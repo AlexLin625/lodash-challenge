@@ -11,9 +11,12 @@
     "generate": "node scripts/generate-challenges.mjs",
     "generate:no-verify": "node scripts/generate-challenges.mjs --no-verify",
     "typecheck:generator": "tsc -p generator/tsconfig.json",
-    "test:generator": "node --test \"generator/tests/**/*.test.ts\""
+    "test:generator": "node --test \"generator/tests/**/*.test.ts\"",
+    "test:app": "node --test \"src/**/*.test.ts\"",
+    "test": "pnpm run test:generator && pnpm run test:app"
   },
   "dependencies": {
+    "@codesandbox/sandpack-client": "^2.19.8",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

@@ -110,29 +110,34 @@ export function expect(actual: unknown): Expectation {
 
 export class Expectation {
   private readonly actual: unknown;
+  private readonly negated: boolean;
 
-  constructor(actual: unknown) {
+  constructor(actual: unknown, negated = false) {
     this.actual = actual;
+    this.negated = negated;
   }
 
   private fail(message: string): never {
     throw new Error(`expect(...).${message}`);
   }
 
+  /** Asserts that `passed` is true; when negated, asserts that it is false. */
+  private check(passed: boolean, message: string): void {
+    if (passed === this.negated) {
+      this.fail(message);
+    }
+  }
+
   get not(): Expectation {
-    return this;
+    return new Expectation(this.actual, !this.negated);
   }
 
   toBe(expected: unknown): void {
-    if (this.actual !== expected) {
-      this.fail(`toBe: expected ${stringify(expected)}, received ${stringify(this.actual)}`);
-    }
+    this.check(this.actual === expected, `toBe: expected ${stringify(expected)}, received ${stringify(this.actual)}`);
   }
 
   toEqual(expected: unknown): void {
-    if (!deepEqual(this.actual, expected)) {
-      this.fail(`toEqual: expected ${stringify(expected)}, received ${stringify(this.actual)}`);
-    }
+    this.check(deepEqual(this.actual, expected), `toEqual: expected ${stringify(expected)}, received ${stringify(this.actual)}`);
   }
 
   toStrictEqual(expected: unknown): void {
@@ -140,95 +145,90 @@ export class Expectation {
   }
 
   toBeUndefined(): void {
-    if (this.actual !== undefined) {
-      this.fail(`toBeUndefined: received ${stringify(this.actual)}`);
-    }
+    this.check(this.actual === undefined, `toBeUndefined: received ${stringify(this.actual)}`);
   }
 
   toBeDefined(): void {
-    if (this.actual === undefined) {
-      this.fail('toBeDefined: received undefined');
-    }
+    this.check(this.actual !== undefined, 'toBeDefined: received undefined');
   }
 
   toBeNull(): void {
-    if (this.actual !== null) {
-      this.fail(`toBeNull: received ${stringify(this.actual)}`);
-    }
+    this.check(this.actual === null, `toBeNull: received ${stringify(this.actual)}`);
   }
 
   toBeTruthy(): void {
-    if (!this.actual) {
-      this.fail(`toBeTruthy: received ${stringify(this.actual)}`);
-    }
+    this.check(Boolean(this.actual), `toBeTruthy: received ${stringify(this.actual)}`);
   }
 
   toBeFalsy(): void {
-    if (this.actual) {
-      this.fail(`toBeFalsy: received ${stringify(this.actual)}`);
-    }
+    this.check(!this.actual, `toBeFalsy: received ${stringify(this.actual)}`);
   }
 
   toBeNaN(): void {
-    if (!(typeof this.actual === 'number' && Number.isNaN(this.actual))) {
-      this.fail(`toBeNaN: received ${stringify(this.actual)}`);
-    }
+    this.check(
+      typeof this.actual === 'number' && Number.isNaN(this.actual),
+      `toBeNaN: received ${stringify(this.actual)}`
+    );
   }
 
   toBeGreaterThan(expected: number): void {
-    if (!(typeof this.actual === 'number' && this.actual > expected)) {
-      this.fail(`toBeGreaterThan(${expected}): received ${stringify(this.actual)}`);
-    }
+    this.check(
+      typeof this.actual === 'number' && this.actual > expected,
+      `toBeGreaterThan(${expected}): received ${stringify(this.actual)}`
+    );
   }
 
   toBeLessThan(expected: number): void {
-    if (!(typeof this.actual === 'number' && this.actual < expected)) {
-      this.fail(`toBeLessThan(${expected}): received ${stringify(this.actual)}`);
-    }
+    this.check(
+      typeof this.actual === 'number' && this.actual < expected,
+      `toBeLessThan(${expected}): received ${stringify(this.actual)}`
+    );
   }
 
   toBeCloseTo(expected: number, precision = 2): void {
-    const delta = Math.abs(this.actual as number - expected);
-    if (delta >= 10 ** -precision / 2) {
-      this.fail(`toBeCloseTo(${expected}, ${precision}): received ${stringify(this.actual)}`);
-    }
+    const delta = Math.abs((this.actual as number) - expected);
+    this.check(
+      delta < 10 ** -precision / 2,
+      `toBeCloseTo(${expected}, ${precision}): received ${stringify(this.actual)}`
+    );
   }
 
   toContain(item: unknown): void {
     const actual = this.actual as ArrayLike<unknown> | string;
-    if (!actual || typeof actual !== 'object' && typeof actual !== 'string') {
-      this.fail(`toContain: received ${stringify(this.actual)}`);
-    }
-    const found = typeof actual === 'string' ? actual.includes(item as string) : Array.from(actual).includes(item);
-    if (!found) {
-      this.fail(`toContain(${stringify(item)}): received ${stringify(this.actual)}`);
-    }
+    const arrayLike =
+      !!actual && (typeof actual === 'object' || typeof actual === 'string') && typeof actual.length === 'number';
+    const found =
+      arrayLike && (typeof actual === 'string' ? actual.includes(item as string) : Array.from(actual).includes(item));
+    this.check(Boolean(found), `toContain(${stringify(item)}): received ${stringify(this.actual)}`);
   }
 
   toHaveLength(length: number): void {
     const actual = this.actual as { length?: number } | undefined;
-    if (!actual || actual.length !== length) {
-      this.fail(`toHaveLength(${length}): received ${stringify(this.actual)}`);
-    }
+    this.check(!!actual && actual.length === length, `toHaveLength(${length}): received ${stringify(this.actual)}`);
   }
 
   toBeInstanceOf(klass: unknown): void {
-    if (!(this.actual instanceof (klass as new (...args: never[]) => unknown))) {
-      this.fail(`toBeInstanceOf: received ${stringify(this.actual)}`);
-    }
+    this.check(
+      this.actual instanceof (klass as new (...args: never[]) => unknown),
+      `toBeInstanceOf: received ${stringify(this.actual)}`
+    );
   }
 
   toHaveProperty(path: string, value?: unknown): void {
     let current: unknown = this.actual;
+    let present = true;
     for (const key of path.split('.')) {
       if (current === null || current === undefined || !(key in Object(current))) {
-        this.fail(`toHaveProperty(${path}): received ${stringify(this.actual)}`);
+        present = false;
+        break;
       }
       current = (current as Record<string, unknown>)[key];
     }
-    if (arguments.length >= 2 && current !== value) {
-      this.fail(`toHaveProperty(${path}, ${stringify(value)}): received ${stringify(current)}`);
-    }
+    const withValue = arguments.length >= 2;
+    this.check(
+      present && (!withValue || current === value),
+      `toHaveProperty(${path}${withValue ? `, ${stringify(value)}` : ''}): received ${stringify(this.actual)}`
+    );
   }
 
   toThrow(expected?: RegExp | string | Error): void {
@@ -244,23 +244,24 @@ export class Expectation {
       threw = true;
       thrown = err;
     }
-    if (!threw) {
-      this.fail('toThrow: function did not throw');
-    }
-    if (expected !== undefined) {
-      const message = thrown instanceof Error ? thrown.message : String(thrown);
-      if (expected instanceof Error) {
-        if (thrown !== expected) {
-          this.fail(`toThrow: threw ${stringify(thrown)}`);
+    let matches = false;
+    if (threw) {
+      matches = true;
+      if (expected !== undefined) {
+        const message = thrown instanceof Error ? thrown.message : String(thrown);
+        if (expected instanceof Error) {
+          matches = thrown === expected;
+        } else if (expected instanceof RegExp) {
+          matches = expected.test(message);
+        } else {
+          matches = message.includes(String(expected));
         }
-      } else if (expected instanceof RegExp) {
-        if (!expected.test(message)) {
-          this.fail(`toThrow: message "${message}" does not match ${String(expected)}`);
-        }
-      } else if (!message.includes(String(expected))) {
-        this.fail(`toThrow: message "${message}" does not contain ${JSON.stringify(String(expected))}`);
       }
     }
+    this.check(
+      threw && matches,
+      `toThrow(${expected !== undefined ? stringify(expected) : ''}): expected function to${this.negated ? ' not' : ''} throw`
+    );
   }
 }
 

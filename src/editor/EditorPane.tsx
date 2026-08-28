@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { monaco } from './monaco.ts';
+import { monaco, setEditorTheme } from './monaco.ts';
 import type { WorkspaceFile, WorkspaceModels } from './workspace-models.ts';
 
 export interface EditorPaneProps {
@@ -7,14 +7,27 @@ export interface EditorPaneProps {
   activePath: string;
   models: WorkspaceModels | null;
   onActivePathChange: (path: string) => void;
+  editorTheme?: string;
+  editorFontSize?: number;
 }
+
+// Defaults reflect the pre-preferences editor options.
+const DEFAULT_EDITOR_FONT_SIZE = 13;
+const DEFAULT_EDITOR_THEME = 'vs';
 
 function fileName(path: string): string {
   const segments = path.split('/');
   return segments[segments.length - 1] ?? path;
 }
 
-export function EditorPane({ files, activePath, models, onActivePathChange }: EditorPaneProps) {
+export function EditorPane({
+  files,
+  activePath,
+  models,
+  onActivePathChange,
+  editorTheme,
+  editorFontSize,
+}: EditorPaneProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
@@ -28,14 +41,14 @@ export function EditorPane({ files, activePath, models, onActivePathChange }: Ed
       model: null,
       automaticLayout: true,
       minimap: { enabled: false },
-      fontSize: 13,
+      fontSize: DEFAULT_EDITOR_FONT_SIZE,
       tabSize: 2,
       wordWrap: 'on',
       readOnly: true,
       scrollBeyondLastLine: false,
       renderWhitespace: 'selection',
       fontFamily: 'ui-monospace, SFMono-Regular, Consolas, monospace',
-      theme: 'vs',
+      theme: DEFAULT_EDITOR_THEME,
     });
     editorRef.current = editor;
     return () => {
@@ -43,6 +56,19 @@ export function EditorPane({ files, activePath, models, onActivePathChange }: Ed
       editorRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    const editor = editorRef.current;
+    if (editor && editorFontSize !== undefined) {
+      editor.updateOptions({ fontSize: editorFontSize });
+    }
+  }, [editorFontSize]);
+
+  useEffect(() => {
+    if (editorTheme !== undefined) {
+      setEditorTheme(editorTheme);
+    }
+  }, [editorTheme]);
 
   useEffect(() => {
     const editor = editorRef.current;

@@ -17,6 +17,8 @@ const EMPTY_COMPLETED_IDS: ReadonlySet<string> = new Set<string>();
 export interface ChallengeWorkspaceProps {
   progressService?: ProgressSeam;
   reader?: ProgressReader;
+  editorTheme?: string;
+  editorFontSize?: number;
 }
 
 const DRAFT_SAVE_DEBOUNCE_MS = 600;
@@ -28,7 +30,12 @@ function toMessage(error: unknown): string {
   return String(error);
 }
 
-export function ChallengeWorkspace({ progressService, reader }: ChallengeWorkspaceProps) {
+export function ChallengeWorkspace({
+  progressService,
+  reader,
+  editorTheme,
+  editorFontSize,
+}: ChallengeWorkspaceProps) {
   const [catalog, setCatalog] = useState<ChallengeCatalog | null>(null);
   const [catalogError, setCatalogError] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -328,7 +335,14 @@ export function ChallengeWorkspace({ progressService, reader }: ChallengeWorkspa
 
               <div className="editor-results">
                 <div className="editor-region">
-                  <EditorPane files={files} activePath={activePath} models={models} onActivePathChange={setActivePath} />
+                  <EditorPane
+                    files={files}
+                    activePath={activePath}
+                    models={models}
+                    onActivePathChange={setActivePath}
+                    editorTheme={editorTheme}
+                    editorFontSize={editorFontSize}
+                  />
                 </div>
                 <div className="results-region">
                   <TestPanel phase={phase} result={result} />

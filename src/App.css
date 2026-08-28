@@ -42,6 +42,35 @@
   background: var(--bg-alt);
 }
 
+/* ------------------------------------------------------------ Settings bar */
+
+.settings-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 20px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.settings-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.settings-btn {
+  padding: 3px 10px;
+  font-size: 13px;
+}
+
+.settings-font-size {
+  min-width: 38px;
+  font-family: var(--mono);
+  color: var(--text-dim);
+}
+
 /* ------------------------------------------------------------- Workspace */
 
 .workspace {

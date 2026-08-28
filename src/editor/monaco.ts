@@ -28,4 +28,15 @@ if (!self.MonacoEnvironment) {
   };
 }
 
+// Monaco ships these themes out of the box; no defineTheme call is needed.
+const BUILTIN_EDITOR_THEMES: readonly string[] = ['vs', 'vs-dark', 'hc-black', 'hc-light'];
+
+export function normalizeEditorTheme(theme: string): string {
+  return BUILTIN_EDITOR_THEMES.includes(theme) ? theme : 'vs';
+}
+
+export function setEditorTheme(theme: string): void {
+  monaco.editor.setTheme(normalizeEditorTheme(theme));
+}
+
 export { monaco };

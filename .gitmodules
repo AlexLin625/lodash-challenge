@@ -1,0 +1,3 @@
+[submodule "external/es-toolkit"]
+	path = external/es-toolkit
+	url = https://github.com/toss/es-toolkit.git

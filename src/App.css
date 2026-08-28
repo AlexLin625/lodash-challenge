@@ -29,6 +29,19 @@
   color: var(--text-dim);
 }
 
+/* -------------------------------------------------------------- Storage banner */
+
+.storage-banner {
+  padding: 8px 20px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+}
+
+.banner--muted {
+  color: var(--text-dim);
+  background: var(--bg-alt);
+}
+
 /* ------------------------------------------------------------- Workspace */
 
 .workspace {
@@ -57,6 +70,20 @@
 }
 
 /* ------------------------------------------------------- Challenge list */
+
+.challenge-list-header {
+  display: flex;
+  align-items: baseline;
+  padding: 2px 2px 8px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.challenge-list-progress {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
 
 .challenge-group {
   margin-bottom: 18px;
@@ -143,6 +170,13 @@
 .badge-hard {
   color: var(--err);
   background: var(--err-bg);
+  border-color: transparent;
+}
+
+.badge-done {
+  padding: 1px 6px;
+  color: var(--ok);
+  background: var(--ok-bg);
   border-color: transparent;
 }
 

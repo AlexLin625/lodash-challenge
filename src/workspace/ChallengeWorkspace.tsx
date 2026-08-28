@@ -8,10 +8,15 @@ import { EditorPane } from '../editor/EditorPane.tsx';
 import { WorkspaceModels, type WorkspaceFile } from '../editor/workspace-models.ts';
 import { ChallengeList } from './ChallengeList.tsx';
 import { TestPanel, type RunPhase } from './TestPanel.tsx';
+import { completedChallengeIds, progressTotalsLabel } from './completion.ts';
+import { useChallengeProgressSummary, type ProgressReader } from './use-progress.ts';
 import { noopProgressService, type AttemptRecord, type ProgressSeam } from './progress.ts';
+
+const EMPTY_COMPLETED_IDS: ReadonlySet<string> = new Set<string>();
 
 export interface ChallengeWorkspaceProps {
   progressService?: ProgressSeam;
+  reader?: ProgressReader;
 }
 
 const DRAFT_SAVE_DEBOUNCE_MS = 600;
@@ -23,7 +28,7 @@ function toMessage(error: unknown): string {
   return String(error);
 }
 
-export function ChallengeWorkspace({ progressService }: ChallengeWorkspaceProps) {
+export function ChallengeWorkspace({ progressService, reader }: ChallengeWorkspaceProps) {
   const [catalog, setCatalog] = useState<ChallengeCatalog | null>(null);
   const [catalogError, setCatalogError] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -35,6 +40,8 @@ export function ChallengeWorkspace({ progressService }: ChallengeWorkspaceProps)
   const [activePath, setActivePath] = useState('');
   const [phase, setPhase] = useState<RunPhase>('idle');
   const [result, setResult] = useState<TestRunResult | null>(null);
+
+  const { summary, refresh } = useChallengeProgressSummary(reader ?? null);
 
   const loaderRef = useRef<ChallengeLoader | null>(null);
   const hostRef = useRef<HTMLDivElement | null>(null);
@@ -226,6 +233,7 @@ export function ChallengeWorkspace({ progressService }: ChallengeWorkspaceProps)
       progressRef.current.recordAttempt(attempt);
       if (runResult.status === 'passed') {
         progressRef.current.markCompleted(key, attempt);
+        refresh();
       }
     } catch (error: unknown) {
       if (challengeRef.current?.manifest.id !== runChallengeId) {
@@ -241,7 +249,7 @@ export function ChallengeWorkspace({ progressService }: ChallengeWorkspaceProps)
         error: toMessage(error),
       });
     }
-  }, []);
+  }, [refresh]);
 
   const handleReset = useCallback(() => {
     const current = challengeRef.current;
@@ -256,6 +264,8 @@ export function ChallengeWorkspace({ progressService }: ChallengeWorkspaceProps)
 
   const selectedManifest = challenge?.manifest;
   const runDisabled = phase === 'running';
+  const completedIds = summary ? completedChallengeIds(summary) : EMPTY_COMPLETED_IDS;
+  const totalsLabel = summary ? progressTotalsLabel(summary.totals) : '';
 
   return (
     <div className="app">
@@ -273,7 +283,13 @@ export function ChallengeWorkspace({ progressService }: ChallengeWorkspaceProps)
           ) : catalog === null ? (
             <p className="panel-hint">Loading catalog…</p>
           ) : (
-            <ChallengeList catalog={catalog} selectedId={selectedId} onSelect={handleSelect} />
+            <ChallengeList
+              catalog={catalog}
+              selectedId={selectedId}
+              onSelect={handleSelect}
+              completedIds={completedIds}
+              totalsLabel={totalsLabel}
+            />
           )}
         </aside>
 

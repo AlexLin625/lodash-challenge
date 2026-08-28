@@ -15,7 +15,7 @@ import type {
 } from './domain.ts';
 import type { PersistenceErrorCode } from './errors.ts';
 import { PersistenceError } from './errors.ts';
-import { challengeKeyId } from './keys.ts';
+import { toChallengeKeyTuple } from './keys.ts';
 import { createMemoryPort } from './memory.ts';
 import type { PersistencePort } from './port.ts';
 import { STORE_NAMES } from './schema.ts';
@@ -107,7 +107,7 @@ async function attemptsOf(port: MemoryPort): Promise<AttemptRecord[]> {
 }
 
 async function completionOf(port: MemoryPort): Promise<CompletionRecord | undefined> {
-  return port.get<CompletionRecord>(STORE_NAMES.completions, challengeKeyId(key));
+  return port.get<CompletionRecord>(STORE_NAMES.completions, toChallengeKeyTuple(key));
 }
 
 function failingPort(failure: unknown): PersistencePort {

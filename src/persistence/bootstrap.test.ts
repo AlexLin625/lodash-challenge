@@ -10,7 +10,7 @@ import type {
 } from './domain.ts';
 import { PersistenceError } from './errors.ts';
 import { isIndexedDBAvailable } from './idb-port.ts';
-import { challengeKeyId } from './keys.ts';
+import { toChallengeKeyTuple } from './keys.ts';
 import { createMemoryPort } from './memory.ts';
 import type { PersistencePort } from './port.ts';
 import { DEFAULT_PREFERENCES } from './preferences.ts';
@@ -83,7 +83,7 @@ test('default assembly persists the full progress flow through the memory port',
 
   const completion = await port.get<CompletionRecord>(
     STORE_NAMES.completions,
-    challengeKeyId(key)
+    toChallengeKeyTuple(key)
   );
   assert.equal(completion?.passingSourceHash, 'src-hash');
   assert.equal(completion?.firstPassedAt, 1000);

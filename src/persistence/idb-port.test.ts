@@ -31,7 +31,7 @@ import type {
   IndexedDBStringListLike,
   IndexedDBTransactionLike,
 } from './idb-port.ts';
-import { challengeKeyId } from './keys.ts';
+import { toChallengeKeyTuple } from './keys.ts';
 import { createMemoryPort } from './memory.ts';
 import type { PersistencePort, StoreName } from './port.ts';
 import { DATABASE_NAME, DATABASE_VERSION, SCHEMA_V1, STORE_NAMES } from './schema.ts';
@@ -729,19 +729,31 @@ test('composite tuple keys address solutions records, scalar preferences by key'
   ]);
 });
 
-test('JSON stringified tuple keys resolve to in-line composite records', async () => {
-  const { port } = await fakeBackedPort();
+test('fake IDB and memory port agree on solutions tuple-key get/put/delete', async () => {
+  const { port: idb } = await fakeBackedPort();
+  const memory = createMemoryPort();
   const key: ChallengeKey = { challengeId: 'chunk', challengeVersion: 'v1' };
-  const id = challengeKeyId(key);
-  await port.put(STORE_NAMES.solutions, ['chunk', 'v1'], demoSolution('chunk', 'v1', 1));
+  const tuple = toChallengeKeyTuple(key);
+  const first = demoSolution('chunk', 'v1', 1);
+  const second = demoSolution('chunk', 'v1', 2);
 
-  assert.deepEqual(await port.get(STORE_NAMES.solutions, id), demoSolution('chunk', 'v1', 1));
-  assert.equal(await port.get(STORE_NAMES.solutions, '["chunk"]'), undefined);
-  assert.equal(await port.get(STORE_NAMES.preferences, id), undefined);
-  assert.equal(await port.get(STORE_NAMES.solutions, id + '!'), undefined);
+  assert.deepEqual(await idb.get(STORE_NAMES.solutions, tuple), undefined);
+  assert.deepEqual(await memory.get(STORE_NAMES.solutions, tuple), undefined);
 
-  await port.deleteMany(STORE_NAMES.solutions, [id]);
-  assert.equal(await port.get(STORE_NAMES.solutions, ['chunk', 'v1']), undefined);
+  await idb.put(STORE_NAMES.solutions, tuple, first);
+  await memory.put(STORE_NAMES.solutions, tuple, first);
+  assert.deepEqual(await idb.get(STORE_NAMES.solutions, tuple), first);
+  assert.deepEqual(await memory.get(STORE_NAMES.solutions, tuple), first);
+
+  await idb.put(STORE_NAMES.solutions, tuple, second);
+  await memory.put(STORE_NAMES.solutions, tuple, second);
+  assert.deepEqual(await idb.list(STORE_NAMES.solutions), await memory.list(STORE_NAMES.solutions));
+
+  await idb.delete(STORE_NAMES.solutions, tuple);
+  await memory.delete(STORE_NAMES.solutions, tuple);
+  assert.deepEqual(await idb.get(STORE_NAMES.solutions, tuple), undefined);
+  assert.deepEqual(await memory.get(STORE_NAMES.solutions, tuple), undefined);
+  assert.deepEqual(await idb.list(STORE_NAMES.solutions), await memory.list(STORE_NAMES.solutions));
 });
 
 test('request and transaction failures normalize to coded PersistenceErrors', async () => {
@@ -913,7 +925,10 @@ test('DAO smoke: draft, attempt, completion and summary flow over the fake IDB p
   assert.deepEqual(attempts.map((attempt) => attempt.id), [makeAttemptId(key, 900)]);
 
   await dao.markCompleted({ key, durationMs: 42, sourceHash: 'src-hash' });
-  const completion = await port.get<CompletionRecord>(STORE_NAMES.completions, challengeKeyId(key));
+  const completion = await port.get<CompletionRecord>(
+    STORE_NAMES.completions,
+    toChallengeKeyTuple(key)
+  );
   assert.equal(completion?.attemptCountAtFirstPass, 1);
   assert.equal(completion?.firstPassedAt, 1000);
   assert.equal(completion?.bestDurationMs, 42);

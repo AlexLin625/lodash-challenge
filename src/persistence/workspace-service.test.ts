@@ -10,7 +10,7 @@ import type {
   SolutionRecord,
 } from './domain.ts';
 import { PersistenceError } from './errors.ts';
-import { challengeKeyId } from './keys.ts';
+import { toChallengeKeyTuple } from './keys.ts';
 import { createMemoryPort } from './memory.ts';
 import { STORE_NAMES } from './schema.ts';
 import { progressKeyOf } from './summary.ts';
@@ -185,7 +185,7 @@ test('markCompleted stores the passing source hash from the attempt', async () =
 
   const completion = await port.get<CompletionRecord>(
     STORE_NAMES.completions,
-    challengeKeyId(key)
+    toChallengeKeyTuple(key)
   );
   assert.notEqual(completion, undefined);
   assert.equal(completion?.passingSourceHash, 'good-hash');

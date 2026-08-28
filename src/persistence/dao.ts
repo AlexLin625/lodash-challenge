@@ -19,8 +19,9 @@ import type {
   SolutionRecord,
 } from './domain.ts';
 import { normalizePersistenceError } from './errors.ts';
-import { challengeKeyId } from './keys.ts';
+import { toChallengeKeyTuple } from './keys.ts';
 import type { PersistencePort, PortKey } from './port.ts';
+import { portKeyToId } from './port.ts';
 import { STORE_NAMES } from './schema.ts';
 import { aggregateProgress, indexProgressByChallenge, summarizeChallenge } from './summary.ts';
 import type { ChallengeProgress, ProgressTotals } from './summary.ts';
@@ -81,14 +82,19 @@ export interface ProgressDAO {
 
 export type DAOClock = { now(): number } | number;
 
+// In-memory grouping id for composite records: the canonical string form of
+// the tuple PortKey (portKeyToId of toChallengeKeyTuple). Maps and counts key
+// off this string; every port address below uses the tuple itself.
 function recordKeyId(record: {
   challengeId: string;
   challengeVersion: string;
 }): string {
-  return challengeKeyId({
-    challengeId: record.challengeId,
-    challengeVersion: record.challengeVersion,
-  });
+  return portKeyToId(
+    toChallengeKeyTuple({
+      challengeId: record.challengeId,
+      challengeVersion: record.challengeVersion,
+    })
+  );
 }
 
 function parseChallengeKeyId(id: string): ChallengeKey {
@@ -133,7 +139,7 @@ export function createProgressDAO(
         const solutionKey = asChallengeKey(key);
         const record = await port.get<SolutionRecord>(
           STORE_NAMES.solutions,
-          challengeKeyId(solutionKey)
+          toChallengeKeyTuple(solutionKey)
         );
         return record ?? null;
       } catch (error) {
@@ -144,8 +150,8 @@ export function createProgressDAO(
     async saveDraft(input: SaveDraftInput): Promise<void> {
       try {
         const key = asChallengeKey(input.key);
-        const id = challengeKeyId(key);
-        const existing = await port.get<SolutionRecord>(STORE_NAMES.solutions, id);
+        const portKey = toChallengeKeyTuple(key);
+        const existing = await port.get<SolutionRecord>(STORE_NAMES.solutions, portKey);
         const stamp = clock.now();
         const record: SolutionRecord = existing
           ? {
@@ -163,7 +169,7 @@ export function createProgressDAO(
               updatedAt: stamp,
               runCount: 0,
             };
-        await port.put(STORE_NAMES.solutions, id, asSolutionRecord(record));
+        await port.put(STORE_NAMES.solutions, portKey, asSolutionRecord(record));
       } catch (error) {
         throw normalizePersistenceError(error);
       }
@@ -194,12 +200,12 @@ export function createProgressDAO(
           );
         }
 
-        const solutionId = challengeKeyId(key);
-        const solution = await port.get<SolutionRecord>(STORE_NAMES.solutions, solutionId);
+        const solutionKey = toChallengeKeyTuple(key);
+        const solution = await port.get<SolutionRecord>(STORE_NAMES.solutions, solutionKey);
         if (solution !== undefined) {
           await port.put(
             STORE_NAMES.solutions,
-            solutionId,
+            solutionKey,
             asSolutionRecord({
               ...solution,
               runCount: solution.runCount + 1,
@@ -217,8 +223,8 @@ export function createProgressDAO(
       try {
         const key = asChallengeKey(input.key);
         const stamp = clock.now();
-        const id = challengeKeyId(key);
-        const existing = await port.get<CompletionRecord>(STORE_NAMES.completions, id);
+        const portKey = toChallengeKeyTuple(key);
+        const existing = await port.get<CompletionRecord>(STORE_NAMES.completions, portKey);
         const record: CompletionRecord = existing
           ? {
               ...existing,
@@ -236,7 +242,7 @@ export function createProgressDAO(
               passingSourceHash: input.sourceHash,
               attemptCountAtFirstPass: (await attemptsFor(key)).length,
             };
-        await port.put(STORE_NAMES.completions, id, asCompletionRecord(record));
+        await port.put(STORE_NAMES.completions, portKey, asCompletionRecord(record));
       } catch (error) {
         throw normalizePersistenceError(error);
       }
@@ -282,9 +288,9 @@ export function createProgressDAO(
       try {
         const resetKey = asChallengeKey(key);
         const staleAttemptIds = (await attemptsFor(resetKey)).map((attempt) => attempt.id);
-        const id = challengeKeyId(resetKey);
-        await port.delete(STORE_NAMES.solutions, id);
-        await port.delete(STORE_NAMES.completions, id);
+        const portKey = toChallengeKeyTuple(resetKey);
+        await port.delete(STORE_NAMES.solutions, portKey);
+        await port.delete(STORE_NAMES.completions, portKey);
         if (staleAttemptIds.length > 0) {
           await port.deleteMany(STORE_NAMES.attempts, staleAttemptIds);
         }
@@ -338,7 +344,7 @@ export function createProgressDAO(
             continue;
           }
           solutionById.set(id, incoming);
-          solutionEntries.push([id, incoming]);
+          solutionEntries.push([toChallengeKeyTuple(incoming), incoming]);
         }
 
         const completionEntries: (readonly [PortKey, CompletionRecord])[] = [];
@@ -348,7 +354,7 @@ export function createProgressDAO(
             ? mergeCompletion(completionById.get(id)!, incoming)
             : incoming;
           completionById.set(id, merged);
-          completionEntries.push([id, merged]);
+          completionEntries.push([toChallengeKeyTuple(incoming), merged]);
         }
 
         const incomingIds = new Set(exp.attempts.map((attempt) => attempt.id));

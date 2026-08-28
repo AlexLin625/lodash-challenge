@@ -173,40 +173,9 @@ function usesInlineKeys(descriptor: ObjectStoreDescriptor): boolean {
     : descriptor.keyPath.length > 0;
 }
 
-// Stores with a compound in-line keyPath hold records under the tuple read
-// off the record itself, but port callers (the DAO via keys.challengeKeyId)
-// pass the same tuple JSON-stringified. Parse such strings back into a
-// tuple before issuing a get/delete so both spellings address one record.
-function resolveLookupKey(
-  descriptor: ObjectStoreDescriptor,
-  key: IDBValidKey
-): IDBValidKey {
-  if (typeof key !== 'string' || typeof descriptor.keyPath === 'string') {
-    return key;
-  }
-  const trimmed = key.trim();
-  if (!trimmed.startsWith('[')) {
-    return key;
-  }
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(trimmed);
-  } catch {
-    return key;
-  }
-  if (
-    !Array.isArray(parsed) ||
-    parsed.length !== descriptor.keyPath.length ||
-    !parsed.every((part) => typeof part === 'string' || typeof part === 'number')
-  ) {
-    return key;
-  }
-  return parsed as string[] | number[];
-}
-
-function portToIdbKey(descriptor: ObjectStoreDescriptor, key: PortKey): IDBValidKey {
-  return resolveLookupKey(descriptor, toIdbKey(key));
-}
+// Stores with a compound in-line keyPath are addressed by the tuple read
+// off the record; port callers pass exactly that tuple (keys.
+// toChallengeKeyTuple), so lookups go straight to IndexedDB unchanged.
 
 export async function openChallengeDatabase(
   options: OpenChallengeDatabaseOptions = {}
@@ -395,7 +364,7 @@ export function createIDBPersistencePort(
 
   return {
     async get<T>(store: StoreName, key: PortKey): Promise<T | undefined> {
-      const idbKey = portToIdbKey(storeDescriptor(store), key);
+      const idbKey = toIdbKey(key);
       return execute(store, 'readonly', (objectStore, transaction) =>
         sendRequest<T | undefined>(objectStore.get(idbKey), transaction)
       );
@@ -438,16 +407,14 @@ export function createIDBPersistencePort(
     },
 
     async delete(store: StoreName, key: PortKey): Promise<void> {
-      const descriptor = storeDescriptor(store);
-      const idbKey = portToIdbKey(descriptor, key);
+      const idbKey = toIdbKey(key);
       await execute(store, 'readwrite', (objectStore, transaction) =>
         sendRequest(objectStore.delete(idbKey), transaction)
       );
     },
 
     async deleteMany(store: StoreName, keys: readonly PortKey[]): Promise<void> {
-      const descriptor = storeDescriptor(store);
-      const idbKeys = keys.map((key) => portToIdbKey(descriptor, key));
+      const idbKeys = keys.map(toIdbKey);
       await execute(store, 'readwrite', async (objectStore, transaction) => {
         for (const idbKey of idbKeys) {
           await sendRequest(objectStore.delete(idbKey), transaction);

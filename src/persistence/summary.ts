@@ -67,9 +67,9 @@ export function aggregateProgress(
 }
 
 // Catalog-facing map key: challengeId and challengeVersion joined by NUL,
-// matching the grouping used by the attempts helpers. Unlike challengeKeyId
-// in keys.ts (a JSON tuple), this form is an in-memory Map key only and is
-// never persisted.
+// matching the grouping used by the attempts helpers. Unlike the tuple
+// addressing key in keys.ts (a [challengeId, challengeVersion] pair), this
+// form is an in-memory Map key only and is never persisted.
 export function progressKeyOf(key: ChallengeKey): string {
   return `${key.challengeId}\u0000${key.challengeVersion}`;
 }

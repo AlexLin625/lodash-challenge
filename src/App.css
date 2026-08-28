@@ -314,6 +314,42 @@
   white-space: pre-wrap;
 }
 
+/* ------------------------------------------------------------ Hint panel */
+
+.hint-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+}
+
+.hint-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hint-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding-left: 2px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.hint-level-badge {
+  text-transform: none;
+}
+
+.hint-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 /* ------------------------------------------------------- Editor + results */
 
 .editor-results {

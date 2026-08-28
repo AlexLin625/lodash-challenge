@@ -66,13 +66,20 @@ function App() {
 
   const { refresh: refreshSummary } = useChallengeProgressSummary(persistence.dao);
 
+  const [importCount, setImportCount] = useState(0);
+
+  const handleImportSuccess = useCallback(() => {
+    refreshSummary();
+    setImportCount((count) => count + 1);
+  }, [refreshSummary]);
+
   const progressIoApi = useMemo<ProgressIOApi>(
     () => ({
       exportAll: () => persistence.dao.exportAll(),
       importAll: (data) => persistence.dao.importAll(data),
-      onSuccess: refreshSummary,
+      onSuccess: handleImportSuccess,
     }),
-    [persistence, refreshSummary]
+    [persistence, handleImportSuccess]
   );
 
   return (
@@ -93,6 +100,7 @@ function App() {
         reader={persistence.dao}
         editorTheme={prefs?.editorTheme}
         editorFontSize={prefs?.fontSize}
+        refreshSignal={importCount}
       />
     </>
   );

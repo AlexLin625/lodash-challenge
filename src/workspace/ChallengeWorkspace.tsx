@@ -7,6 +7,8 @@ import { SandpackRunner } from '../runner/sandpack-runner.ts';
 import { EditorPane } from '../editor/EditorPane.tsx';
 import { WorkspaceModels, type WorkspaceFile } from '../editor/workspace-models.ts';
 import { ChallengeList } from './ChallengeList.tsx';
+import { HintPanel } from './HintPanel.tsx';
+import { nextRevealedLevel, type RevealedLevel } from './hint-logic.ts';
 import { TestPanel, type RunPhase } from './TestPanel.tsx';
 import { completedChallengeIds, progressTotalsLabel } from './completion.ts';
 import { useChallengeProgressSummary, type ProgressReader as ProgressSummaryReader } from './use-progress.ts';
@@ -29,6 +31,8 @@ export interface ChallengeWorkspaceProps {
   reader?: WorkspaceReader | null;
   editorTheme?: string;
   editorFontSize?: number;
+  /** Bump to re-read the progress summary (e.g. after an import replaced it). */
+  refreshSignal?: number;
 }
 
 const DRAFT_SAVE_DEBOUNCE_MS = 600;
@@ -67,6 +71,7 @@ export function ChallengeWorkspace({
   reader,
   editorTheme,
   editorFontSize,
+  refreshSignal,
 }: ChallengeWorkspaceProps) {
   const [catalog, setCatalog] = useState<ChallengeCatalog | null>(null);
   const [catalogError, setCatalogError] = useState<string | null>(null);
@@ -80,6 +85,7 @@ export function ChallengeWorkspace({
   const [phase, setPhase] = useState<RunPhase>('idle');
   const [result, setResult] = useState<TestRunResult | null>(null);
   const [draftNotice, setDraftNotice] = useState<string | null>(null);
+  const [hintsLevel, setHintsLevel] = useState<RevealedLevel>(0);
 
   const { summary, refresh } = useChallengeProgressSummary(reader ?? null);
 
@@ -270,6 +276,15 @@ export function ChallengeWorkspace({
     };
   }, [draftNotice]);
 
+  // Re-read the summary when the app signals that progress changed underneath
+  // us (an import replaced the whole directory), so badges refresh immediately.
+  useEffect(() => {
+    if (refreshSignal === undefined) {
+      return;
+    }
+    refresh();
+  }, [refreshSignal, refresh]);
+
   const handleSelect = useCallback(
     (id: string) => {
       if (selectedId === id) {
@@ -278,6 +293,7 @@ export function ChallengeWorkspace({
       setChallenge(null);
       setChallengeError(null);
       setLoadingChallenge(true);
+      setHintsLevel(0);
       setSelectedId(id);
     },
     [selectedId]
@@ -409,6 +425,15 @@ export function ChallengeWorkspace({
               </div>
 
               {selectedManifest.description && <p className="description">{selectedManifest.description}</p>}
+
+              <HintPanel
+                hints={selectedManifest.hints}
+                revealedLevel={hintsLevel}
+                onShowMore={() => {
+                  const hints = selectedManifest.hints;
+                  setHintsLevel((prev) => nextRevealedLevel(hints, prev));
+                }}
+              />
 
               {draftNotice && (
                 <p className="panel-hint" role="status">

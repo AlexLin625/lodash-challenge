@@ -11,7 +11,9 @@
 //
 // This module is browser-only and must not be imported from Node tests.
 
-import * as monaco from 'monaco-editor';
+import * as monaco from '../../node_modules/monaco-editor/esm/vs/editor/editor.api.js';
+import '../../node_modules/monaco-editor/esm/vs/languages/definitions/typescript/register.js';
+import '../../node_modules/monaco-editor/esm/vs/languages/features/typescript/register.js';
 import editorWorker from '../../node_modules/monaco-editor/esm/vs/editor/editor.worker?worker';
 import tsWorker from '../../node_modules/monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 

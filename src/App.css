@@ -71,6 +71,37 @@
   color: var(--text-dim);
 }
 
+/* ------------------------------------------------------------- Progress IO */
+
+.app-topbar {
+  display: flex;
+  align-items: stretch;
+}
+
+.progress-io {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  padding: 8px 20px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.progress-io-file {
+  display: none;
+}
+
+.progress-io-message {
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--text-dim);
+  background: var(--bg-alt);
+}
+
 /* ------------------------------------------------------------- Workspace */
 
 .workspace {

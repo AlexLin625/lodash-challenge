@@ -2,8 +2,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPersistence } from './persistence/bootstrap.ts';
 import type { PreferencesState } from './persistence/preferences.ts';
 import { ChallengeWorkspace } from './workspace/ChallengeWorkspace.tsx';
+import { ProgressIO } from './workspace/progress-io.tsx';
+import type { ProgressIOApi } from './workspace/progress-io.tsx';
 import { SettingsBar } from './workspace/settings-bar.tsx';
 import { nextTheme, stepFontSize } from './workspace/settings-logic.ts';
+import { useChallengeProgressSummary } from './workspace/use-progress.ts';
 import './App.css';
 
 function App() {
@@ -61,6 +64,17 @@ function App() {
 
   const storageAvailable = persistence.storageAvailable && !unavailableNotice;
 
+  const { refresh: refreshSummary } = useChallengeProgressSummary(persistence.dao);
+
+  const progressIoApi = useMemo<ProgressIOApi>(
+    () => ({
+      exportAll: () => persistence.dao.exportAll(),
+      importAll: (data) => persistence.dao.importAll(data),
+      onSuccess: refreshSummary,
+    }),
+    [persistence, refreshSummary]
+  );
+
   return (
     <>
       {!storageAvailable && (
@@ -68,9 +82,12 @@ function App() {
           Local storage unavailable — progress won&apos;t be saved
         </div>
       )}
-      {prefs !== null && (
-        <SettingsBar prefs={prefs} onFontSize={handleFontSize} onToggleTheme={handleToggleTheme} />
-      )}
+      <div className="app-topbar">
+        {prefs !== null && (
+          <SettingsBar prefs={prefs} onFontSize={handleFontSize} onToggleTheme={handleToggleTheme} />
+        )}
+        <ProgressIO disabled={!storageAvailable} api={progressIoApi} />
+      </div>
       <ChallengeWorkspace
         progressService={persistence.progress}
         reader={persistence.dao}

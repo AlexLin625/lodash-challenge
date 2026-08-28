@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ChallengeLoader } from '../challenges/loader.ts';
-import { sha256Hex } from '../challenges/integrity.ts';
-import type { ChallengeCatalog, ChallengeManifest, LoadedChallenge } from '../challenges/types.ts';
+import type { ChallengeCatalog, LoadedChallenge } from '../challenges/types.ts';
+import { sourceHash } from '../persistence/hash.ts';
 import { summarizeTests, type TestRunResult } from '../runner/protocol.ts';
 import { SandpackRunner } from '../runner/sandpack-runner.ts';
 import { EditorPane } from '../editor/EditorPane.tsx';
@@ -21,11 +21,6 @@ function toMessage(error: unknown): string {
     return error.message;
   }
   return String(error);
-}
-
-async function sourceHashOf(manifest: ChallengeManifest, files: Record<string, string>): Promise<string> {
-  const editable = manifest.editableFiles.map((path) => files[path] ?? '').join('\u0000');
-  return sha256Hex(editable);
 }
 
 export function ChallengeWorkspace({ progressService }: ChallengeWorkspaceProps) {
@@ -226,7 +221,7 @@ export function ChallengeWorkspace({ progressService }: ChallengeWorkspaceProps)
         passedTests: summary.passed,
         totalTests: summary.total,
         durationMs: runResult.durationMs,
-        sourceHash: await sourceHashOf(current.manifest, files),
+        sourceHash: await sourceHash(files, current.manifest.editableFiles),
       };
       progressRef.current.recordAttempt(attempt);
       if (runResult.status === 'passed') {

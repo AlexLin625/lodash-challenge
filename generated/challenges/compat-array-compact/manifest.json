@@ -1,0 +1,44 @@
+{
+  "category": "array",
+  "challengeVersion": "77c692f4af0a8ae529f7c68c63c8020a75a2f396f92a42bfd23207807ae6cbcc",
+  "description": "Removes falsey values (false, null, 0, 0n, '', undefined, NaN) from an array.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/array/compact.ts"
+  ],
+  "entryFile": "src/compat/array/compact.ts",
+  "generatorVersion": "0.1.0",
+  "hints": [],
+  "id": "compat-array-compact",
+  "integrity": {
+    "configHash": "e7dea86b901209650c9ad0bc0f425fe7c4bd1423ebb3aeec2d0b207ebf4d2770",
+    "manifestHash": "e7551b24b822666519f4b57b7482bb75c170b78685362b4412b319b58fd37b62",
+    "starterHash": "3af31bebbe832b64912ba74d6268ec9b77168f760dbc6092bcf1ace6a48ecc5e",
+    "testsHash": "2b6046922edff9aaf12546c44adfaace946f3b74b668f5f74fe28d11f030a8cc"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/args.ts",
+    "src/compat/_internal/falsey.ts",
+    "src/compat/_internal/toArgs.ts",
+    "src/compat/array/compact.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "compact",
+  "targetExport": "compact",
+  "title": "compact",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/array/compact.ts",
+    "testPaths": [
+      "src/compat/array/compact.spec.ts"
+    ]
+  }
+}

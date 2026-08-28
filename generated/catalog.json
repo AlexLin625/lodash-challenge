@@ -1,0 +1,101 @@
+{
+  "challenges": [
+    {
+      "category": "array",
+      "challengeVersion": "77c692f4af0a8ae529f7c68c63c8020a75a2f396f92a42bfd23207807ae6cbcc",
+      "description": "Removes falsey values (false, null, 0, 0n, '', undefined, NaN) from an array.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/array/compact.ts"
+      ],
+      "entryFile": "src/compat/array/compact.ts",
+      "generatorVersion": "0.1.0",
+      "hints": [],
+      "id": "compat-array-compact",
+      "integrity": {
+        "configHash": "e7dea86b901209650c9ad0bc0f425fe7c4bd1423ebb3aeec2d0b207ebf4d2770",
+        "manifestHash": "e7551b24b822666519f4b57b7482bb75c170b78685362b4412b319b58fd37b62",
+        "starterHash": "3af31bebbe832b64912ba74d6268ec9b77168f760dbc6092bcf1ace6a48ecc5e",
+        "testsHash": "2b6046922edff9aaf12546c44adfaace946f3b74b668f5f74fe28d11f030a8cc"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/args.ts",
+        "src/compat/_internal/falsey.ts",
+        "src/compat/_internal/toArgs.ts",
+        "src/compat/array/compact.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "compact",
+      "targetExport": "compact",
+      "title": "compact",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/array/compact.ts",
+        "testPaths": [
+          "src/compat/array/compact.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "array",
+      "challengeVersion": "64c90ac922217ccfa395e8f8f5c4b25bbc6d458ce112997d7017bf799d333a29",
+      "description": "Creates a slice of array excluding elements dropped from the beginning.\nElements are dropped until predicate returns falsey.\nThe predicate is invoked with three arguments: (value, index, array).",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/array/dropWhile.ts"
+      ],
+      "entryFile": "src/compat/array/dropWhile.ts",
+      "generatorVersion": "0.1.0",
+      "hints": [],
+      "id": "compat-array-dropWhile",
+      "integrity": {
+        "configHash": "7b3f22fa2b8692e168d7d87cde6856a88b05b040aa021bed18c2808eb5c53847",
+        "manifestHash": "45a0158d607f22d452fc3b13b05cf3163adc64341503958e425d555803784575",
+        "starterHash": "31e7069b76e306963242f7faf4e5fea070d2624571422c7db201d61a1975ea6c",
+        "testsHash": "cfdbed63ef146dab3be9a8491fa4876d0a25b538cbfe7bdece2fda8bcb988ef4"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/ListIteratee.ts",
+        "src/compat/_internal/PartialShallow.ts",
+        "src/compat/_internal/args.ts",
+        "src/compat/_internal/slice.ts",
+        "src/compat/_internal/toArgs.ts",
+        "src/compat/array/dropWhile.spec.ts",
+        "src/function/identity.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "dropWhile",
+      "targetExport": "dropWhile",
+      "title": "dropWhile",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/array/dropWhile.ts",
+        "testPaths": [
+          "src/compat/array/dropWhile.spec.ts"
+        ]
+      }
+    }
+  ],
+  "generatorVersion": "0.1.0",
+  "schemaVersion": 1,
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit"
+  }
+}

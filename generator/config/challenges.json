@@ -1,0 +1,42 @@
+{
+  "upstream": {
+    "repository": "toss/es-toolkit",
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "root": "external/es-toolkit"
+  },
+  "generatorVersion": "0.1.0",
+  "challenges": [
+    {
+      "id": "compat-array-compact",
+      "sourcePath": "src/compat/array/compact.ts",
+      "targetExport": "compact",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": ["src/compat/array/compact.spec.ts"]
+      },
+      "hints": {
+        "mode": "none",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-array-dropWhile",
+      "sourcePath": "src/compat/array/dropWhile.ts",
+      "targetExport": "dropWhile",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "remove-helpers"
+      },
+      "tests": {
+        "sourcePaths": ["src/compat/array/dropWhile.spec.ts"]
+      },
+      "hints": {
+        "mode": "none",
+        "maxLevel": 1
+      }
+    }
+  ]
+}

@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate": "node scripts/generate-challenges.mjs",
+    "generate:no-verify": "node scripts/generate-challenges.mjs --no-verify",
+    "typecheck:generator": "tsc -p generator/tsconfig.json",
+    "test:generator": "node --test \"generator/tests/**/*.test.ts\""
   },
   "dependencies": {
     "react": "^19.2.8",
@@ -23,6 +27,7 @@
     "@vitejs/plugin-react": "^6.1.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "oxlint": "^1.79.0",
+    "ts-morph": "^28.0.0",
     "typescript": "~6.0.2",
     "vite": "^8.2.2"
   }

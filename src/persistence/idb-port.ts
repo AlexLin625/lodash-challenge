@@ -9,6 +9,102 @@ import type { PersistencePort, PortKey, StoreName } from './port.ts';
 import type { IndexDescriptor, ObjectStoreDescriptor } from './schema.ts';
 import { DATABASE_NAME, DATABASE_VERSION, findStoreDescriptor, SCHEMA_V1 } from './schema.ts';
 
+// Structural injection surface: the exact subset of the DOM IDB* types this
+// module calls, so a node-side fake can drive the same code path as a real
+// browser database. Stand-ins enter through openChallengeDatabase({factory})
+// and createIDBPersistencePort(db); each funnel converges in one cast.
+export interface IndexedDBErrorLike {
+  readonly name: string;
+  readonly message: string;
+}
+
+export interface IndexedDBEventLike {
+  preventDefault(): void;
+}
+
+export interface IndexedDBVersionChangeEventLike extends IndexedDBEventLike {
+  readonly oldVersion: number;
+}
+
+export interface IndexedDBStringListLike {
+  readonly length: number;
+  contains(name: string): boolean;
+}
+
+export interface IndexedDBRequestLike<TResult = unknown> {
+  result: TResult;
+  error: IndexedDBErrorLike | null;
+  onsuccess: ((event: IndexedDBEventLike) => void) | null;
+  onerror: ((event: IndexedDBEventLike) => void) | null;
+}
+
+export interface IndexedDBObjectStoreOptionsLike {
+  keyPath?: string | readonly string[];
+  autoIncrement?: boolean;
+}
+
+export interface IndexedDBIndexOptionsLike {
+  unique?: boolean;
+}
+
+export interface IndexedDBObjectStoreLike {
+  readonly indexNames: IndexedDBStringListLike;
+  createIndex(
+    name: string,
+    keyPath: string | readonly string[],
+    options?: IndexedDBIndexOptionsLike
+  ): unknown;
+  get(query: IDBValidKey): IndexedDBRequestLike<unknown>;
+  getAll(): IndexedDBRequestLike<readonly unknown[]>;
+  put(value: unknown, key?: IDBValidKey): IndexedDBRequestLike<unknown>;
+  delete(query: IDBValidKey): IndexedDBRequestLike<unknown>;
+  clear(): IndexedDBRequestLike<unknown>;
+}
+
+export interface IndexedDBTransactionLike {
+  error: IndexedDBErrorLike | null;
+  objectStore(name: string): IndexedDBObjectStoreLike;
+  abort(): void;
+  oncomplete: ((event: IndexedDBEventLike) => void) | null;
+  onerror: ((event: IndexedDBEventLike) => void) | null;
+  onabort: ((event: IndexedDBEventLike) => void) | null;
+}
+
+export interface IndexedDBDatabaseLike {
+  name: string;
+  version: number;
+  readonly objectStoreNames: IndexedDBStringListLike;
+  onversionchange: ((event: IndexedDBEventLike) => void) | null;
+  close(): void;
+  createObjectStore(
+    name: string,
+    options?: IndexedDBObjectStoreOptionsLike
+  ): IndexedDBObjectStoreLike;
+  transaction(
+    storeNames: string | readonly string[],
+    mode?: 'readonly' | 'readwrite' | 'versionchange'
+  ): IndexedDBTransactionLike;
+}
+
+export interface IndexedDBOpenDBRequestLike {
+  result: IndexedDBDatabaseLike;
+  transaction: IndexedDBTransactionLike | null;
+  error: IndexedDBErrorLike | null;
+  onsuccess: ((event: IndexedDBEventLike) => void) | null;
+  onerror: ((event: IndexedDBEventLike) => void) | null;
+  onblocked: ((event: IndexedDBEventLike) => void) | null;
+  onupgradeneeded: ((event: IndexedDBVersionChangeEventLike) => void) | null;
+}
+
+export interface IndexedDBFactoryLike {
+  open(name: string, version?: number): IndexedDBOpenDBRequestLike;
+}
+
+export interface OpenChallengeDatabaseOptions {
+  /** Stand-in for globalThis.indexedDB; defaults to the ambient factory. */
+  factory?: IndexedDBFactoryLike;
+}
+
 export function isIndexedDBAvailable(): boolean {
   try {
     return typeof globalThis.indexedDB !== 'undefined' && globalThis.indexedDB !== null;
@@ -77,13 +173,53 @@ function usesInlineKeys(descriptor: ObjectStoreDescriptor): boolean {
     : descriptor.keyPath.length > 0;
 }
 
-export async function openChallengeDatabase(): Promise<IDBDatabase> {
-  if (!isIndexedDBAvailable()) {
+// Stores with a compound in-line keyPath hold records under the tuple read
+// off the record itself, but port callers (the DAO via keys.challengeKeyId)
+// pass the same tuple JSON-stringified. Parse such strings back into a
+// tuple before issuing a get/delete so both spellings address one record.
+function resolveLookupKey(
+  descriptor: ObjectStoreDescriptor,
+  key: IDBValidKey
+): IDBValidKey {
+  if (typeof key !== 'string' || typeof descriptor.keyPath === 'string') {
+    return key;
+  }
+  const trimmed = key.trim();
+  if (!trimmed.startsWith('[')) {
+    return key;
+  }
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(trimmed);
+  } catch {
+    return key;
+  }
+  if (
+    !Array.isArray(parsed) ||
+    parsed.length !== descriptor.keyPath.length ||
+    !parsed.every((part) => typeof part === 'string' || typeof part === 'number')
+  ) {
+    return key;
+  }
+  return parsed as string[] | number[];
+}
+
+function portToIdbKey(descriptor: ObjectStoreDescriptor, key: PortKey): IDBValidKey {
+  return resolveLookupKey(descriptor, toIdbKey(key));
+}
+
+export async function openChallengeDatabase(
+  options: OpenChallengeDatabaseOptions = {}
+): Promise<IDBDatabase> {
+  if (options.factory === undefined && !isIndexedDBAvailable()) {
     throw storageUnavailableError();
   }
   return new Promise<IDBDatabase>((resolve, reject) => {
     try {
-      const request = globalThis.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
+      // One-line cast: the factory default is the real IDBFactory, and an
+      // injected IndexedDBFactoryLike only ever occupies open() below.
+      const factory = (options.factory ?? globalThis.indexedDB) as IDBFactory;
+      const request = factory.open(DATABASE_NAME, DATABASE_VERSION);
 
       request.onupgradeneeded = () => {
         const db = request.result;
@@ -145,9 +281,22 @@ export async function openChallengeDatabase(): Promise<IDBDatabase> {
 }
 
 export function createIDBPersistencePort(
-  db?: IDBDatabase | Promise<IDBDatabase>
+  db?:
+    | IDBDatabase
+    | Promise<IDBDatabase>
+    | IndexedDBDatabaseLike
+    | Promise<IndexedDBDatabaseLike>
 ): PersistencePort {
-  const injected = db === undefined ? null : Promise.resolve(db);
+  // One-line cast: a structural stand-in only ever occupies the IDBDatabase
+  // members this port touches, so real and fake databases share one path.
+  const asNativeDatabase = (database: IDBDatabase | IndexedDBDatabaseLike): IDBDatabase =>
+    database as IDBDatabase;
+  const injected =
+    db === undefined
+      ? null
+      : Promise.resolve(db).then(asNativeDatabase, (error: unknown) => {
+          throw normalizePersistenceError(error);
+        });
   let opening: Promise<IDBDatabase> | null = null;
 
   function database(): Promise<IDBDatabase> {
@@ -246,7 +395,7 @@ export function createIDBPersistencePort(
 
   return {
     async get<T>(store: StoreName, key: PortKey): Promise<T | undefined> {
-      const idbKey = toIdbKey(key);
+      const idbKey = portToIdbKey(storeDescriptor(store), key);
       return execute(store, 'readonly', (objectStore, transaction) =>
         sendRequest<T | undefined>(objectStore.get(idbKey), transaction)
       );
@@ -289,14 +438,16 @@ export function createIDBPersistencePort(
     },
 
     async delete(store: StoreName, key: PortKey): Promise<void> {
-      const idbKey = toIdbKey(key);
+      const descriptor = storeDescriptor(store);
+      const idbKey = portToIdbKey(descriptor, key);
       await execute(store, 'readwrite', (objectStore, transaction) =>
         sendRequest(objectStore.delete(idbKey), transaction)
       );
     },
 
     async deleteMany(store: StoreName, keys: readonly PortKey[]): Promise<void> {
-      const idbKeys = keys.map((key) => toIdbKey(key));
+      const descriptor = storeDescriptor(store);
+      const idbKeys = keys.map((key) => portToIdbKey(descriptor, key));
       await execute(store, 'readwrite', async (objectStore, transaction) => {
         for (const idbKey of idbKeys) {
           await sendRequest(objectStore.delete(idbKey), transaction);

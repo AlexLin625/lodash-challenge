@@ -93,14 +93,10 @@ export function ChallengeWorkspace({ progressService }: ChallengeWorkspaceProps)
   // Load the bundle for the selected challenge.
   useEffect(() => {
     if (!selectedId) {
-      setChallenge(null);
       return;
     }
     let cancelled = false;
     const controller = new AbortController();
-    setLoadingChallenge(true);
-    setChallengeError(null);
-    setChallenge(null);
     loaderRef.current!
       .loadChallenge(selectedId, controller.signal)
       .then((loaded) => {
@@ -188,9 +184,18 @@ export function ChallengeWorkspace({ progressService }: ChallengeWorkspaceProps)
     return disposeWorkspace;
   }, [challenge, disposeWorkspace]);
 
-  const handleSelect = useCallback((id: string) => {
-    setSelectedId((previous) => (previous === id ? previous : id));
-  }, []);
+  const handleSelect = useCallback(
+    (id: string) => {
+      if (selectedId === id) {
+        return;
+      }
+      setChallenge(null);
+      setChallengeError(null);
+      setLoadingChallenge(true);
+      setSelectedId(id);
+    },
+    [selectedId]
+  );
 
   const handleRun = useCallback(async () => {
     const current = challengeRef.current;

@@ -22,6 +22,11 @@ export interface AttemptRecord {
   sourceHash: string;
 }
 
+export interface ProgressReader {
+  /** The stored draft files for this exact [challengeId, challengeVersion], or null. */
+  getSolutionDraft(key: ChallengeKey): Promise<Record<string, string> | null>;
+}
+
 export interface ProgressSeam {
   /** A challenge was opened and its starter files are known. */
   challengeOpened(key: ChallengeKey, starterFiles: Record<string, string>): void;
@@ -31,6 +36,12 @@ export interface ProgressSeam {
   recordAttempt(attempt: AttemptRecord): void;
   /** A run passed every test. */
   markCompleted(key: ChallengeKey, attempt: AttemptRecord): void;
+  /**
+   * Optional read-only capability (docs/design-v1.md §10): DAO-backed
+   * services also expose the last stored draft so the workspace can restore
+   * it on open. Absent on the noop service, which keeps the old behavior.
+   */
+  getSolutionDraft?(key: ChallengeKey): Promise<Record<string, string> | null>;
 }
 
 export class NoopProgressService implements ProgressSeam {

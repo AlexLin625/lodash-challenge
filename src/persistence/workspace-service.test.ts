@@ -226,3 +226,30 @@ test('the queue keeps running after a failed operation', async () => {
   const solution = await dao.getSolution(key);
   assert.deepEqual(solution?.files, { 'index.ts': 'after failure' });
 });
+
+test('getSolutionDraft returns null when no solution is stored', async () => {
+  const { service } = setup();
+  assert.equal(await service.getSolutionDraft(key), null);
+});
+
+test('getSolutionDraft returns the stored draft files', async () => {
+  const { service, dao } = setup();
+  await dao.saveDraft({ key, files: { 'index.ts': 'typed' }, starterHash: 'hash-1' });
+  assert.deepEqual(await service.getSolutionDraft(key), { 'index.ts': 'typed' });
+});
+
+test('getSolutionDraft reports DAO failures through onError and resolves null', async () => {
+  const { service, errors } = brokenService();
+  assert.equal(await service.getSolutionDraft(key), null);
+  assert.equal(errors.length, 1);
+  assert.ok(errors[0] instanceof PersistenceError);
+  assert.equal(errors[0]?.code, 'db-error');
+});
+
+test('flush covers queued reads and reads observe earlier writes', async () => {
+  const { service } = setup();
+  service.challengeOpened(key, { 'index.ts': 'starter' });
+  const read = service.getSolutionDraft(key);
+  await service.flush();
+  assert.deepEqual(await read, { 'index.ts': 'starter' });
+});

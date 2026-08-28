@@ -9,6 +9,7 @@ import type { RunStatus } from '../runner/protocol.ts';
 import type {
   AttemptRecord as WorkspaceAttemptRecord,
   ChallengeKey as WorkspaceChallengeKey,
+  ProgressReader,
   ProgressSeam,
 } from '../workspace/progress.ts';
 import type { ProgressDAO } from './dao.ts';
@@ -23,10 +24,17 @@ export interface WorkspaceProgressServiceDeps {
   clock?: () => number;
 }
 
-export interface FlushableProgressSeam extends ProgressSeam {
+export interface FlushableProgressSeam extends ProgressSeam, ProgressReader {
+  // Redeclared to narrow the optional seam member to a required one.
+  getSolutionDraft(key: WorkspaceChallengeKey): Promise<Record<string, string> | null>;
   /** Resolves once every operation enqueued before the call has settled. */
   flush(): Promise<void>;
 }
+
+// Reads share the fire-and-forget write queue's tail so they observe every
+// write enqueued before them (open-time restore sees the seed, if any) and
+// are covered by flush(). Failures normalize through onError and resolve to
+// the fallback instead of rejecting into the UI.
 
 // dao.saveDraft overwrites starterHash on existing records (dao.ts merges it
 // unconditionally), so the service re-reads the solution and replays the
@@ -77,6 +85,23 @@ export function createWorkspaceProgressService(
     tail = tail.then(step, step);
   }
 
+  function enqueueResult<T>(operation: () => Promise<T>, fallback: T): Promise<T> {
+    const step = async (): Promise<T> => {
+      try {
+        return await operation();
+      } catch (error) {
+        notifyError(error);
+        return fallback;
+      }
+    };
+    const result = tail.then(step, step);
+    tail = result.then(
+      () => undefined,
+      () => undefined
+    );
+    return result;
+  }
+
   return {
     challengeOpened(key: WorkspaceChallengeKey, starterFiles: Record<string, string>): void {
       enqueue(async () => {
@@ -121,6 +146,13 @@ export function createWorkspaceProgressService(
           sourceHash: attempt.sourceHash,
         });
       });
+    },
+
+    getSolutionDraft(key: WorkspaceChallengeKey): Promise<Record<string, string> | null> {
+      return enqueueResult(async () => {
+        const existing = await dao.getSolution(toDomainKey(key));
+        return existing?.files ?? null;
+      }, null);
     },
 
     async flush(): Promise<void> {

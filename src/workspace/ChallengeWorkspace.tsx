@@ -9,25 +9,57 @@ import { WorkspaceModels, type WorkspaceFile } from '../editor/workspace-models.
 import { ChallengeList } from './ChallengeList.tsx';
 import { TestPanel, type RunPhase } from './TestPanel.tsx';
 import { completedChallengeIds, progressTotalsLabel } from './completion.ts';
-import { useChallengeProgressSummary, type ProgressReader } from './use-progress.ts';
-import { noopProgressService, type AttemptRecord, type ProgressSeam } from './progress.ts';
+import { useChallengeProgressSummary, type ProgressReader as ProgressSummaryReader } from './use-progress.ts';
+import {
+  noopProgressService,
+  type AttemptRecord,
+  type ChallengeKey,
+  type ProgressReader as SolutionDraftReader,
+  type ProgressSeam,
+} from './progress.ts';
+import { decideDraftAction, mergeRestoredFiles } from './restore.ts';
 
 const EMPTY_COMPLETED_IDS: ReadonlySet<string> = new Set<string>();
 
+/** Reader prop: the summary reader, optionally extended with draft reads. */
+type WorkspaceReader = ProgressSummaryReader & Partial<SolutionDraftReader>;
+
 export interface ChallengeWorkspaceProps {
   progressService?: ProgressSeam;
-  reader?: ProgressReader;
+  reader?: WorkspaceReader | null;
   editorTheme?: string;
   editorFontSize?: number;
 }
 
 const DRAFT_SAVE_DEBOUNCE_MS = 600;
+const DRAFT_NOTICE_MS = 5000;
 
 function toMessage(error: unknown): string {
   if (error instanceof Error) {
     return error.message;
   }
   return String(error);
+}
+
+// Reads the stored draft from the first source that supports it: the reader
+// prop first, then a DAO-backed progress seam. A failing read never blocks
+// opening the challenge.
+async function readStoredDraft(
+  reader: WorkspaceReader | null,
+  seam: ProgressSeam,
+  key: ChallengeKey
+): Promise<Record<string, string> | null> {
+  try {
+    if (typeof reader?.getSolutionDraft === 'function') {
+      return (await reader.getSolutionDraft(key)) ?? null;
+    }
+    if (typeof seam.getSolutionDraft === 'function') {
+      return (await seam.getSolutionDraft(key)) ?? null;
+    }
+  } catch {
+    // Persistence errors surface through the service's own onError channel.
+  }
+  return null;
 }
 
 export function ChallengeWorkspace({
@@ -47,6 +79,7 @@ export function ChallengeWorkspace({
   const [activePath, setActivePath] = useState('');
   const [phase, setPhase] = useState<RunPhase>('idle');
   const [result, setResult] = useState<TestRunResult | null>(null);
+  const [draftNotice, setDraftNotice] = useState<string | null>(null);
 
   const { summary, refresh } = useChallengeProgressSummary(reader ?? null);
 
@@ -55,6 +88,7 @@ export function ChallengeWorkspace({
   const modelsRef = useRef<WorkspaceModels | null>(null);
   const runnerRef = useRef<SandpackRunner | null>(null);
   const progressRef = useRef<ProgressSeam>(progressService ?? noopProgressService);
+  const readerRef = useRef<WorkspaceReader | null>(reader ?? null);
   const challengeRef = useRef<LoadedChallenge | null>(null);
   const phaseRef = useRef<RunPhase>('idle');
   const draftTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -66,6 +100,10 @@ export function ChallengeWorkspace({
   useEffect(() => {
     progressRef.current = progressService ?? noopProgressService;
   }, [progressService]);
+
+  useEffect(() => {
+    readerRef.current = reader ?? null;
+  }, [reader]);
 
   useEffect(() => {
     challengeRef.current = challenge;
@@ -145,53 +183,92 @@ export function ChallengeWorkspace({
     setResult(null);
   }, []);
 
-  // Create Monaco models and the runner for the loaded challenge.
+  // Create Monaco models and the runner for the loaded challenge. When a
+  // draft source is available, restore the stored draft before mounting
+  // (docs/design-v1.md §10 "user opens challenge → DAO read → restore/seed").
   useEffect(() => {
     if (!challenge) {
       return;
     }
-    const created = new WorkspaceModels({
-      onEditableChange: (_path: string, _value: string) => {
-        if (draftTimerRef.current) {
-          clearTimeout(draftTimerRef.current);
-        }
-        draftTimerRef.current = setTimeout(() => {
-          const current = challengeRef.current;
-          const currentModels = modelsRef.current;
-          if (!current || !currentModels) {
-            return;
+    let cancelled = false;
+    const key: ChallengeKey = {
+      challengeId: challenge.manifest.id,
+      challengeVersion: challenge.manifest.challengeVersion,
+    };
+
+    const mount = (fileContents: Record<string, string>): void => {
+      const created = new WorkspaceModels({
+        onEditableChange: (_path: string, _value: string) => {
+          if (draftTimerRef.current) {
+            clearTimeout(draftTimerRef.current);
           }
-          progressRef.current.saveDraft(
-            { challengeId: current.manifest.id, challengeVersion: current.manifest.challengeVersion },
-            currentModels.getAllContents()
-          );
-        }, DRAFT_SAVE_DEBOUNCE_MS);
-      },
-    });
-    created.create(challenge.files, challenge.manifest.editableFiles);
-    modelsRef.current = created;
-    setModels(created);
-
-    const list = created.fileList();
-    setFiles(list);
-    setActivePath(list[0]?.path ?? '');
-    setPhase('idle');
-    setResult(null);
-
-    if (hostRef.current) {
-      runnerRef.current = new SandpackRunner({
-        host: hostRef.current,
-        timeoutMs: challenge.manifest.runtime.timeoutMs,
+          draftTimerRef.current = setTimeout(() => {
+            const current = challengeRef.current;
+            const currentModels = modelsRef.current;
+            if (!current || !currentModels) {
+              return;
+            }
+            progressRef.current.saveDraft(
+              { challengeId: current.manifest.id, challengeVersion: current.manifest.challengeVersion },
+              currentModels.getAllContents()
+            );
+          }, DRAFT_SAVE_DEBOUNCE_MS);
+        },
       });
-    }
+      created.create(fileContents, challenge.manifest.editableFiles);
+      modelsRef.current = created;
+      setModels(created);
 
-    progressRef.current.challengeOpened(
-      { challengeId: challenge.manifest.id, challengeVersion: challenge.manifest.challengeVersion },
-      challenge.files
-    );
+      const list = created.fileList();
+      setFiles(list);
+      setActivePath(list[0]?.path ?? '');
+      setPhase('idle');
+      setResult(null);
 
-    return disposeWorkspace;
+      if (hostRef.current) {
+        runnerRef.current = new SandpackRunner({
+          host: hostRef.current,
+          timeoutMs: challenge.manifest.runtime.timeoutMs,
+        });
+      }
+
+      progressRef.current.challengeOpened(key, challenge.files);
+    };
+
+    const open = async (): Promise<void> => {
+      const draft = await readStoredDraft(readerRef.current, progressRef.current, key);
+      if (cancelled || challengeRef.current !== challenge) {
+        // The user switched challenges while the draft was loading; drop it.
+        return;
+      }
+      if (decideDraftAction(draft) === 'restore' && draft !== null) {
+        setDraftNotice('Draft restored');
+        mount(mergeRestoredFiles(challenge.files, draft, challenge.manifest.editableFiles));
+      } else {
+        mount(challenge.files);
+      }
+    };
+
+    void open();
+
+    return () => {
+      cancelled = true;
+      disposeWorkspace();
+    };
   }, [challenge, disposeWorkspace]);
+
+  // Auto-dismiss the non-blocking draft-restored notice.
+  useEffect(() => {
+    if (draftNotice === null) {
+      return;
+    }
+    const timer = setTimeout(() => {
+      setDraftNotice(null);
+    }, DRAFT_NOTICE_MS);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [draftNotice]);
 
   const handleSelect = useCallback(
     (id: string) => {
@@ -332,6 +409,12 @@ export function ChallengeWorkspace({
               </div>
 
               {selectedManifest.description && <p className="description">{selectedManifest.description}</p>}
+
+              {draftNotice && (
+                <p className="panel-hint" role="status">
+                  {draftNotice}
+                </p>
+              )}
 
               <div className="editor-results">
                 <div className="editor-region">

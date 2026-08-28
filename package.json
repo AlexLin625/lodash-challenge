@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@codesandbox/sandpack-client": "^2.19.8",
+    "monaco-editor": "^0.56.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

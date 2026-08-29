@@ -1,6 +1,6 @@
 {
   "category": "object",
-  "challengeVersion": "207f4907f2b321ca7fef4d76151f8683d56b0d57ede8ccf264614eed0db7f8e3",
+  "challengeVersion": "81d5d042fd102c1e1a217a6a717dc80499e65d54a41a8d256f663136ac95557f",
   "description": "Finds the key of the first element that matches the given predicate.",
   "difficulty": "medium",
   "editableFiles": [
@@ -23,16 +23,12 @@
   "id": "compat-object-findKey",
   "integrity": {
     "configHash": "d05801d55ffd3ef0e3384e81a69a234085fcac003a1182446b889fdab9cddb62",
-    "manifestHash": "1e3ccb797c1d59ee2d616e9efe67d5dfd07d335ee64e2e33365233bbbd8fec13",
-    "starterHash": "1b22263da910076e13da06d4c595b416ea9c4a5003410766593f7497ae21f521",
+    "manifestHash": "62962e6f31d650d27f4cc597d5eb9c39082e690c43fe31c83cad72e8db6c00a6",
+    "starterHash": "98cadbf9749d341a5c1b5c37562323d33eab863f1a57ac6a2856b9ad07148bb3",
     "testsHash": "a765d86de07ca081cb8dbcb74488628ea8692a2fba7fe83f66cc6f6b9d82baf1"
   },
   "readonlyFiles": [
     "runtime/test-runtime.ts",
-    "src/compat/_internal/IterateeShorthand.ts",
-    "src/compat/_internal/ObjectIteratee.ts",
-    "src/compat/_internal/ObjectIterator.ts",
-    "src/compat/_internal/PartialShallow.ts",
     "src/compat/object/findKey.spec.ts"
   ],
   "runtime": {

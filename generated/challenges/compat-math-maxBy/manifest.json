@@ -1,6 +1,6 @@
 {
   "category": "math",
-  "challengeVersion": "24db978a9ee08252d8c091f06b03b5a872bd44b0f4ecfaedced5e2c024162519",
+  "challengeVersion": "e7028cb595fa08afe2217af95c987cbb084efa3fc03826a2c66a5404b04abc3c",
   "description": "Finds the element in an array that has the maximum value when applying\nthe `iteratee` to each element.",
   "difficulty": "medium",
   "editableFiles": [
@@ -23,14 +23,12 @@
   "id": "compat-math-maxBy",
   "integrity": {
     "configHash": "fedd1bed7cfdd0dd7ea16795d9c6b4eff1124ff2da95cde746ef61462599f952",
-    "manifestHash": "fbb64d0c303d086651958a7e1317b7123b4bc9816555f6252c97c116cd1fa422",
-    "starterHash": "58276b68b82b343f86a4134f0b8f97114810ac70d26d42f18ba7528bd8f51675",
+    "manifestHash": "1cda71d7f70c9d0b27573211a4e9fe6fc202d344258c9214cb08f1e95e19d303",
+    "starterHash": "c09737816503283493503e44696086b21e60c24194dcca48b9c47832d19b4183",
     "testsHash": "d1c7c33d7e73ae43be67507560aafd3a08f45dbad0455ee10c6e2f6bdb5674ca"
   },
   "readonlyFiles": [
     "runtime/test-runtime.ts",
-    "src/compat/_internal/PartialShallow.ts",
-    "src/compat/_internal/ValueIteratee.ts",
     "src/compat/math/maxBy.spec.ts",
     "src/function/identity.ts"
   ],

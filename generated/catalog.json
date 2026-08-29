@@ -162,7 +162,7 @@
     },
     {
       "category": "array",
-      "challengeVersion": "f5573aa17db4f93842a47403ec94f3ba03ab49c06b929e23b491ad6d4a964eb8",
+      "challengeVersion": "029562c53d5c3e2bec0a33b1d03442c4c63ca6ea5c60665a3ef5ac520b8ec116",
       "description": "Creates a slice of array excluding elements dropped from the beginning.\nElements are dropped until predicate returns falsey.\nThe predicate is invoked with three arguments: (value, index, array).",
       "difficulty": "easy",
       "editableFiles": [
@@ -180,14 +180,12 @@
       "id": "compat-array-dropWhile",
       "integrity": {
         "configHash": "b60560c44e18d3242ffef5b637642d95ed06d3fb201a5a2aac4db365872428aa",
-        "manifestHash": "2ab419e852c34fbd9c3661e505bc7d1b2c3159edb9ca4e171367d18339180767",
-        "starterHash": "31e7069b76e306963242f7faf4e5fea070d2624571422c7db201d61a1975ea6c",
+        "manifestHash": "557acdd015e99c306db18f14ea8dba4b0931b68c31fff50b58b7d16b24536e06",
+        "starterHash": "d0fe02c7b0c30bd4f2aa129501ffa92f53ce5290cdb8903cecd1c1110093452e",
         "testsHash": "cfdbed63ef146dab3be9a8491fa4876d0a25b538cbfe7bdece2fda8bcb988ef4"
       },
       "readonlyFiles": [
         "runtime/test-runtime.ts",
-        "src/compat/_internal/ListIteratee.ts",
-        "src/compat/_internal/PartialShallow.ts",
         "src/compat/_internal/args.ts",
         "src/compat/_internal/slice.ts",
         "src/compat/_internal/toArgs.ts",
@@ -215,7 +213,7 @@
     },
     {
       "category": "array",
-      "challengeVersion": "81516eef60b9aaa651c5bd62d58bd9b8e08c33a9112d9b779e1c7859dc17cc55",
+      "challengeVersion": "886ef5875571f4f70ebafe55b1db6aef281701c0109c3b1be2424c207d06e190",
       "description": "Recursively flattens array up to depth times.",
       "difficulty": "medium",
       "editableFiles": [
@@ -238,14 +236,12 @@
       "id": "compat-array-flattenDepth",
       "integrity": {
         "configHash": "74ee3e0f74c9873774fed956727cb88d2c94897b9980437b41fe79189a43d1c4",
-        "manifestHash": "cd4ae9852fd6e37f42295b5df661b1a4ca829ad96bf1130d3b86e8d19fd161d9",
-        "starterHash": "a5da279256e3dfd778b98f8f4a21e200ac65f0fc7ee56034d6ad03bbf73e12b2",
+        "manifestHash": "008773c96f99672fd604e7a085bad5c4db6070044e00ddba4e06cac1629b3533",
+        "starterHash": "4bc6487127398806f06f9a5858701fd78473460704abfa9521146548844d746a",
         "testsHash": "d6013715b13920622eee5b42d02e1a982f2a4f627c1af1d98bc5990d321387fc"
       },
       "readonlyFiles": [
         "runtime/test-runtime.ts",
-        "src/compat/_internal/ListOfRecursiveArraysOrValues.ts",
-        "src/compat/_internal/RecursiveArray.ts",
         "src/compat/_internal/args.ts",
         "src/compat/_internal/toArgs.ts",
         "src/compat/array/flattenDepth.spec.ts"
@@ -616,7 +612,7 @@
     },
     {
       "category": "math",
-      "challengeVersion": "24db978a9ee08252d8c091f06b03b5a872bd44b0f4ecfaedced5e2c024162519",
+      "challengeVersion": "e7028cb595fa08afe2217af95c987cbb084efa3fc03826a2c66a5404b04abc3c",
       "description": "Finds the element in an array that has the maximum value when applying\nthe `iteratee` to each element.",
       "difficulty": "medium",
       "editableFiles": [
@@ -639,14 +635,12 @@
       "id": "compat-math-maxBy",
       "integrity": {
         "configHash": "fedd1bed7cfdd0dd7ea16795d9c6b4eff1124ff2da95cde746ef61462599f952",
-        "manifestHash": "fbb64d0c303d086651958a7e1317b7123b4bc9816555f6252c97c116cd1fa422",
-        "starterHash": "58276b68b82b343f86a4134f0b8f97114810ac70d26d42f18ba7528bd8f51675",
+        "manifestHash": "1cda71d7f70c9d0b27573211a4e9fe6fc202d344258c9214cb08f1e95e19d303",
+        "starterHash": "c09737816503283493503e44696086b21e60c24194dcca48b9c47832d19b4183",
         "testsHash": "d1c7c33d7e73ae43be67507560aafd3a08f45dbad0455ee10c6e2f6bdb5674ca"
       },
       "readonlyFiles": [
         "runtime/test-runtime.ts",
-        "src/compat/_internal/PartialShallow.ts",
-        "src/compat/_internal/ValueIteratee.ts",
         "src/compat/math/maxBy.spec.ts",
         "src/function/identity.ts"
       ],
@@ -813,7 +807,7 @@
     },
     {
       "category": "object",
-      "challengeVersion": "207f4907f2b321ca7fef4d76151f8683d56b0d57ede8ccf264614eed0db7f8e3",
+      "challengeVersion": "81d5d042fd102c1e1a217a6a717dc80499e65d54a41a8d256f663136ac95557f",
       "description": "Finds the key of the first element that matches the given predicate.",
       "difficulty": "medium",
       "editableFiles": [
@@ -836,16 +830,12 @@
       "id": "compat-object-findKey",
       "integrity": {
         "configHash": "d05801d55ffd3ef0e3384e81a69a234085fcac003a1182446b889fdab9cddb62",
-        "manifestHash": "1e3ccb797c1d59ee2d616e9efe67d5dfd07d335ee64e2e33365233bbbd8fec13",
-        "starterHash": "1b22263da910076e13da06d4c595b416ea9c4a5003410766593f7497ae21f521",
+        "manifestHash": "62962e6f31d650d27f4cc597d5eb9c39082e690c43fe31c83cad72e8db6c00a6",
+        "starterHash": "98cadbf9749d341a5c1b5c37562323d33eab863f1a57ac6a2856b9ad07148bb3",
         "testsHash": "a765d86de07ca081cb8dbcb74488628ea8692a2fba7fe83f66cc6f6b9d82baf1"
       },
       "readonlyFiles": [
         "runtime/test-runtime.ts",
-        "src/compat/_internal/IterateeShorthand.ts",
-        "src/compat/_internal/ObjectIteratee.ts",
-        "src/compat/_internal/ObjectIterator.ts",
-        "src/compat/_internal/PartialShallow.ts",
         "src/compat/object/findKey.spec.ts"
       ],
       "runtime": {
@@ -869,7 +859,7 @@
     },
     {
       "category": "object",
-      "challengeVersion": "67e5d69256b455b15e37c1ee17be1b2c502efbe5cca73b0dcf1cca9981b5ba5d",
+      "challengeVersion": "5fed49c5e9be60fffbe18daa8e8f3318e08d3ba25dcb63b3c552f2c47880a6dc",
       "description": "Checks if a given path exists in an object, **including inherited properties**.",
       "difficulty": "medium",
       "editableFiles": [
@@ -892,8 +882,8 @@
       "id": "compat-object-hasIn",
       "integrity": {
         "configHash": "3411cc0429acca4815fc9e3111a4b05d11d45a34ca75d5feb0ed733e45a068c6",
-        "manifestHash": "9b7e957bc5c69e721325052506b89e96fe7d70daa906b5a5d05488eb13f3b419",
-        "starterHash": "edb9844db56ed64d94d868c0b3a5178151d3a4e0329ac557855d4cc179ac2230",
+        "manifestHash": "4a90ce028c55f6929d3e1f93b7312973858916faf56172b8fa24d44a6d293653",
+        "starterHash": "2eae8124082107f74b41d7206d5b73e93450f110517624d7969526876d23da37",
         "testsHash": "6ee4457130aca71a12a9b8208766969a1145b66205ef5baf86c1c92457c25ceb"
       },
       "readonlyFiles": [
@@ -995,7 +985,7 @@
     },
     {
       "category": "predicate",
-      "challengeVersion": "fc482f9dc6feb667e980e742113d384e6ce4917d67abbd60132ae51a714c02c2",
+      "challengeVersion": "47b2caccdb942078bf75c3f804470ece39e38cf61a5c9928f34c8550aaaa4bfd",
       "description": "Checks if `object` conforms to `source` by invoking the predicate properties of `source` with the corresponding property values of `object`.",
       "difficulty": "hard",
       "editableFiles": [
@@ -1023,13 +1013,12 @@
       "id": "compat-predicate-conformsTo",
       "integrity": {
         "configHash": "964a02ac1df1acaa0d1d01687f5cf69419ea7e13d48504a5a134bc7723028033",
-        "manifestHash": "e2628a0acb3f044e1b7d8d96fea374259aa15891ddcc7debedb59ebcab0f9176",
-        "starterHash": "40239ad723192edc13e53651e686a88153c5c359a3a5eed7b6bb10d2d294ef94",
+        "manifestHash": "7d70c383c5dc632388d00a7056af70a8c1eb10df04a2af50c28f69a91c05c249",
+        "starterHash": "7a9bfd5de500fd2506019068f5c2b625356aa2a345d17c2525ddec5bfef202aa",
         "testsHash": "a6665815d303e920ea2b54244560f62861c9bc30b2eec545194bded26f306af4"
       },
       "readonlyFiles": [
         "runtime/test-runtime.ts",
-        "src/compat/_internal/ConformsPredicateObject.ts",
         "src/compat/predicate/conformsTo.spec.ts"
       ],
       "runtime": {

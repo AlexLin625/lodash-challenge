@@ -72,6 +72,13 @@ export async function validateChallenge(input: ValidateInput): Promise<Validatio
     detail: unusedImports.length ? `unused: ${unusedImports.map((u) => `${u.binding} (${u.moduleSpecifier})`).join(', ')}` : undefined,
   });
 
+  const internalImports = internalImportSpecifiers(input.starterText);
+  checks.push({
+    name: 'starter imports no _internal modules (type-only imports must be inlined)',
+    passed: internalImports.length === 0,
+    detail: internalImports.length ? `found: ${internalImports.join(', ')}` : undefined,
+  });
+
   const nodeApis = nodeApiUsage(input.testPaths.map((p) => input.bundleFiles.get(p) ?? ''));
   checks.push({ name: 'selected tests avoid Node-only APIs', passed: nodeApis.length === 0, detail: nodeApis.length ? `found: ${nodeApis.join(', ')}` : undefined });
 
@@ -169,6 +176,20 @@ function originalImplementationLeaked(originalText: string, starterText: string)
     }
   }
   return false;
+}
+
+/** Module specifiers in the starter that point into a `_internal/` directory. */
+export function internalImportSpecifiers(starterText: string): string[] {
+  const project = new Project({ useInMemoryFileSystem: true });
+  const sourceFile = project.createSourceFile('/validate-internal.ts', starterText, { overwrite: true });
+  const found: string[] = [];
+  for (const decl of sourceFile.getImportDeclarations()) {
+    const specifier = decl.getModuleSpecifierValue();
+    if (/(^|[\\/])_internal[\\/]/.test(specifier)) {
+      found.push(specifier);
+    }
+  }
+  return found;
 }
 
 function unresolvedHelperRefs(starterText: string, removedHelpers: string[]): string[] {

@@ -1,4 +1,12 @@
-import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
+export type ObjectIterator<T, R> = (value: T[keyof T], key: string, collection: T) => R;
+
+export type PartialShallow<T> = {
+  [P in keyof T]?: T[P] extends object ? object : T[P];
+};
+
+export type IterateeShorthand<T> = PropertyKey | [PropertyKey, any] | PartialShallow<T>;
+
+export type ObjectIteratee<TObject> = ObjectIterator<TObject, unknown> | IterateeShorthand<TObject[keyof TObject]>;
 
 /**
  * Finds the key of the first element that matches the given predicate.

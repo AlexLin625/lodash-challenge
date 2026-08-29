@@ -1,4 +1,4 @@
-import { Project, SyntaxKind } from 'ts-morph';
+import { Project, SyntaxKind, ts } from 'ts-morph';
 import type { Identifier, Node, SourceFile } from 'ts-morph';
 import type * as morph from 'ts-morph';
 
@@ -33,9 +33,45 @@ export function findUnusedImportBindings(sourceText: string): UnusedImportBindin
   return findUnusedImportBindingsInSourceFile(sourceFile);
 }
 
+/**
+ * Returns every identifier that occurs outside import declarations and JSDoc
+ * in a real reference position, grouped by identifier text. Shared with the
+ * type-import inliner (typeInline.ts).
+ */
+export function referencedIdentifiers(sourceFile: SourceFile): Map<string, Identifier[]> {
+  const byName = new Map<string, Identifier[]>();
+  sourceFile.forEachDescendant((node) => {
+    if (!node.isKind(SyntaxKind.Identifier)) {
+      return;
+    }
+    if (isInsideImportOrJsDoc(node, sourceFile) || isNonReferencePosition(node)) {
+      return;
+    }
+    const existing = byName.get(node.getText());
+    if (existing) {
+      existing.push(node);
+    } else {
+      byName.set(node.getText(), [node]);
+    }
+  });
+  return byName;
+}
+
+/** True when the identifier only appears in type positions (never as a value). */
+export function isTypeOnlyReference(node: Identifier): boolean {
+  let current: Node | undefined = node.getParent();
+  while (current && !current.isKind(SyntaxKind.SourceFile)) {
+    if (ts.isTypeNode(current.compilerNode)) {
+      return true;
+    }
+    current = current.getParent();
+  }
+  return false;
+}
+
 /** Same analysis as {@link findUnusedImportBindings} for an already-parsed file. */
 export function findUnusedImportBindingsInSourceFile(sourceFile: SourceFile): UnusedImportBinding[] {
-  const referenced = referencedIdentifierNames(sourceFile);
+  const referenced = new Set(referencedIdentifiers(sourceFile).keys());
   const unused: UnusedImportBinding[] = [];
 
   for (const decl of sourceFile.getImportDeclarations()) {
@@ -61,21 +97,6 @@ export function findUnusedImportBindingsInSourceFile(sourceFile: SourceFile): Un
   }
 
   return unused;
-}
-
-/** Set of identifier texts occurring outside import declarations in real reference positions. */
-function referencedIdentifierNames(sourceFile: SourceFile): Set<string> {
-  const names = new Set<string>();
-  sourceFile.forEachDescendant((node) => {
-    if (!node.isKind(SyntaxKind.Identifier)) {
-      return;
-    }
-    if (isInsideImportOrJsDoc(node, sourceFile) || isNonReferencePosition(node)) {
-      return;
-    }
-    names.add(node.getText());
-  });
-  return names;
 }
 
 function isInsideImportOrJsDoc(node: Identifier, sourceFile: SourceFile): boolean {
@@ -105,6 +126,10 @@ function isNonReferencePosition(node: Identifier): boolean {
     return false;
   }
   switch (parent.getKind()) {
+    case SyntaxKind.TypeParameter:
+    case SyntaxKind.TypeAliasDeclaration:
+    case SyntaxKind.InterfaceDeclaration:
+    case SyntaxKind.ClassDeclaration:
     case SyntaxKind.PropertyAccessExpression:
       return (parent as morph.PropertyAccessExpression).getNameNode() === node;
     case SyntaxKind.QualifiedName:

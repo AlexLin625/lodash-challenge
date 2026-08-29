@@ -1,6 +1,6 @@
 {
   "category": "array",
-  "challengeVersion": "81516eef60b9aaa651c5bd62d58bd9b8e08c33a9112d9b779e1c7859dc17cc55",
+  "challengeVersion": "886ef5875571f4f70ebafe55b1db6aef281701c0109c3b1be2424c207d06e190",
   "description": "Recursively flattens array up to depth times.",
   "difficulty": "medium",
   "editableFiles": [
@@ -23,14 +23,12 @@
   "id": "compat-array-flattenDepth",
   "integrity": {
     "configHash": "74ee3e0f74c9873774fed956727cb88d2c94897b9980437b41fe79189a43d1c4",
-    "manifestHash": "cd4ae9852fd6e37f42295b5df661b1a4ca829ad96bf1130d3b86e8d19fd161d9",
-    "starterHash": "a5da279256e3dfd778b98f8f4a21e200ac65f0fc7ee56034d6ad03bbf73e12b2",
+    "manifestHash": "008773c96f99672fd604e7a085bad5c4db6070044e00ddba4e06cac1629b3533",
+    "starterHash": "4bc6487127398806f06f9a5858701fd78473460704abfa9521146548844d746a",
     "testsHash": "d6013715b13920622eee5b42d02e1a982f2a4f627c1af1d98bc5990d321387fc"
   },
   "readonlyFiles": [
     "runtime/test-runtime.ts",
-    "src/compat/_internal/ListOfRecursiveArraysOrValues.ts",
-    "src/compat/_internal/RecursiveArray.ts",
     "src/compat/_internal/args.ts",
     "src/compat/_internal/toArgs.ts",
     "src/compat/array/flattenDepth.spec.ts"

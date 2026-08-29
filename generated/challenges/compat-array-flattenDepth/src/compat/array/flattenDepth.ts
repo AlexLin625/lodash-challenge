@@ -1,4 +1,8 @@
-import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface RecursiveArray<T> extends Array<T | RecursiveArray<T>> {}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface ListOfRecursiveArraysOrValues<T> extends ArrayLike<T | RecursiveArray<T>> {}
 
 /**
  * Recursively flattens array up to depth times.

@@ -28,6 +28,12 @@ function printChallenge(built: BuiltChallenge): void {
     if (removedImports) {
       console.log(`    removed imports : ${removedImports}`);
     }
+    if (built.transformReport.inlinedTypes.length > 0) {
+      console.log(`    inlined types   : ${built.transformReport.inlinedTypes.join(', ')}`);
+    }
+    for (const warning of built.transformReport.typeInlineWarnings) {
+      console.log(`    type-inline warn: ${warning.binding} (${warning.moduleSpecifier}): ${warning.reason}`);
+    }
     if (built.validation) {
       for (const check of built.validation.checks) {
         console.log(`    ${check.passed ? 'ok  ' : 'FAIL'} ${check.name}${check.detail ? ` (${check.detail})` : ''}`);

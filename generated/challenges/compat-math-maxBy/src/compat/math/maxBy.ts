@@ -1,5 +1,10 @@
 import { identity } from '../../function/identity.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+
+export type PartialShallow<T> = {
+  [P in keyof T]?: T[P] extends object ? object : T[P];
+};
+
+export type ValueIteratee<T> = ((value: T) => unknown) | (PropertyKey | [PropertyKey, any] | PartialShallow<T>);
 
 /**
  * Finds the element in an array that has the maximum value when applying

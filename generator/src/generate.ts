@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { analyzeSource } from './analyzer.ts';
 import { transformSource } from './transform.ts';
+import { createUpstreamResolver } from './typeInline.ts';
 import { collectClosure } from './closure.ts';
 import { adaptTestFile } from './testAdapter.ts';
 import { buildManifest, dedupeSorted } from './bundle.ts';
@@ -51,7 +52,7 @@ export async function buildChallenge(
       analysis: analysisResult.analysis,
       classification: 'unsupported',
       unsupportedReasons: analysisResult.analysis.unsupportedReasons,
-      transformReport: { removedHelpers: [], removedImports: [], keptImports: [] },
+      transformReport: { removedHelpers: [], removedImports: [], keptImports: [], inlinedTypes: [], typeInlineWarnings: [] },
       entryContent: '',
       files: new Map(),
       testPaths: config.tests.sourcePaths,
@@ -62,7 +63,7 @@ export async function buildChallenge(
     };
   }
 
-  const { content: starterText, report: transformReport } = transformSource(config, analysisResult);
+  const { content: starterText, report: transformReport } = transformSource(config, analysisResult, createUpstreamResolver(upstreamRoot));
 
   // Adapt upstream Vitest tests to the internal runtime.
   const adaptedTests = new Map<string, string>();

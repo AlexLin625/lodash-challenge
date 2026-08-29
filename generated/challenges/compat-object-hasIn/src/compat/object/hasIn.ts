@@ -1,4 +1,6 @@
-import { PropertyPath } from '../_internal/PropertyPath.ts';
+export type Many<T> = T | readonly T[];
+
+export type PropertyPath = Many<PropertyKey>;
 
 /**
  * Checks if a given path exists in an object, **including inherited properties**.

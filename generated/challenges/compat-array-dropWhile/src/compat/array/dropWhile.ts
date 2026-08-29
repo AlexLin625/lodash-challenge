@@ -1,5 +1,12 @@
 import { identity } from '../../function/identity.ts';
-import { ListIteratee } from '../_internal/ListIteratee.ts';
+
+export type PartialShallow<T> = {
+  [P in keyof T]?: T[P] extends object ? object : T[P];
+};
+
+export type ListIteratee<T> =
+  | ((value: T, index: number, collection: ArrayLike<T>) => unknown)
+  | (PropertyKey | [PropertyKey, any] | PartialShallow<T>);
 
 /**
  * Creates a slice of array excluding elements dropped from the beginning.

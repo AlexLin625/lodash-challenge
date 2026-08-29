@@ -4,6 +4,8 @@
 // manifest) and §6.1 (source analysis), plus the internal working types used
 // by the pipeline.
 
+import type { TypeInlineWarning } from './typeInline.ts';
+
 export type Classification = 'single-function' | 'function-with-helpers' | 'unsupported';
 
 export interface UpstreamConfig {
@@ -166,6 +168,10 @@ export interface TransformReport {
   removedHelpers: string[];
   removedImports: string[];
   keptImports: string[];
+  /** Type names inlined into the starter (topological injection order). */
+  inlinedTypes: string[];
+  /** Type-only imports that could not be inlined and were preserved. */
+  typeInlineWarnings: TypeInlineWarning[];
 }
 
 export interface TestCaseResult {

@@ -1,4 +1,6 @@
-import { ConformsPredicateObject } from '../_internal/ConformsPredicateObject.ts';
+export type ConformsPredicateObject<T> = {
+  [P in keyof T]: T[P] extends (arg: infer A) => any ? A : any;
+};
 
 /**
  * Checks if `object` conforms to `source` by invoking the predicate properties of `source` with the corresponding property values of `object`.

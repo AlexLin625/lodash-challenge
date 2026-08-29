@@ -2,6 +2,7 @@ import { SyntaxKind } from 'ts-morph';
 import type { SourceFile, ParameterDeclaration, FunctionDeclaration } from 'ts-morph';
 import type { ChallengeGenerationConfig, TransformReport } from './types.ts';
 import type { AnalysisResult } from './analyzer.ts';
+import { inlineTypeImports, type ImportResolver } from './typeInline.ts';
 
 export interface TransformResult {
   content: string;
@@ -18,15 +19,19 @@ export interface TransformResult {
  *    (function declarations, bound arrow/function-expression variables) and
  *    remove value imports that became unused.
  *
+ * After import cleanup both strategies inline type-only imports (and their
+ * transitive type declarations) into the starter itself via typeInline.ts;
+ * value imports such as parameter defaults (`= identity`) are never inlined.
+ *
  * The public signature (name, type parameters, parameters, return type, JSDoc)
  * is preserved from the original source.
  */
-export function transformSource(config: ChallengeGenerationConfig, result: AnalysisResult): TransformResult {
+export function transformSource(config: ChallengeGenerationConfig, result: AnalysisResult, resolveImport?: ImportResolver): TransformResult {
   const { sourceFile, targetImplementation, helpers } = result.internal;
   const analysis = result.analysis;
   const removedHelpers: string[] = [];
   const removedImports: string[] = [];
-  const keptImports: string[] = [];
+  let keptImports: string[] = [];
 
   if (analysis.classification === 'unsupported') {
     throw new Error(`[transform] ${config.id} is unsupported: ${analysis.unsupportedReasons.join('; ')}`);
@@ -45,12 +50,29 @@ export function transformSource(config: ChallengeGenerationConfig, result: Analy
 
   sourceFile.formatText({ indentSize: 2 });
 
+  let content = sourceFile.getFullText();
+  let inlinedTypes: string[] = [];
+  let typeInlineWarnings: TransformReport['typeInlineWarnings'] = [];
+  if (resolveImport) {
+    const inlined = inlineTypeImports(content, config.sourcePath, resolveImport);
+    content = inlined.content;
+    inlinedTypes = inlined.report.inlinedTypes;
+    typeInlineWarnings = inlined.report.warnings;
+    if (inlined.report.removedImports.length > 0) {
+      const removed = new Set(inlined.report.removedImports);
+      removedImports.push(...inlined.report.removedImports);
+      keptImports = keptImports.filter((entry) => !removed.has(entry));
+    }
+  }
+
   return {
-    content: sourceFile.getFullText(),
+    content,
     report: {
       removedHelpers,
       removedImports,
       keptImports: keptImports.sort(),
+      inlinedTypes,
+      typeInlineWarnings,
     },
   };
 }

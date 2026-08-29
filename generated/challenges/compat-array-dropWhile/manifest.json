@@ -1,6 +1,6 @@
 {
   "category": "array",
-  "challengeVersion": "f5573aa17db4f93842a47403ec94f3ba03ab49c06b929e23b491ad6d4a964eb8",
+  "challengeVersion": "029562c53d5c3e2bec0a33b1d03442c4c63ca6ea5c60665a3ef5ac520b8ec116",
   "description": "Creates a slice of array excluding elements dropped from the beginning.\nElements are dropped until predicate returns falsey.\nThe predicate is invoked with three arguments: (value, index, array).",
   "difficulty": "easy",
   "editableFiles": [
@@ -18,14 +18,12 @@
   "id": "compat-array-dropWhile",
   "integrity": {
     "configHash": "b60560c44e18d3242ffef5b637642d95ed06d3fb201a5a2aac4db365872428aa",
-    "manifestHash": "2ab419e852c34fbd9c3661e505bc7d1b2c3159edb9ca4e171367d18339180767",
-    "starterHash": "31e7069b76e306963242f7faf4e5fea070d2624571422c7db201d61a1975ea6c",
+    "manifestHash": "557acdd015e99c306db18f14ea8dba4b0931b68c31fff50b58b7d16b24536e06",
+    "starterHash": "d0fe02c7b0c30bd4f2aa129501ffa92f53ce5290cdb8903cecd1c1110093452e",
     "testsHash": "cfdbed63ef146dab3be9a8491fa4876d0a25b538cbfe7bdece2fda8bcb988ef4"
   },
   "readonlyFiles": [
     "runtime/test-runtime.ts",
-    "src/compat/_internal/ListIteratee.ts",
-    "src/compat/_internal/PartialShallow.ts",
     "src/compat/_internal/args.ts",
     "src/compat/_internal/slice.ts",
     "src/compat/_internal/toArgs.ts",

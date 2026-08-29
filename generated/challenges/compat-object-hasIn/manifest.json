@@ -1,6 +1,6 @@
 {
   "category": "object",
-  "challengeVersion": "67e5d69256b455b15e37c1ee17be1b2c502efbe5cca73b0dcf1cca9981b5ba5d",
+  "challengeVersion": "5fed49c5e9be60fffbe18daa8e8f3318e08d3ba25dcb63b3c552f2c47880a6dc",
   "description": "Checks if a given path exists in an object, **including inherited properties**.",
   "difficulty": "medium",
   "editableFiles": [
@@ -23,8 +23,8 @@
   "id": "compat-object-hasIn",
   "integrity": {
     "configHash": "3411cc0429acca4815fc9e3111a4b05d11d45a34ca75d5feb0ed733e45a068c6",
-    "manifestHash": "9b7e957bc5c69e721325052506b89e96fe7d70daa906b5a5d05488eb13f3b419",
-    "starterHash": "edb9844db56ed64d94d868c0b3a5178151d3a4e0329ac557855d4cc179ac2230",
+    "manifestHash": "4a90ce028c55f6929d3e1f93b7312973858916faf56172b8fa24d44a6d293653",
+    "starterHash": "2eae8124082107f74b41d7206d5b73e93450f110517624d7969526876d23da37",
     "testsHash": "6ee4457130aca71a12a9b8208766969a1145b66205ef5baf86c1c92457c25ceb"
   },
   "readonlyFiles": [

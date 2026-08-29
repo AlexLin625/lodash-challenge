@@ -1,8 +1,9 @@
 // Owns the lifecycle of the Monaco models for one loaded challenge.
 //
-// Every bundle file (editable + readonly) gets a `monaco.editor.TextModel`
-// keyed by its bundle-relative path. Model URIs mirror the bundle layout so the
-// TS language service can resolve relative imports across virtual files.
+// Every editor-scoped bundle file (editable + closure-visible readonly) gets
+// a `monaco.editor.TextModel` keyed by its bundle-relative path. Model URIs
+// mirror the bundle layout so the TS language service can resolve relative
+// imports across virtual files.
 //
 // Switching challenges or unmounting must call `disposeAll()`; reusing a model
 // from a previous challenge would leak into the new one.
@@ -38,7 +39,12 @@ export class WorkspaceModels {
     this.options = options;
   }
 
-  /** Disposes previous models, then creates one per bundle file (editable first, tests excluded). */
+  /**
+   * Disposes previous models, then creates one per file handed in. The
+   * workspace passes only the editor-scoped subset (editable + closure
+   * visible, see workspace/editor-files.ts); any spec/runtime paths that
+   * sneak in are still skipped here as a backstop.
+   */
   create(files: Record<string, string>, editableFiles: readonly string[]): void {
     this.disposeAll();
     const hidden = new Set(Object.keys(files).filter(isTestBundlePath));

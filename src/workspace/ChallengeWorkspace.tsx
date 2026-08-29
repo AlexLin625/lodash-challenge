@@ -5,7 +5,8 @@ import { sourceHash } from '../persistence/hash.ts';
 import { summarizeTests, type TestRunResult } from '../runner/protocol.ts';
 import { SandpackRunner } from '../runner/sandpack-runner.ts';
 import { EditorPane } from '../editor/EditorPane.tsx';
-import { WorkspaceModels, partitionBundleFiles, type WorkspaceFile } from '../editor/workspace-models.ts';
+import { WorkspaceModels, type WorkspaceFile } from '../editor/workspace-models.ts';
+import { computeVisibleFiles } from './editor-files.ts';
 import { ChallengeList } from './ChallengeList.tsx';
 import { HintPanel } from './HintPanel.tsx';
 import { nextRevealedLevel, type RevealedLevel } from './hint-logic.ts';
@@ -43,6 +44,16 @@ function toMessage(error: unknown): string {
     return error.message;
   }
   return String(error);
+}
+
+// Subset of a file map for the given paths; missing paths get '' so the two
+// lists always stay in sync with the bundle keys they came from.
+function pickFiles(files: Readonly<Record<string, string>>, paths: readonly string[]): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const path of paths) {
+    out[path] = files[path] ?? '';
+  }
+  return out;
 }
 
 // Reads the stored draft from the first source that supports it: the reader
@@ -98,9 +109,10 @@ export function ChallengeWorkspace({
   const challengeRef = useRef<LoadedChallenge | null>(null);
   const phaseRef = useRef<RunPhase>('idle');
   const draftTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  // Spec/runtime files stripped from the editor for the open challenge; the
-  // runner receives them merged back with the live model contents.
-  const testFilesRef = useRef<Record<string, string>>({});
+  // Bundle files outside the starter's compilable dependency closure (specs,
+  // runtime shims, unreferenced _internal files); the runner receives them
+  // merged back with the live model contents, and the editor never sees them.
+  const hiddenFilesRef = useRef<Record<string, string>>({});
 
   if (loaderRef.current === null) {
     loaderRef.current = new ChallengeLoader({ verifyIntegrity: false });
@@ -183,7 +195,7 @@ export function ChallengeWorkspace({
     }
     modelsRef.current?.disposeAll();
     modelsRef.current = null;
-    testFilesRef.current = {};
+    hiddenFilesRef.current = {};
     runnerRef.current?.destroy();
     runnerRef.current = null;
     setModels(null);
@@ -207,8 +219,18 @@ export function ChallengeWorkspace({
     };
 
     const mount = (fileContents: Record<string, string>): void => {
-      const { editorFiles, testFiles } = partitionBundleFiles(fileContents);
-      testFilesRef.current = testFiles;
+      // One scoping pass per mount: the editor gets the starter's compilable
+      // dependency closure (docs/design-v1.md §8.1); everything else keeps
+      // test-scope semantics and only returns for runs.
+      const { visible, hidden } = computeVisibleFiles(
+        fileContents,
+        challenge.manifest.editableFiles,
+        challenge.manifest.readonlyFiles
+      );
+      const editorFiles = pickFiles(fileContents, visible);
+      // Hidden contents always come from the pristine bundle, never from a
+      // restored draft, so tampered drafts cannot reach the runner.
+      hiddenFilesRef.current = pickFiles(challenge.files, hidden);
       const created = new WorkspaceModels({
         onEditableChange: (_path: string, _value: string) => {
           if (draftTimerRef.current) {
@@ -244,10 +266,15 @@ export function ChallengeWorkspace({
         });
       }
 
-      // Seed the DAO draft with the starter map minus the hidden test files;
-      // restore later merges drafts over the full starter, so omitting them
-      // here keeps specs out of persisted drafts.
-      progressRef.current.challengeOpened(key, partitionBundleFiles(challenge.files).editorFiles);
+      // Seed the DAO draft with the starter's editor-scoped files only;
+      // restore merges drafts over the full starter, and hidden (test-scope)
+      // files never enter persisted drafts because models never carry them.
+      const starterVisible = computeVisibleFiles(
+        challenge.files,
+        challenge.manifest.editableFiles,
+        challenge.manifest.readonlyFiles
+      ).visible;
+      progressRef.current.challengeOpened(key, pickFiles(challenge.files, starterVisible));
     };
 
     const open = async (): Promise<void> => {
@@ -316,9 +343,9 @@ export function ChallengeWorkspace({
       return;
     }
     const runChallengeId = current.manifest.id;
-    // The editor never shows spec/runtime files; hand the runner the hidden
-    // originals plus the live (editable + readonly source) model contents.
-    const files = { ...testFilesRef.current, ...currentModels.getAllContents() };
+    // The editor only carries the starter closure; hand the runner the
+    // pristine hidden files plus the live (editable + visible readonly) models.
+    const files = { ...hiddenFilesRef.current, ...currentModels.getAllContents() };
     setPhase('running');
     setResult(null);
     const startedAt = Date.now();

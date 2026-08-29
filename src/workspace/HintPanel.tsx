@@ -32,6 +32,11 @@ export function HintPanel({ hints, revealedLevel, onShowMore }: HintPanelProps) 
             {remaining}
           </span>
         )}
+        {exhausted && (
+          <span className="panel-hint" role="status">
+            No more hints
+          </span>
+        )}
       </div>
       {revealed.map((hint, index) => (
         <div key={`${hint.level}-${index}`} className="hint-item">

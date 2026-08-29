@@ -18,7 +18,21 @@
   --info-bg: #eff6ff;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  --mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Consolas,
+    'Liberation Mono', Menlo, monospace;
+
+  /* Type scale and spacing rhythm (docs/design-v1.md §11): one source of
+     truth for font sizes and gap/padding steps used across App.css. */
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-base: 14px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
 
   font: 15px/1.5 var(--sans);
   letter-spacing: 0.1px;
@@ -33,6 +47,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --text: #9ca3af;
     --text-h: #f3f4f6;
     --text-dim: #9ca3af;
@@ -82,4 +97,16 @@ h4 {
 
 button {
   font-family: var(--sans);
+}
+
+/* Visible keyboard focus ring; outline follows each element's border-radius,
+   so component-level radii are preserved. */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }

@@ -27,12 +27,21 @@ export const PREFERENCE_KEYS: readonly string[] = KNOWN_PREFERENCE_KEYS;
 const PREFERENCE_KEY_SET: ReadonlySet<string> = new Set(PREFERENCE_KEYS);
 
 export const DEFAULT_PREFERENCES: Readonly<PreferencesState> = {
-  editorTheme: 'vs',
+  editorTheme: 'auto',
   fontSize: 14,
   panelLayout: 'split',
   recentChallengeKey: null,
   autoSaveEnabled: true,
 };
+
+// Recognized editorTheme values. Parsing deliberately stays lenient (any
+// string survives so older/newer clients keep working); consumers resolve
+// unknown values to a concrete Monaco theme (see settings-logic.ts).
+export const EDITOR_THEME_VALUES: readonly string[] = ['auto', 'vs', 'vs-dark'];
+
+export function isEditorThemeValue(value: string): boolean {
+  return EDITOR_THEME_VALUES.includes(value);
+}
 
 const MIN_FONT_SIZE = 8;
 const MAX_FONT_SIZE = 32;

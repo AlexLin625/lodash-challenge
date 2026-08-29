@@ -5,7 +5,7 @@ import { sourceHash } from '../persistence/hash.ts';
 import { summarizeTests, type TestRunResult } from '../runner/protocol.ts';
 import { SandpackRunner } from '../runner/sandpack-runner.ts';
 import { EditorPane } from '../editor/EditorPane.tsx';
-import { WorkspaceModels, type WorkspaceFile } from '../editor/workspace-models.ts';
+import { WorkspaceModels, partitionBundleFiles, type WorkspaceFile } from '../editor/workspace-models.ts';
 import { ChallengeList } from './ChallengeList.tsx';
 import { HintPanel } from './HintPanel.tsx';
 import { nextRevealedLevel, type RevealedLevel } from './hint-logic.ts';
@@ -98,6 +98,9 @@ export function ChallengeWorkspace({
   const challengeRef = useRef<LoadedChallenge | null>(null);
   const phaseRef = useRef<RunPhase>('idle');
   const draftTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Spec/runtime files stripped from the editor for the open challenge; the
+  // runner receives them merged back with the live model contents.
+  const testFilesRef = useRef<Record<string, string>>({});
 
   if (loaderRef.current === null) {
     loaderRef.current = new ChallengeLoader({ verifyIntegrity: false });
@@ -180,6 +183,7 @@ export function ChallengeWorkspace({
     }
     modelsRef.current?.disposeAll();
     modelsRef.current = null;
+    testFilesRef.current = {};
     runnerRef.current?.destroy();
     runnerRef.current = null;
     setModels(null);
@@ -203,6 +207,8 @@ export function ChallengeWorkspace({
     };
 
     const mount = (fileContents: Record<string, string>): void => {
+      const { editorFiles, testFiles } = partitionBundleFiles(fileContents);
+      testFilesRef.current = testFiles;
       const created = new WorkspaceModels({
         onEditableChange: (_path: string, _value: string) => {
           if (draftTimerRef.current) {
@@ -221,7 +227,7 @@ export function ChallengeWorkspace({
           }, DRAFT_SAVE_DEBOUNCE_MS);
         },
       });
-      created.create(fileContents, challenge.manifest.editableFiles);
+      created.create(editorFiles, challenge.manifest.editableFiles);
       modelsRef.current = created;
       setModels(created);
 
@@ -238,7 +244,10 @@ export function ChallengeWorkspace({
         });
       }
 
-      progressRef.current.challengeOpened(key, challenge.files);
+      // Seed the DAO draft with the starter map minus the hidden test files;
+      // restore later merges drafts over the full starter, so omitting them
+      // here keeps specs out of persisted drafts.
+      progressRef.current.challengeOpened(key, partitionBundleFiles(challenge.files).editorFiles);
     };
 
     const open = async (): Promise<void> => {
@@ -307,7 +316,9 @@ export function ChallengeWorkspace({
       return;
     }
     const runChallengeId = current.manifest.id;
-    const files = currentModels.getAllContents();
+    // The editor never shows spec/runtime files; hand the runner the hidden
+    // originals plus the live (editable + readonly source) model contents.
+    const files = { ...testFilesRef.current, ...currentModels.getAllContents() };
     setPhase('running');
     setResult(null);
     const startedAt = Date.now();
@@ -368,7 +379,7 @@ export function ChallengeWorkspace({
   const totalsLabel = summary ? progressTotalsLabel(summary.totals) : '';
 
   return (
-    <div className="app">
+    <>
       <header className="app-header">
         <h1 className="app-title">Lodash Challenge</h1>
         {catalog && <span className="app-subtitle">{catalog.challenges.length} challenges</span>}
@@ -462,6 +473,6 @@ export function ChallengeWorkspace({
       </div>
 
       <div className="runner-host" ref={hostRef} aria-hidden="true" />
-    </div>
+    </>
   );
 }

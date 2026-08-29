@@ -5,8 +5,9 @@ import { ChallengeWorkspace } from './workspace/ChallengeWorkspace.tsx';
 import { ProgressIO } from './workspace/progress-io.tsx';
 import type { ProgressIOApi } from './workspace/progress-io.tsx';
 import { SettingsBar } from './workspace/settings-bar.tsx';
-import { nextTheme, stepFontSize } from './workspace/settings-logic.ts';
+import { nextTheme, resolveEditorTheme, stepFontSize } from './workspace/settings-logic.ts';
 import { useChallengeProgressSummary } from './workspace/use-progress.ts';
+import { useSystemTheme } from './workspace/use-system-theme.ts';
 import './App.css';
 
 function App() {
@@ -62,6 +63,9 @@ function App() {
     updatePrefs({ editorTheme: nextTheme(prefs.editorTheme) });
   }, [prefs, updatePrefs]);
 
+  const prefersDark = useSystemTheme();
+  const resolvedEditorTheme = resolveEditorTheme(prefs?.editorTheme ?? 'auto', prefersDark);
+
   const storageAvailable = persistence.storageAvailable && !unavailableNotice;
 
   const { refresh: refreshSummary } = useChallengeProgressSummary(persistence.dao);
@@ -83,7 +87,7 @@ function App() {
   );
 
   return (
-    <>
+    <div className="app">
       {!storageAvailable && (
         <div className="storage-banner banner--muted" role="status">
           Local storage unavailable — progress won&apos;t be saved
@@ -91,18 +95,23 @@ function App() {
       )}
       <div className="app-topbar">
         {prefs !== null && (
-          <SettingsBar prefs={prefs} onFontSize={handleFontSize} onToggleTheme={handleToggleTheme} />
+          <SettingsBar
+            prefs={prefs}
+            prefersDark={prefersDark}
+            onFontSize={handleFontSize}
+            onToggleTheme={handleToggleTheme}
+          />
         )}
         <ProgressIO disabled={!storageAvailable} api={progressIoApi} />
       </div>
       <ChallengeWorkspace
         progressService={persistence.progress}
         reader={persistence.dao}
-        editorTheme={prefs?.editorTheme}
+        editorTheme={resolvedEditorTheme}
         editorFontSize={prefs?.fontSize}
         refreshSignal={importCount}
       />
-    </>
+    </div>
   );
 }
 

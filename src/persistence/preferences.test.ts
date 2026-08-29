@@ -3,7 +3,9 @@ import { test } from 'node:test';
 import type { JsonValue, PreferenceRecord } from './domain.ts';
 import {
   DEFAULT_PREFERENCES,
+  EDITOR_THEME_VALUES,
   PREFERENCE_KEYS,
+  isEditorThemeValue,
   isPreferenceKey,
   parsePreferences,
   serializePreferences,
@@ -30,12 +32,20 @@ test('PREFERENCE_KEYS lists every known preference key in order', () => {
 
 test('DEFAULT_PREFERENCES carries the documented defaults', () => {
   assert.deepEqual({ ...DEFAULT_PREFERENCES }, {
-    editorTheme: 'vs',
+    editorTheme: 'auto',
     fontSize: 14,
     panelLayout: 'split',
     recentChallengeKey: null,
     autoSaveEnabled: true,
   });
+});
+
+test('editorTheme recognized values include auto, vs and vs-dark', () => {
+  assert.deepEqual([...EDITOR_THEME_VALUES], ['auto', 'vs', 'vs-dark']);
+  assert.equal(isEditorThemeValue('auto'), true);
+  assert.equal(isEditorThemeValue('vs'), true);
+  assert.equal(isEditorThemeValue('vs-dark'), true);
+  assert.equal(isEditorThemeValue('monokai'), false);
 });
 
 test('parsePreferences on an empty list returns a copy of the defaults', () => {

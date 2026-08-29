@@ -47,7 +47,9 @@ export function EditorPane({
       readOnly: true,
       scrollBeyondLastLine: false,
       renderWhitespace: 'selection',
-      fontFamily: 'ui-monospace, SFMono-Regular, Consolas, monospace',
+      fontFamily:
+        "'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Consolas, monospace",
+      fontLigatures: true,
       theme: DEFAULT_EDITOR_THEME,
     });
     editorRef.current = editor;

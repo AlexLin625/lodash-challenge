@@ -132,7 +132,7 @@ export function ProgressIO({ disabled = false, api }: ProgressIOProps) {
         }}
       />
       {message !== null && (
-        <span className="progress-io-message banner--muted" role="status">
+        <span className="progress-io-message" role="status">
           {message}
         </span>
       )}

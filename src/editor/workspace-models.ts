@@ -8,8 +8,11 @@
 // from a previous challenge would leak into the new one.
 
 import type { IDisposable } from 'monaco-editor';
+import { isTestBundlePath } from './bundle-files.ts';
 import { languageForPath } from './language.ts';
 import { monaco } from './monaco.ts';
+
+export { isTestBundlePath, partitionBundleFiles } from './bundle-files.ts';
 
 export interface WorkspaceFile {
   path: string;
@@ -35,11 +38,15 @@ export class WorkspaceModels {
     this.options = options;
   }
 
-  /** Disposes previous models, then creates one per bundle file (editable first). */
+  /** Disposes previous models, then creates one per bundle file (editable first, tests excluded). */
   create(files: Record<string, string>, editableFiles: readonly string[]): void {
     this.disposeAll();
-    const editable = new Set(editableFiles);
-    const paths = [...editableFiles, ...Object.keys(files).filter((p) => !editable.has(p))];
+    const hidden = new Set(Object.keys(files).filter(isTestBundlePath));
+    const editable = new Set(editableFiles.filter((p) => !hidden.has(p)));
+    const paths = [
+      ...editable,
+      ...Object.keys(files).filter((p) => !editable.has(p) && !hidden.has(p)),
+    ];
     this.files = paths.map((path) => ({ path, readonly: !editable.has(path) }));
 
     for (const path of paths) {

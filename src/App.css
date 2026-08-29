@@ -1,4 +1,18 @@
-/* Challenge workspace layout: header on top, catalog sidebar + editor/results. */
+/* Challenge workspace layout: header on top, catalog sidebar + editor/results.
+ *
+ * Type/spacing tokens come from index.css (E1). Magic numbers were snapped to
+ * the nearest token; ±2px visual drift is accepted. Radius, borders, glyph
+ * widths and min/max dimensions stay literal (they are component metrics, not
+ * rhythm). Snap mapping used throughout:
+ *   font-size: 10px/11px/12px -> --fs-xs | 13px -> --fs-sm | 14px -> --fs-base
+ *              15px -> literal (--description body size) | 18px -> --text-lg
+ *              20px -> --text-xl
+ *   spacing (0 kept; 1px kept inside two-value paddings):
+ *              2px/3px/5px -> --sp-1 | 4px -> --sp-1 | 6px/7px -> --sp-2
+ *              8px -> --sp-2 | 10px -> --sp-3 (+2, ties round up)
+ *              12px -> --sp-3 | 14px -> --sp-5 (sidebar only, E7 20px baseline)
+ *              16px -> --sp-4 | 18px -> --sp-5 | 20px -> --sp-5
+ */
 
 .app {
   display: flex;
@@ -11,29 +25,29 @@
 .app-header {
   display: flex;
   align-items: baseline;
-  gap: 12px;
-  padding: 12px 20px;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-5);
   border-bottom: 1px solid var(--border);
   background: var(--bg);
 }
 
 .app-title {
   margin: 0;
-  font-size: 18px;
+  font-size: var(--text-lg);
   font-weight: 600;
   letter-spacing: -0.2px;
 }
 
 .app-subtitle {
-  font-size: 13px;
+  font-size: var(--fs-sm);
   color: var(--text-dim);
 }
 
 /* -------------------------------------------------------------- Storage banner */
 
 .storage-banner {
-  padding: 8px 20px;
-  font-size: 13px;
+  padding: var(--sp-2) var(--sp-5);
+  font-size: var(--fs-sm);
   border-bottom: 1px solid var(--border);
 }
 
@@ -47,9 +61,9 @@
 .settings-bar {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 8px 20px;
-  font-size: 13px;
+  gap: var(--sp-4);
+  padding: var(--sp-2) var(--sp-5);
+  font-size: var(--fs-sm);
   border-bottom: 1px solid var(--border);
   background: var(--bg);
 }
@@ -57,12 +71,12 @@
 .settings-group {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sp-2);
 }
 
 .settings-btn {
-  padding: 3px 10px;
-  font-size: 13px;
+  padding: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-sm);
 }
 
 .settings-font-size {
@@ -81,10 +95,10 @@
 .progress-io {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sp-2);
   margin-left: auto;
-  padding: 8px 20px;
-  font-size: 13px;
+  padding: var(--sp-2) var(--sp-5);
+  font-size: var(--fs-sm);
   border-bottom: 1px solid var(--border);
   background: var(--bg);
 }
@@ -93,17 +107,20 @@
   display: none;
 }
 
+/* Self-contained chip: previously leaned on .banner--muted for its colors. */
 .progress-io-message {
-  margin-left: 8px;
+  margin-left: var(--sp-2);
   padding: 1px 8px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: var(--fs-xs);
   color: var(--text-dim);
   background: var(--bg-alt);
 }
 
 /* ------------------------------------------------------------- Workspace */
 
+/* E7: sidebar/main/header share the 20px (--sp-5) horizontal baseline; the
+   workspace itself stretches between the header and the viewport bottom. */
 .workspace {
   flex: 1;
   display: flex;
@@ -116,7 +133,7 @@
   border-right: 1px solid var(--border);
   background: var(--bg-alt);
   overflow-y: auto;
-  padding: 12px 14px;
+  padding: var(--sp-3) var(--sp-5);
 }
 
 .main {
@@ -124,8 +141,8 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px 20px 20px;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5) var(--sp-5);
   overflow-y: auto;
 }
 
@@ -134,24 +151,24 @@
 .challenge-list-header {
   display: flex;
   align-items: baseline;
-  padding: 2px 2px 8px;
-  margin-bottom: 10px;
+  padding: var(--sp-1) var(--sp-1) var(--sp-2);
+  margin-bottom: var(--sp-3);
   border-bottom: 1px solid var(--border);
 }
 
 .challenge-list-progress {
-  font-size: 12px;
+  font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--text-dim);
 }
 
 .challenge-group {
-  margin-bottom: 18px;
+  margin-bottom: var(--sp-5);
 }
 
 .group-title {
-  margin: 0 0 6px;
-  font-size: 12px;
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-xs);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.6px;
@@ -164,7 +181,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--sp-1);
 }
 
 .challenge-item {
@@ -172,13 +189,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  padding: 7px 10px;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
   border: 1px solid transparent;
   border-radius: 8px;
   background: transparent;
   color: var(--text-h);
-  font-size: 14px;
+  font-size: var(--fs-base);
   cursor: pointer;
   text-align: left;
 }
@@ -194,7 +211,7 @@
 
 .challenge-slug {
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: var(--fs-base);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -205,9 +222,9 @@
 .badge {
   flex: none;
   display: inline-block;
-  padding: 1px 8px;
+  padding: 1px var(--sp-2);
   border-radius: 999px;
-  font-size: 11px;
+  font-size: var(--fs-xs);
   font-weight: 600;
   text-transform: capitalize;
   color: var(--text-dim);
@@ -234,7 +251,7 @@
 }
 
 .badge-done {
-  padding: 1px 6px;
+  padding: 1px var(--sp-2);
   color: var(--ok);
   background: var(--ok-bg);
   border-color: transparent;
@@ -246,42 +263,42 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--sp-3);
   flex-wrap: wrap;
 }
 
 .toolbar-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--sp-3);
   min-width: 0;
 }
 
 .challenge-title {
   margin: 0;
-  font-size: 20px;
+  font-size: var(--text-xl);
   font-weight: 600;
   font-family: var(--mono);
   letter-spacing: -0.3px;
 }
 
 .challenge-category {
-  font-size: 13px;
+  font-size: var(--fs-sm);
   color: var(--text-dim);
 }
 
 .toolbar-actions {
   display: flex;
-  gap: 8px;
+  gap: var(--sp-2);
 }
 
 .btn {
-  padding: 7px 16px;
+  padding: var(--sp-2) var(--sp-4);
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--bg);
   color: var(--text-h);
-  font-size: 14px;
+  font-size: var(--fs-base);
   cursor: pointer;
 }
 
@@ -307,10 +324,13 @@
   color: #fff;
 }
 
+/* E2: the description is reading copy, so it uses the main text color and a
+   relaxed measure, one step under the challenge title. */
 .description {
   margin: 0;
-  font-size: 14px;
-  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
   white-space: pre-wrap;
 }
 
@@ -319,8 +339,8 @@
 .hint-panel {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 10px 12px;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--bg);
@@ -329,15 +349,15 @@
 .hint-panel-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--sp-3);
 }
 
 .hint-item {
   display: flex;
   align-items: baseline;
-  gap: 8px;
-  padding-left: 2px;
-  font-size: 13px;
+  gap: var(--sp-2);
+  padding-left: var(--sp-1);
+  font-size: var(--fs-sm);
   color: var(--text-dim);
 }
 
@@ -355,7 +375,7 @@
 .editor-results {
   flex: 1;
   display: flex;
-  gap: 12px;
+  gap: var(--sp-3);
   min-height: 380px;
 }
 
@@ -388,8 +408,8 @@
 .editor-tabs {
   display: flex;
   align-items: stretch;
-  gap: 2px;
-  padding: 6px 8px 0;
+  gap: var(--sp-1);
+  padding: var(--sp-2) var(--sp-2) 0;
   background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
   overflow-x: auto;
@@ -398,14 +418,14 @@
 .tab {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
   border: 1px solid transparent;
   border-bottom: none;
   border-radius: 8px 8px 0 0;
   background: transparent;
   color: var(--text-dim);
-  font-size: 13px;
+  font-size: var(--fs-sm);
   cursor: pointer;
   white-space: nowrap;
 }
@@ -422,15 +442,15 @@
 
 .tab-name {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-xs);
 }
 
 .tab-badge {
-  font-size: 10px;
+  font-size: var(--fs-xs);
   color: var(--text-dim);
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 0 5px;
+  padding: 0 var(--sp-1);
 }
 
 .editor-container {
@@ -444,11 +464,11 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--sp-3);
   min-height: 0;
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 12px;
+  padding: var(--sp-3);
   overflow-y: auto;
   background: var(--bg);
 }
@@ -457,13 +477,13 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--sp-2);
   flex-wrap: wrap;
 }
 
 .run-status {
   font-weight: 600;
-  font-size: 14px;
+  font-size: var(--fs-base);
 }
 
 .panel-status-passed .run-status {
@@ -482,24 +502,24 @@
 }
 
 .run-summary {
-  font-size: 12px;
+  font-size: var(--fs-xs);
   color: var(--text-dim);
 }
 
 .panel-hint {
   margin: 0;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   color: var(--text-dim);
 }
 
 .error-block {
   margin: 0;
-  padding: 10px 12px;
+  padding: var(--sp-3);
   border-radius: 8px;
   background: var(--err-bg);
   color: var(--err);
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-xs);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
@@ -510,13 +530,13 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--sp-1);
 }
 
 .test {
   display: flex;
-  gap: 8px;
-  padding: 6px 8px;
+  gap: var(--sp-2);
+  padding: var(--sp-2);
   border-radius: 6px;
   background: var(--bg-alt);
 }
@@ -541,30 +561,30 @@
 }
 
 .test-name {
-  font-size: 13px;
+  font-size: var(--fs-sm);
   color: var(--text-h);
 }
 
 .test-error {
-  margin: 4px 0 0;
-  padding: 6px 8px;
+  margin: var(--sp-1) 0 0;
+  padding: var(--sp-2);
   border-radius: 6px;
   background: var(--err-bg);
   color: var(--err);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--fs-xs);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 
 .console-block {
   border-top: 1px solid var(--border);
-  padding-top: 8px;
+  padding-top: var(--sp-2);
 }
 
 .console-title {
-  margin: 0 0 6px;
-  font-size: 12px;
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-xs);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -581,15 +601,15 @@
 
 .console-line {
   display: flex;
-  gap: 8px;
+  gap: var(--sp-2);
   font-family: var(--mono);
-  font-size: 12px;
-  padding: 2px 0;
+  font-size: var(--fs-xs);
+  padding: var(--sp-1) 0;
 }
 
 .console-method {
   flex: none;
-  width: 44px;
+  width: 60px;
   color: var(--text-dim);
 }
 
@@ -631,6 +651,18 @@
   .app {
     height: auto;
     min-height: 100svh;
+  }
+
+  .app-topbar {
+    flex-wrap: wrap;
+  }
+
+  .settings-bar {
+    flex-wrap: wrap;
+  }
+
+  .progress-io {
+    margin-left: 0;
   }
 
   .workspace {

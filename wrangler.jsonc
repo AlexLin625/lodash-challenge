@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lodash-quiz",
+  "compatibility_date": "2026-08-29",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  },
+  "routes": [
+    {
+      "pattern": "lodash-quiz.a1exl.in",
+      "custom_domain": true
+    }
+  ]
+}

@@ -1,36 +1,40 @@
-# React + TypeScript + Vite
+# Lodash Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+一个纯前端的 TypeScript 工具函数挑战站。它在浏览器里提供 Monaco 编辑器、类型检查、自动补全和原始行为测试，不需要服务端运行用户代码。
 
-Currently, two official plugins are available:
+线上地址：[lodash-quiz.a1exl.in](https://lodash-quiz.a1exl.in)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 本地开发
 
-## React Compiler
+需要 Node.js 和 pnpm。
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+pnpm install
+pnpm dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
-# lodash-challenge
+常用检查：
+
+```bash
+pnpm test
+pnpm build
+pnpm lint
+```
+
+挑战数据由 `generator/` 生成：
+
+```bash
+pnpm generate
+```
+
+## 部署
+
+站点使用 Cloudflare Workers Static Assets：
+
+```bash
+pnpm deploy
+```
+
+## Credit
+
+网站由 [Alex Lin](mailto:me@a1exlin.cn) 开发。Puzzle 主体源码与测试改编自 [toss/es-toolkit@32f4c8fb](https://github.com/toss/es-toolkit/tree/32f4c8fb33828ad6512064ba84b0fdd8fda966a3)，其源码遵循 MIT License。

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "deploy": "pnpm run build && wrangler deploy",
     "lint": "oxlint",
     "preview": "vite preview",
     "generate": "node scripts/generate-challenges.mjs",

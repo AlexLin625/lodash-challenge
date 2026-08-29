@@ -1,0 +1,47 @@
+{
+  "category": "string",
+  "challengeVersion": "d2072d35cd6f3f522a4b4c7be08d1d6b227edbfbc9285f12f12ccdbf9a480f25",
+  "description": "Converts the first character of string to upper case and the remaining to lower case.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/string/capitalize.ts"
+  ],
+  "entryFile": "src/compat/string/capitalize.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Converts the first character of string to upper case and the remaining to lower case."
+    }
+  ],
+  "id": "compat-string-capitalize",
+  "integrity": {
+    "configHash": "66a55b09fac7805ca534e9f1fd93ebc791683a42b623da6b837dabfa60395a16",
+    "manifestHash": "1afff6622592528ffc9a8f54674f914a6419443a1bd3e8f19538689883fb420a",
+    "starterHash": "44cf526fddd593dc851af1db5ade92505fd6eb4a9d81b9d6de4c3b4213e32e49",
+    "testsHash": "05ca9bab6dba14356dfcf3b980be41bb82d688ad30827c1e64054e61d5da1a46"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/string/capitalize.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "capitalize",
+  "targetExport": "capitalize",
+  "title": "capitalize",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/string/capitalize.ts",
+    "testPaths": [
+      "src/compat/string/capitalize.spec.ts"
+    ]
+  }
+}

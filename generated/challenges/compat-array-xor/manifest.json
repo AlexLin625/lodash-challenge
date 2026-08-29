@@ -1,0 +1,54 @@
+{
+  "category": "array",
+  "challengeVersion": "a7b69e38fb888904d44a0f4239b108f8cf19d12bde3126b675efffe4a04e9b50",
+  "description": "Computes the symmetric difference of the provided arrays, returning an array of elements\nthat exist in only one of the arrays.",
+  "difficulty": "hard",
+  "editableFiles": [
+    "src/compat/array/xor.ts"
+  ],
+  "entryFile": "src/compat/array/xor.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Computes the symmetric difference of the provided arrays, returning an array of elements that exist in only one of the arrays."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "Consider each parameter in turn (arrays), including missing, empty and boundary values."
+    }
+  ],
+  "id": "compat-array-xor",
+  "integrity": {
+    "configHash": "38ee9e12db4f0f7113db3919c2e237f24bb5bbae4b99166e9f56c4f86e74df50",
+    "manifestHash": "8e7266550494e28a265863adb363603f6e778ead0bc3196f90cd0af09c8f35a7",
+    "starterHash": "5292cac8b4685a2dcab4d2ae247ebcc07803c56f4f970674444fd246b3e94807",
+    "testsHash": "e629372fdf84dd74cd4af2e3eadc1300fd880d79f0dd29e2f0ed44dabe5d6641"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/args.ts",
+    "src/compat/_internal/toArgs.ts",
+    "src/compat/array/xor.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "xor",
+  "targetExport": "xor",
+  "title": "xor",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/array/xor.ts",
+    "testPaths": [
+      "src/compat/array/xor.spec.ts"
+    ]
+  }
+}

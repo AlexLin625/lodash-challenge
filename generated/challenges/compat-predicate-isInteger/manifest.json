@@ -1,0 +1,53 @@
+{
+  "category": "predicate",
+  "challengeVersion": "47e0f81c70738f6035c02fa18e30eedbd72bef84ad0f1059b30e9ca1654fd1ae",
+  "description": "Checks if `value` is an integer.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/predicate/isInteger.ts"
+  ],
+  "entryFile": "src/compat/predicate/isInteger.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Checks if `value` is an integer."
+    }
+  ],
+  "id": "compat-predicate-isInteger",
+  "integrity": {
+    "configHash": "3b64e49a1a33570581f731ca744f766313d29618c39dcdb298401515ea0fddfb",
+    "manifestHash": "d1edde2a70dff44312f3b1be07a88cf187e220889cc56225ffe762b25af296ce",
+    "starterHash": "27c2721822fc4037609e346a7c174221b83265e0326229ae8bbce62cb4f0372f",
+    "testsHash": "7d0e24fec4872dd8542e4dfcf11d0b9d6075b525143747940f1f0f3043f699a0"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/args.ts",
+    "src/compat/_internal/falsey.ts",
+    "src/compat/_internal/symbol.ts",
+    "src/compat/_internal/toArgs.ts",
+    "src/compat/predicate/isInteger.spec.ts",
+    "src/compat/util/stubFalse.ts",
+    "src/compat/util/stubTrue.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "isInteger",
+  "targetExport": "isInteger",
+  "title": "isInteger",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/predicate/isInteger.ts",
+    "testPaths": [
+      "src/compat/predicate/isInteger.spec.ts"
+    ]
+  }
+}

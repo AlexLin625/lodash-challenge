@@ -1,0 +1,54 @@
+{
+  "category": "array",
+  "challengeVersion": "77a6b0c219a0c3dadae9f6b8b86e972c56c6010c902993c40ee640690862109b",
+  "description": "Splits an array into smaller arrays of a specified length.",
+  "difficulty": "medium",
+  "editableFiles": [
+    "src/compat/array/chunk.ts"
+  ],
+  "entryFile": "src/compat/array/chunk.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Splits an array into smaller arrays of a specified length."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "This function takes an input array and divides it into multiple smaller arrays, each of a specified length. If the input array cannot be evenly divided, the final sub-array will contain the remaining elements."
+    }
+  ],
+  "id": "compat-array-chunk",
+  "integrity": {
+    "configHash": "a90cccbcce8564d35e0dee7e6128509296eacec7e80451fa99caf9693b7b0f2e",
+    "manifestHash": "7383b16b899c7aae86cf52aa5a9a0a709b5f8b0ed715405bffb1563efe87af53",
+    "starterHash": "7d56713d4a2a7cfa4c00926e8cf899b202603b00eff6f40b5b957b06a53e16fd",
+    "testsHash": "b92e18fe5b0880996c04d8e21dc55d67e21684d96c464d119002680a95b402b1"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/args.ts",
+    "src/compat/_internal/toArgs.ts",
+    "src/compat/array/chunk.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "chunk",
+  "targetExport": "chunk",
+  "title": "chunk",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/array/chunk.ts",
+    "testPaths": [
+      "src/compat/array/chunk.spec.ts"
+    ]
+  }
+}

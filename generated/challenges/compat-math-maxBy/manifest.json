@@ -1,0 +1,55 @@
+{
+  "category": "math",
+  "challengeVersion": "24db978a9ee08252d8c091f06b03b5a872bd44b0f4ecfaedced5e2c024162519",
+  "description": "Finds the element in an array that has the maximum value when applying\nthe `iteratee` to each element.",
+  "difficulty": "medium",
+  "editableFiles": [
+    "src/compat/math/maxBy.ts"
+  ],
+  "entryFile": "src/compat/math/maxBy.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Finds the element in an array that has the maximum value when applying the `iteratee` to each element."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "Consider each parameter in turn (items, iteratee), including missing, empty and boundary values."
+    }
+  ],
+  "id": "compat-math-maxBy",
+  "integrity": {
+    "configHash": "fedd1bed7cfdd0dd7ea16795d9c6b4eff1124ff2da95cde746ef61462599f952",
+    "manifestHash": "fbb64d0c303d086651958a7e1317b7123b4bc9816555f6252c97c116cd1fa422",
+    "starterHash": "58276b68b82b343f86a4134f0b8f97114810ac70d26d42f18ba7528bd8f51675",
+    "testsHash": "d1c7c33d7e73ae43be67507560aafd3a08f45dbad0455ee10c6e2f6bdb5674ca"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/PartialShallow.ts",
+    "src/compat/_internal/ValueIteratee.ts",
+    "src/compat/math/maxBy.spec.ts",
+    "src/function/identity.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "maxBy",
+  "targetExport": "maxBy",
+  "title": "maxBy",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/math/maxBy.ts",
+    "testPaths": [
+      "src/compat/math/maxBy.spec.ts"
+    ]
+  }
+}

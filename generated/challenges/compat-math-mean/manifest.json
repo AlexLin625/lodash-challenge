@@ -1,0 +1,92 @@
+{
+  "category": "math",
+  "challengeVersion": "3ba0912227e230ca2bd4abd2e938918a9026761c911a2fdfd7706474a7966afa",
+  "description": "Calculates the average of an array of numbers.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/math/mean.ts"
+  ],
+  "entryFile": "src/compat/math/mean.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Calculates the average of an array of numbers."
+    }
+  ],
+  "id": "compat-math-mean",
+  "integrity": {
+    "configHash": "e9ef6b0735d20f8816d88903a0b4e3ffe5808d794454508c22ef9b3378a56ff6",
+    "manifestHash": "63130540a940cf710db53532b881664510999190b4930ce2c9f35185964083ae",
+    "starterHash": "157364e3ccf941cdc0b7849f388cfdb2ed8c856bbf2df497b5ae99a671a2e8cc",
+    "testsHash": "e827e86ef0f69bc9988030cf1a6fe42faa28c8b13899d877c33cebf60a3073cc"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/_internal/globalThis.ts",
+    "src/_internal/isUnsafeProperty.ts",
+    "src/compat/_internal/ArrayIterator.ts",
+    "src/compat/_internal/GetFieldType.ts",
+    "src/compat/_internal/IsMatchWithCustomizer.ts",
+    "src/compat/_internal/ListIterator.ts",
+    "src/compat/_internal/Many.ts",
+    "src/compat/_internal/ObjectIterator.ts",
+    "src/compat/_internal/PropertyPath.ts",
+    "src/compat/_internal/TupleIterator.ts",
+    "src/compat/_internal/empties.ts",
+    "src/compat/_internal/falsey.ts",
+    "src/compat/_internal/getSymbols.ts",
+    "src/compat/_internal/getTag.ts",
+    "src/compat/_internal/isDeepKey.ts",
+    "src/compat/_internal/isIndex.ts",
+    "src/compat/_internal/stubNaN.ts",
+    "src/compat/_internal/tags.ts",
+    "src/compat/_internal/toKey.ts",
+    "src/compat/array/map.ts",
+    "src/compat/math/mean.spec.ts",
+    "src/compat/object/cloneDeep.ts",
+    "src/compat/object/cloneDeepWith.ts",
+    "src/compat/object/get.ts",
+    "src/compat/object/has.ts",
+    "src/compat/object/property.ts",
+    "src/compat/predicate/isArguments.ts",
+    "src/compat/predicate/isArrayLike.ts",
+    "src/compat/predicate/isMatch.ts",
+    "src/compat/predicate/isMatchWith.ts",
+    "src/compat/predicate/isObject.ts",
+    "src/compat/predicate/isSymbol.ts",
+    "src/compat/predicate/matches.ts",
+    "src/compat/predicate/matchesProperty.ts",
+    "src/compat/util/eq.ts",
+    "src/compat/util/iteratee.ts",
+    "src/compat/util/toPath.ts",
+    "src/compat/util/toString.ts",
+    "src/function/identity.ts",
+    "src/math/range.ts",
+    "src/object/cloneDeep.ts",
+    "src/object/cloneDeepWith.ts",
+    "src/predicate/isBuffer.ts",
+    "src/predicate/isLength.ts",
+    "src/predicate/isPrimitive.ts",
+    "src/predicate/isTypedArray.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "mean",
+  "targetExport": "mean",
+  "title": "mean",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/math/mean.ts",
+    "testPaths": [
+      "src/compat/math/mean.spec.ts"
+    ]
+  }
+}

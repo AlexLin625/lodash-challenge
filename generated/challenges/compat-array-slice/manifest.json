@@ -1,0 +1,50 @@
+{
+  "category": "array",
+  "challengeVersion": "884fab14d3a03f179efa8bb329876c8f228a169e5cd1569ae7d94c29726ed97c",
+  "description": "Create a slice of `array` from `start` up to, but not including, `end`.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/array/slice.ts"
+  ],
+  "entryFile": "src/compat/array/slice.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Create a slice of `array` from `start` up to, but not including, `end`."
+    }
+  ],
+  "id": "compat-array-slice",
+  "integrity": {
+    "configHash": "538a023f1c850656df85afaef231446b7b264c895611e8578db3819b3b8eb667",
+    "manifestHash": "e290b6dcbea65ab0790b97ac771214d8e45d06471eeed6d36cee48bfbaa7bc87",
+    "starterHash": "908d986f0bc305daeca541b243d41228ebf900698da404e7889b0368f61d552c",
+    "testsHash": "5ce01094ef2a182a4e0d1c3201134e811a128323783dc34a4528e62248572b56"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/args.ts",
+    "src/compat/_internal/falsey.ts",
+    "src/compat/_internal/toArgs.ts",
+    "src/compat/array/slice.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "slice",
+  "targetExport": "slice",
+  "title": "slice",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/array/slice.ts",
+    "testPaths": [
+      "src/compat/array/slice.spec.ts"
+    ]
+  }
+}

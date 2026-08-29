@@ -1,0 +1,49 @@
+{
+  "category": "array",
+  "challengeVersion": "a7edc2e410f94b62d3d4f38fdfc0fd2947926b22c6772442e4980e948ee6c049",
+  "description": "Returns a new array containing all elements except the last one from the input array.\nIf the input array is empty or has only one element, the function returns an empty array.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/array/initial.ts"
+  ],
+  "entryFile": "src/compat/array/initial.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Returns a new array containing all elements except the last one from the input array."
+    }
+  ],
+  "id": "compat-array-initial",
+  "integrity": {
+    "configHash": "9990ba82fcf1dbd633cb7e127aaf06297dd077679d68585da02a202ef2c24334",
+    "manifestHash": "5d93d280e0870fb24dcc90cc71345eeb3c24ca1d031bc70f904b308e7d168c20",
+    "starterHash": "1c7e1ac232a78b312798dc316b39cc683071819cb3fc82317e760cde90f77f8e",
+    "testsHash": "e539c4bd47ec370d39a01d9e3ac0cd65aa63cf223cf4010947ba9fa0077d7690"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/args.ts",
+    "src/compat/_internal/toArgs.ts",
+    "src/compat/array/initial.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "initial",
+  "targetExport": "initial",
+  "title": "initial",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/array/initial.ts",
+    "testPaths": [
+      "src/compat/array/initial.spec.ts"
+    ]
+  }
+}

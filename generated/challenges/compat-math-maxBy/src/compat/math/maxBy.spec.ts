@@ -1,0 +1,93 @@
+import { describe, expect, it } from '../../../runtime/test-runtime.ts';
+import { maxBy } from './maxBy';
+
+describe('maxBy', () => {
+  it('should work with Date objects', () => {
+    const curr = new Date();
+    const past = new Date(0);
+
+    expect(maxBy([curr, past], date => date.getTime())).toBe(curr);
+  });
+
+  it('should work with extremely large arrays', () => {
+    const array = Array.from({ length: 5e5 }, (_, i) => i);
+    expect(maxBy(array, x => x)).toBe(499999);
+  });
+
+  it('should work when chaining on an array with only one value', () => {
+    const array = [40];
+    expect(maxBy(array, x => x)).toBe(40);
+  });
+
+  const array = [1, 2, 3];
+
+  it('should work with an `iteratee`', () => {
+    const actual = maxBy(array, n => -n);
+    expect(actual).toBe(1);
+  });
+
+  it('should work with `_.property` shorthands', () => {
+    const objects = [{ a: 2 }, { a: 3 }, { a: 1 }];
+    expect(maxBy(objects, 'a')).toEqual(objects[1]);
+
+    const arrays = [[2], [3], [1]];
+    expect(maxBy(arrays, 0)).toEqual(arrays[1]);
+  });
+
+  it('should work when `iteratee` returns +/-Infinity', () => {
+    const value = -Infinity;
+    const object = { a: value };
+
+    const actual = maxBy([object, { a: value }], obj => obj.a);
+    expect(actual).toBe(object);
+  });
+
+  it('should handle null and undefined values', () => {
+    expect(maxBy(null)).toBe(undefined);
+    expect(maxBy(undefined)).toBe(undefined);
+  });
+
+  it('should work without iteratee parameter (default to identity)', () => {
+    const numbers = [1, 2, 3];
+
+    expect(maxBy(numbers)).toBe(3);
+  });
+
+  it('should work with string values returned by iteratee', () => {
+    const items = [{ v: 'a' }, { v: 'b' }];
+    const result = maxBy(items, item => item.v);
+    expect(result).toEqual({ v: 'b' });
+  });
+
+  it('should skip NaN values, matching lodash', () => {
+    expect(maxBy([NaN, 1, 3, 2], x => x)).toBe(3);
+    expect(maxBy([1, NaN, 3, 2], x => x)).toBe(3);
+  });
+
+  it('should return undefined when every value is NaN', () => {
+    expect(maxBy([NaN, NaN], x => x)).toBeUndefined();
+  });
+
+  it('should skip symbol values', () => {
+    const sym = Symbol('a');
+    expect(maxBy([sym, 1, 3, 2], x => x)).toBe(3);
+    expect(maxBy([1, sym, 3, 2], x => x)).toBe(3);
+  });
+
+  it('should return undefined when every value is a symbol', () => {
+    expect(maxBy([Symbol('a'), Symbol('b')], x => x)).toBeUndefined();
+  });
+
+  it('should skip null and undefined values, matching lodash', () => {
+    // Negative values so `null` (coerced to 0) would wrongly win as the max on the old code.
+    expect(maxBy([{ a: undefined }, { a: -5 }, { a: null }], 'a')).toEqual({ a: -5 });
+    expect(maxBy([-5, undefined, -3, null], x => x)).toBe(-3);
+  });
+
+  it('should return undefined when the iteratee yields no comparable value', () => {
+    // A missing key makes the iteratee return `undefined` for every element.
+    expect(maxBy([{ a: 1 }, { a: 2 }], 'b')).toBeUndefined();
+    expect(maxBy([{ a: undefined }, { a: undefined }], 'a')).toBeUndefined();
+    expect(maxBy([{ a: null }, { a: null }], 'a')).toBeUndefined();
+  });
+});

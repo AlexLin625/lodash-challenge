@@ -1,7 +1,40 @@
 {
-  "generatorVersion": "0.1.0",
+  "generatorVersion": "0.2.0",
   "schemaVersion": 1,
-  "unsupported": [],
+  "unsupported": [
+    {
+      "id": "compat-array-take",
+      "reasons": [
+        "targetExport \"take\" has overload signatures"
+      ],
+      "sourcePath": "src/compat/array/take.ts",
+      "targetExport": "take"
+    },
+    {
+      "id": "compat-math-range",
+      "reasons": [
+        "targetExport \"range\" has overload signatures"
+      ],
+      "sourcePath": "src/compat/math/range.ts",
+      "targetExport": "range"
+    },
+    {
+      "id": "compat-predicate-matches",
+      "reasons": [
+        "targetExport \"matches\" has overload signatures"
+      ],
+      "sourcePath": "src/compat/predicate/matches.ts",
+      "targetExport": "matches"
+    },
+    {
+      "id": "compat-string-words",
+      "reasons": [
+        "targetExport \"words\" has overload signatures"
+      ],
+      "sourcePath": "src/compat/string/words.ts",
+      "targetExport": "words"
+    }
+  ],
   "upstream": {
     "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
     "repository": "toss/es-toolkit"

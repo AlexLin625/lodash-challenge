@@ -1,8 +1,9 @@
 import path from 'node:path';
 import { Project } from 'ts-morph';
-import type { ChallengeGenerationConfig, ChallengeManifest, GeneratorConfigFile } from './types.ts';
+import type { ChallengeGenerationConfig, ChallengeHint, ChallengeManifest, GeneratorConfigFile } from './types.ts';
 import { configHashOfChallenge } from './config.ts';
 import { canonicalJson, hashOfParts, sha256Hex } from './hash.ts';
+import { documentationHints } from './docHints.ts';
 import { CATALOG_SCHEMA_VERSION, DEFAULT_TIMEOUT_MS } from './paths.ts';
 
 export interface ManifestInput {
@@ -61,7 +62,7 @@ export function buildManifest(input: ManifestInput): ChallengeManifest {
     editableFiles: [input.entryPath],
     readonlyFiles: [...input.readonlyFiles].sort(),
     description: descriptionFromSource(input.originalSourceText, input.config.targetExport),
-    hints: input.config.hints.mode === 'none' ? [] : [],
+    hints: hintsForConfig(input.config, input.originalSourceText),
     runtime: {
       timeoutMs: input.config.overrides?.timeoutMs ?? DEFAULT_TIMEOUT_MS,
       testAdapter: 'jest-subset-v1',
@@ -77,6 +78,14 @@ export function buildManifest(input: ManifestInput): ChallengeManifest {
 
   manifest.integrity.manifestHash = sha256Hex(canonicalJson({ ...manifest, integrity: {} }));
   return manifest;
+}
+
+/** Builds the manifest hint list (ascending by level) for the configured hint mode. */
+function hintsForConfig(config: ChallengeGenerationConfig, originalSourceText: string): ChallengeHint[] {
+  if (config.hints.mode !== 'documentation') {
+    return [];
+  }
+  return documentationHints(originalSourceText, config.targetExport, config.hints.maxLevel).sort((a, b) => a.level - b.level);
 }
 
 function categoryFromSourcePath(sourcePath: string): string {
@@ -104,7 +113,10 @@ function descriptionFromSource(sourceText: string, targetExport: string): string
   if (jsDocs.length === 0) {
     return '';
   }
-  const description = jsDocs[0].getDescription().trim();
+  // The JSDoc directly preceding the declaration (the last leading comment) is
+  // the effective one; ignore stray commented-out blocks attached earlier.
+  const jsDoc = jsDocs[jsDocs.length - 1];
+  const description = jsDoc.getDescription().trim();
   if (!description) {
     return '';
   }

@@ -14,7 +14,11 @@ interface CliOptions {
 
 function printChallenge(built: BuiltChallenge): void {
   const status = built.validation ? (built.validation.ok ? 'PASS' : 'FAIL') : 'SKIP';
-  console.log(`  ${built.id} [${built.classification}] ${status} challengeVersion=${built.manifest.challengeVersion} contentHash=${built.contentHash.slice(0, 12)}`);
+  const hashes =
+    built.classification === 'unsupported' || !built.manifest
+      ? ''
+      : ` challengeVersion=${built.manifest.challengeVersion} contentHash=${built.contentHash.slice(0, 12)}`;
+  console.log(`  ${built.id} [${built.classification}] ${status}${hashes}`);
   if (built.classification !== 'unsupported') {
     const removedHelpers = built.transformReport.removedHelpers.join(', ');
     const removedImports = built.transformReport.removedImports.join(', ');

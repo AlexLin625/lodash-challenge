@@ -1,0 +1,102 @@
+{
+  "category": "string",
+  "challengeVersion": "5f5ebcb92091bf0857b3f10e68bf0c2f2bef2702c1ff16b4ca7f7d4ed2546d9d",
+  "description": "Truncates `string` if it's longer than the given maximum string length.\nThe last characters of the truncated string are replaced with the omission\nstring which defaults to \"...\".",
+  "difficulty": "hard",
+  "editableFiles": [
+    "src/compat/string/truncate.ts"
+  ],
+  "entryFile": "src/compat/string/truncate.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Truncates `string` if it's longer than the given maximum string length."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "The last characters of the truncated string are replaced with the omission string which defaults to \"...\"."
+    },
+    {
+      "level": 3,
+      "source": "documentation",
+      "text": "Consider each parameter in turn (string, options), including missing, empty and boundary values."
+    }
+  ],
+  "id": "compat-string-truncate",
+  "integrity": {
+    "configHash": "01aee6d9568caf38629f3baa9b3846117faf6341cc5627088312ea1861a2572f",
+    "manifestHash": "2925c637bd6c606e247492c5a13f715bf004f526cf0506a5cd7a397e6d63f065",
+    "starterHash": "799656602cf72e8cd8c1c062fce1ed91d6b716c6fa34a2f28d6e41c353a29275",
+    "testsHash": "a1bfde312c1caa34f0a169823d07698843b578a296746cb8850c12e9c958f163"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/_internal/globalThis.ts",
+    "src/_internal/isUnsafeProperty.ts",
+    "src/compat/_internal/ArrayIterator.ts",
+    "src/compat/_internal/GetFieldType.ts",
+    "src/compat/_internal/IsMatchWithCustomizer.ts",
+    "src/compat/_internal/ListIterator.ts",
+    "src/compat/_internal/Many.ts",
+    "src/compat/_internal/ObjectIterator.ts",
+    "src/compat/_internal/PropertyPath.ts",
+    "src/compat/_internal/StringIterator.ts",
+    "src/compat/_internal/TupleIterator.ts",
+    "src/compat/_internal/getSymbols.ts",
+    "src/compat/_internal/getTag.ts",
+    "src/compat/_internal/isDeepKey.ts",
+    "src/compat/_internal/isIndex.ts",
+    "src/compat/_internal/tags.ts",
+    "src/compat/_internal/toKey.ts",
+    "src/compat/array/forEach.ts",
+    "src/compat/array/map.ts",
+    "src/compat/object/cloneDeep.ts",
+    "src/compat/object/cloneDeepWith.ts",
+    "src/compat/object/get.ts",
+    "src/compat/object/has.ts",
+    "src/compat/object/property.ts",
+    "src/compat/predicate/isArguments.ts",
+    "src/compat/predicate/isArrayLike.ts",
+    "src/compat/predicate/isMatch.ts",
+    "src/compat/predicate/isMatchWith.ts",
+    "src/compat/predicate/isObject.ts",
+    "src/compat/predicate/isSymbol.ts",
+    "src/compat/predicate/matches.ts",
+    "src/compat/predicate/matchesProperty.ts",
+    "src/compat/string/truncate.spec.ts",
+    "src/compat/util/constant.ts",
+    "src/compat/util/eq.ts",
+    "src/compat/util/iteratee.ts",
+    "src/compat/util/toPath.ts",
+    "src/compat/util/toString.ts",
+    "src/function/identity.ts",
+    "src/math/range.ts",
+    "src/object/cloneDeep.ts",
+    "src/object/cloneDeepWith.ts",
+    "src/predicate/isBuffer.ts",
+    "src/predicate/isLength.ts",
+    "src/predicate/isPrimitive.ts",
+    "src/predicate/isTypedArray.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "truncate",
+  "targetExport": "truncate",
+  "title": "truncate",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/string/truncate.ts",
+    "testPaths": [
+      "src/compat/string/truncate.spec.ts"
+    ]
+  }
+}

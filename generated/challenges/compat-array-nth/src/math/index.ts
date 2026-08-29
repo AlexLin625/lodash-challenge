@@ -1,0 +1,14 @@
+export { clamp } from './clamp.ts';
+export { inRange } from './inRange.ts';
+export { mean } from './mean.ts';
+export { meanBy } from './meanBy.ts';
+export { median } from './median.ts';
+export { medianBy } from './medianBy.ts';
+export { percentile } from './percentile.ts';
+export { random } from './random.ts';
+export { randomInt } from './randomInt.ts';
+export { range } from './range.ts';
+export { rangeRight } from './rangeRight.ts';
+export { round } from './round.ts';
+export { sum } from './sum.ts';
+export { sumBy } from './sumBy.ts';

@@ -1,0 +1,56 @@
+{
+  "category": "array",
+  "challengeVersion": "81516eef60b9aaa651c5bd62d58bd9b8e08c33a9112d9b779e1c7859dc17cc55",
+  "description": "Recursively flattens array up to depth times.",
+  "difficulty": "medium",
+  "editableFiles": [
+    "src/compat/array/flattenDepth.ts"
+  ],
+  "entryFile": "src/compat/array/flattenDepth.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Recursively flattens array up to depth times."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "Consider each parameter in turn (array, depth), including missing, empty and boundary values."
+    }
+  ],
+  "id": "compat-array-flattenDepth",
+  "integrity": {
+    "configHash": "74ee3e0f74c9873774fed956727cb88d2c94897b9980437b41fe79189a43d1c4",
+    "manifestHash": "cd4ae9852fd6e37f42295b5df661b1a4ca829ad96bf1130d3b86e8d19fd161d9",
+    "starterHash": "a5da279256e3dfd778b98f8f4a21e200ac65f0fc7ee56034d6ad03bbf73e12b2",
+    "testsHash": "d6013715b13920622eee5b42d02e1a982f2a4f627c1af1d98bc5990d321387fc"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/ListOfRecursiveArraysOrValues.ts",
+    "src/compat/_internal/RecursiveArray.ts",
+    "src/compat/_internal/args.ts",
+    "src/compat/_internal/toArgs.ts",
+    "src/compat/array/flattenDepth.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "flattenDepth",
+  "targetExport": "flattenDepth",
+  "title": "flattenDepth",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/array/flattenDepth.ts",
+    "testPaths": [
+      "src/compat/array/flattenDepth.spec.ts"
+    ]
+  }
+}

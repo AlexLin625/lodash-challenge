@@ -1,0 +1,56 @@
+{
+  "category": "array",
+  "challengeVersion": "b632d1858f1ba3fa12375336b702dbdbe55feb3252cd79e9364501a8c837a99e",
+  "description": "Computes the difference between an array and multiple arrays.",
+  "difficulty": "medium",
+  "editableFiles": [
+    "src/compat/array/difference.ts"
+  ],
+  "entryFile": "src/compat/array/difference.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Computes the difference between an array and multiple arrays."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "Consider each parameter in turn (arr, values), including missing, empty and boundary values."
+    }
+  ],
+  "id": "compat-array-difference",
+  "integrity": {
+    "configHash": "4ba5e16fd3f8abc5f2f63482da0890d39703c9a3669c898a0a57174f6d6ce6b7",
+    "manifestHash": "6fd796db929e27d9b776a214c5b703abf1167a8e209df4067a7620181500ee9e",
+    "starterHash": "11dba614ad26a5389d7bd74fe40382445a5237dbfffb40afb07f60882689569f",
+    "testsHash": "ad58457fc0e92817cc037713e35ad219c36465a2eb9d0109f4c7353dd8f3902c"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/LARGE_ARRAY_SIZE.ts",
+    "src/compat/_internal/args.ts",
+    "src/compat/_internal/toArgs.ts",
+    "src/compat/array/difference.spec.ts",
+    "src/math/range.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "difference",
+  "targetExport": "difference",
+  "title": "difference",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/array/difference.ts",
+    "testPaths": [
+      "src/compat/array/difference.spec.ts"
+    ]
+  }
+}

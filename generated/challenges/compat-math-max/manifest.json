@@ -1,0 +1,52 @@
+{
+  "category": "math",
+  "challengeVersion": "4b286bd353ca60ea62d28f50f2aa29f9e19669369dce39b03c948faa60c8f2d7",
+  "description": "Finds the element in an array that has the maximum value.",
+  "difficulty": "medium",
+  "editableFiles": [
+    "src/compat/math/max.ts"
+  ],
+  "entryFile": "src/compat/math/max.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Finds the element in an array that has the maximum value."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "Consider each parameter in turn (items), including missing, empty and boundary values."
+    }
+  ],
+  "id": "compat-math-max",
+  "integrity": {
+    "configHash": "570cf745f6a81865dbaff2224757fbe6e9e3d71bfb48ab969938641551f4b6c0",
+    "manifestHash": "b2fdc7d47475928c6ac4d9d81247a6182be2f1d413e9809ee449475891f09ee2",
+    "starterHash": "0e2405b33cae5409a831383beed32371b6ecda03c7268d5258e58be2a7d8038f",
+    "testsHash": "fe283a92cd02349d5a769997a6148f35e13164eed22d569fba587c6a734eba24"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/math/max.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "max",
+  "targetExport": "max",
+  "title": "max",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/math/max.ts",
+    "testPaths": [
+      "src/compat/math/max.spec.ts"
+    ]
+  }
+}

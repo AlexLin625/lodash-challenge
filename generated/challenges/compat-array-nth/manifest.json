@@ -1,0 +1,91 @@
+{
+  "category": "array",
+  "challengeVersion": "79d9d8e7582e1ef9c6b3b8513c4f62d8fa647a6fab4319a9f3d0d8112668244e",
+  "description": "Gets the element at index `n` of `array`. If `n` is negative, the nth element from the end is returned.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/array/nth.ts"
+  ],
+  "entryFile": "src/compat/array/nth.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Gets the element at index `n` of `array`."
+    }
+  ],
+  "id": "compat-array-nth",
+  "integrity": {
+    "configHash": "70d583acd8b6f94f003390d5b4c549a74e528fcb93c69dff99913137c10eecd1",
+    "manifestHash": "20827aeb037686cfb19e2d439be99c7f5d68b463dc741b942edd18124b624862",
+    "starterHash": "ad3ffdc14ab131a5cc41ad445a032e8cd08c4efb60819052a2be294b6e52409d",
+    "testsHash": "6bcc195181b728e3e9cc9b810f9080a1014f8241ccbfa8a615279570bcaf4c65"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/_internal/DOMException.ts",
+    "src/_internal/globalThis.ts",
+    "src/compat/_internal/falsey.ts",
+    "src/compat/_internal/stubA.ts",
+    "src/compat/_internal/stubB.ts",
+    "src/compat/array/nth.spec.ts",
+    "src/error/AbortError.ts",
+    "src/function/after.ts",
+    "src/function/ary.ts",
+    "src/function/asyncNoop.ts",
+    "src/function/before.ts",
+    "src/function/curry.ts",
+    "src/function/curryRight.ts",
+    "src/function/debounce.ts",
+    "src/function/flow.ts",
+    "src/function/flowRight.ts",
+    "src/function/identity.ts",
+    "src/function/index.ts",
+    "src/function/memoize.ts",
+    "src/function/negate.ts",
+    "src/function/noop.ts",
+    "src/function/once.ts",
+    "src/function/partial.ts",
+    "src/function/partialRight.ts",
+    "src/function/rest.ts",
+    "src/function/retry.ts",
+    "src/function/spread.ts",
+    "src/function/throttle.ts",
+    "src/function/unary.ts",
+    "src/math/clamp.ts",
+    "src/math/inRange.ts",
+    "src/math/index.ts",
+    "src/math/mean.ts",
+    "src/math/meanBy.ts",
+    "src/math/median.ts",
+    "src/math/medianBy.ts",
+    "src/math/percentile.ts",
+    "src/math/random.ts",
+    "src/math/randomInt.ts",
+    "src/math/range.ts",
+    "src/math/rangeRight.ts",
+    "src/math/round.ts",
+    "src/math/sum.ts",
+    "src/math/sumBy.ts",
+    "src/promise/delay.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "nth",
+  "targetExport": "nth",
+  "title": "nth",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/array/nth.ts",
+    "testPaths": [
+      "src/compat/array/nth.spec.ts"
+    ]
+  }
+}

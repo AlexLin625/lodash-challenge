@@ -1,0 +1,95 @@
+{
+  "category": "string",
+  "challengeVersion": "20c7e73d263d8c56e7657f85f82184d04b195ca7dea148b659453eb5a3b51f6a",
+  "description": "Escapes the RegExp special characters \"^\", \"$\", \"\\\\\", \".\", \"*\", \"+\", \"?\", \"(\", \")\", \"[\", \"]\", \"{\", \"}\", and \"|\" in `str`.",
+  "difficulty": "medium",
+  "editableFiles": [
+    "src/compat/string/escapeRegExp.ts"
+  ],
+  "entryFile": "src/compat/string/escapeRegExp.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Escapes the RegExp special characters \"^\", \"$\", \"\\\\\", \".\", \"*\", \"+\", \"?\", \"(\", \")\", \"[\", \"]\", \"{\", \"}\", and \"|\" in `str`."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "Consider each parameter in turn (str), including missing, empty and boundary values."
+    }
+  ],
+  "id": "compat-string-escapeRegExp",
+  "integrity": {
+    "configHash": "0d647cbb19f1d13d82036d2a1aff9a9c0db824b08b25f8b4e78900f4c27c8c26",
+    "manifestHash": "8c78f62f4923940cbc956e8384e27fd2dc15e888491e0ee2ea43b69233f0fd88",
+    "starterHash": "c11d411e28f5ec3ea7c00cb285f5dc928615cd8392a82a229fe0eee2fcea23bd",
+    "testsHash": "e08bb659144adc547882b3c4955cd8e5f3db19c7e5f583d9cb29abb44b921b25"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/_internal/globalThis.ts",
+    "src/_internal/isUnsafeProperty.ts",
+    "src/compat/_internal/ArrayIterator.ts",
+    "src/compat/_internal/GetFieldType.ts",
+    "src/compat/_internal/IsMatchWithCustomizer.ts",
+    "src/compat/_internal/ListIterator.ts",
+    "src/compat/_internal/Many.ts",
+    "src/compat/_internal/ObjectIterator.ts",
+    "src/compat/_internal/PropertyPath.ts",
+    "src/compat/_internal/TupleIterator.ts",
+    "src/compat/_internal/getSymbols.ts",
+    "src/compat/_internal/getTag.ts",
+    "src/compat/_internal/isDeepKey.ts",
+    "src/compat/_internal/isIndex.ts",
+    "src/compat/_internal/tags.ts",
+    "src/compat/_internal/toKey.ts",
+    "src/compat/array/map.ts",
+    "src/compat/object/cloneDeep.ts",
+    "src/compat/object/cloneDeepWith.ts",
+    "src/compat/object/get.ts",
+    "src/compat/object/has.ts",
+    "src/compat/object/property.ts",
+    "src/compat/predicate/isArguments.ts",
+    "src/compat/predicate/isArrayLike.ts",
+    "src/compat/predicate/isMatch.ts",
+    "src/compat/predicate/isMatchWith.ts",
+    "src/compat/predicate/isObject.ts",
+    "src/compat/predicate/isSymbol.ts",
+    "src/compat/predicate/matches.ts",
+    "src/compat/predicate/matchesProperty.ts",
+    "src/compat/string/escapeRegExp.spec.ts",
+    "src/compat/util/eq.ts",
+    "src/compat/util/iteratee.ts",
+    "src/compat/util/stubString.ts",
+    "src/compat/util/toPath.ts",
+    "src/compat/util/toString.ts",
+    "src/function/identity.ts",
+    "src/math/range.ts",
+    "src/object/cloneDeep.ts",
+    "src/object/cloneDeepWith.ts",
+    "src/predicate/isBuffer.ts",
+    "src/predicate/isLength.ts",
+    "src/predicate/isPrimitive.ts",
+    "src/predicate/isTypedArray.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "escapeRegExp",
+  "targetExport": "escapeRegExp",
+  "title": "escapeRegExp",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/string/escapeRegExp.ts",
+    "testPaths": [
+      "src/compat/string/escapeRegExp.spec.ts"
+    ]
+  }
+}

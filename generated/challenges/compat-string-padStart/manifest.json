@@ -1,0 +1,47 @@
+{
+  "category": "string",
+  "challengeVersion": "4152c029228031e70df359fe12343f9fe0605774d3a4aba4c7e6dc2fd2c7dfcd",
+  "description": "Pads the start of a string with a given character until it reaches the specified length.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/string/padStart.ts"
+  ],
+  "entryFile": "src/compat/string/padStart.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Pads the start of a string with a given character until it reaches the specified length."
+    }
+  ],
+  "id": "compat-string-padStart",
+  "integrity": {
+    "configHash": "dfa093389ae70cb8464dab5913c599ef9d274d55bd97f07b4edeb63a07592b0c",
+    "manifestHash": "26141cd0f911c658c81f2840461a8f33b6283e771154da7e682924f2ba3f9d99",
+    "starterHash": "cca8eb9e5618e8b98099eae30169def81908462254c4580bf3e701c2268926f2",
+    "testsHash": "d218ab83c00781ca212a5b4d9cb9fde6348a5a6a8af945b00cb960de7a18569c"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/string/padStart.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "padStart",
+  "targetExport": "padStart",
+  "title": "padStart",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/string/padStart.ts",
+    "testPaths": [
+      "src/compat/string/padStart.spec.ts"
+    ]
+  }
+}

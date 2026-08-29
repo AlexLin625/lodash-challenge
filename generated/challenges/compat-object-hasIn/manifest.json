@@ -1,0 +1,69 @@
+{
+  "category": "object",
+  "challengeVersion": "67e5d69256b455b15e37c1ee17be1b2c502efbe5cca73b0dcf1cca9981b5ba5d",
+  "description": "Checks if a given path exists in an object, **including inherited properties**.",
+  "difficulty": "medium",
+  "editableFiles": [
+    "src/compat/object/hasIn.ts"
+  ],
+  "entryFile": "src/compat/object/hasIn.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Checks if a given path exists in an object, **including inherited properties**."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "You can provide the path as a single property key, an array of property keys, or a string representing a deep path. Unlike `has`, which only checks for own properties, `hasIn` also checks for properties in the prototype chain. If the path is an index and the object is an array or an arguments object, the function will verify if the index is valid and within the bounds of the array or arguments object, even if the array or arguments object is sparse (i.e., not all indexes are defined)."
+    }
+  ],
+  "id": "compat-object-hasIn",
+  "integrity": {
+    "configHash": "3411cc0429acca4815fc9e3111a4b05d11d45a34ca75d5feb0ed733e45a068c6",
+    "manifestHash": "9b7e957bc5c69e721325052506b89e96fe7d70daa906b5a5d05488eb13f3b419",
+    "starterHash": "edb9844db56ed64d94d868c0b3a5178151d3a4e0329ac557855d4cc179ac2230",
+    "testsHash": "6ee4457130aca71a12a9b8208766969a1145b66205ef5baf86c1c92457c25ceb"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/Many.ts",
+    "src/compat/_internal/PropertyPath.ts",
+    "src/compat/_internal/args.ts",
+    "src/compat/_internal/getTag.ts",
+    "src/compat/_internal/isDeepKey.ts",
+    "src/compat/_internal/isIndex.ts",
+    "src/compat/_internal/symbol.ts",
+    "src/compat/_internal/toArgs.ts",
+    "src/compat/_internal/toKey.ts",
+    "src/compat/object/has.ts",
+    "src/compat/object/hasIn.spec.ts",
+    "src/compat/predicate/isArguments.ts",
+    "src/compat/predicate/isSymbol.ts",
+    "src/compat/util/stubFalse.ts",
+    "src/compat/util/stubTrue.ts",
+    "src/compat/util/toPath.ts",
+    "src/compat/util/toString.ts",
+    "src/math/range.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "hasIn",
+  "targetExport": "hasIn",
+  "title": "hasIn",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/object/hasIn.ts",
+    "testPaths": [
+      "src/compat/object/hasIn.spec.ts"
+    ]
+  }
+}

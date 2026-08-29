@@ -1,0 +1,50 @@
+{
+  "category": "math",
+  "challengeVersion": "fb1f12177771bf93d9c897e00b5aeafafeb096988208d11080812425153e38ac",
+  "description": "Computes the sum of the values that are returned by the `iteratee` function.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/math/sum.ts"
+  ],
+  "entryFile": "src/compat/math/sum.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Computes the sum of the values that are returned by the `iteratee` function."
+    }
+  ],
+  "id": "compat-math-sum",
+  "integrity": {
+    "configHash": "df697fa797349285e4689352c8827de5ca91b56624e257106159f752d185cbd5",
+    "manifestHash": "c57a45e533737a2d335eaed749787f2cc1082503faad10084edfb98357a06412",
+    "starterHash": "07e0b98c0c0cef9d9d0f532980ef0053fb1493cdb943318e8307c617d0d45fa6",
+    "testsHash": "e104c8bfa160bb3796d2326aa2c69f797d26cdeaab71b49dc1c824a753a90a9c"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/empties.ts",
+    "src/compat/_internal/falsey.ts",
+    "src/compat/_internal/stubZero.ts",
+    "src/compat/math/sum.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "sum",
+  "targetExport": "sum",
+  "title": "sum",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/math/sum.ts",
+    "testPaths": [
+      "src/compat/math/sum.spec.ts"
+    ]
+  }
+}

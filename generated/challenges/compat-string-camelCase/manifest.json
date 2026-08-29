@@ -1,0 +1,52 @@
+{
+  "category": "string",
+  "challengeVersion": "46490918461931808a2a0f24c3b5d36ea1948a3c37c3f688ff7c79fc7fb37107",
+  "description": "Converts a string to camel case.",
+  "difficulty": "medium",
+  "editableFiles": [
+    "src/compat/string/camelCase.ts"
+  ],
+  "entryFile": "src/compat/string/camelCase.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Converts a string to camel case."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "Camel case is the naming convention in which the first word is written in lowercase and each subsequent word begins with a capital letter, concatenated without any separator characters."
+    }
+  ],
+  "id": "compat-string-camelCase",
+  "integrity": {
+    "configHash": "c4611e99ea5435c23d50808100d404b7134aee6aeef0a6a0c93760aaed3584cc",
+    "manifestHash": "6c8002434870877c1a759af955fe8f6c31f538caef7d9e9aed2e3d83d92e43d6",
+    "starterHash": "56cc2b6ea7b2ab0d34e0b30261a48cefc6447014ba759fac9e173f9663a05937",
+    "testsHash": "61eaa8da3c47d08c13837af1b02f1cee5e85c6e3ef7dc2062be2d66629d01d42"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/string/camelCase.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "camelCase",
+  "targetExport": "camelCase",
+  "title": "camelCase",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/string/camelCase.ts",
+    "testPaths": [
+      "src/compat/string/camelCase.spec.ts"
+    ]
+  }
+}

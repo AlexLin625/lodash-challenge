@@ -1,0 +1,53 @@
+{
+  "category": "predicate",
+  "challengeVersion": "7594b70410f54f8937c9082f3427f7b031db3211941b64465400f70b430a0f3c",
+  "description": "Checks if the given value is object-like.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/predicate/isObjectLike.ts"
+  ],
+  "entryFile": "src/compat/predicate/isObjectLike.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Checks if the given value is object-like."
+    }
+  ],
+  "id": "compat-predicate-isObjectLike",
+  "integrity": {
+    "configHash": "19949f5cf18100c04aa212f250e5e0252c93e8682c049b497654b35f0440e52f",
+    "manifestHash": "944f3f79f6d0d8d3157722abbdc1aa569861156d9f5c5c4fe52de0b779fb8344",
+    "starterHash": "23d4b895bdbcf50890220c1d28cb689b6625ff4175bb74246393c4edbbffb56c",
+    "testsHash": "813ce5ba725a06b349e1e6e58f6391a8da1fae8a9e8892e24fa559734334eba2"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/args.ts",
+    "src/compat/_internal/falsey.ts",
+    "src/compat/_internal/slice.ts",
+    "src/compat/_internal/symbol.ts",
+    "src/compat/_internal/toArgs.ts",
+    "src/compat/predicate/isObjectLike.spec.ts",
+    "src/compat/util/stubFalse.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "isObjectLike",
+  "targetExport": "isObjectLike",
+  "title": "isObjectLike",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/predicate/isObjectLike.ts",
+    "testPaths": [
+      "src/compat/predicate/isObjectLike.spec.ts"
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "category": "predicate",
+  "challengeVersion": "fc482f9dc6feb667e980e742113d384e6ce4917d67abbd60132ae51a714c02c2",
+  "description": "Checks if `object` conforms to `source` by invoking the predicate properties of `source` with the corresponding property values of `object`.",
+  "difficulty": "hard",
+  "editableFiles": [
+    "src/compat/predicate/conformsTo.ts"
+  ],
+  "entryFile": "src/compat/predicate/conformsTo.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Checks if `object` conforms to `source` by invoking the predicate properties of `source` with the corresponding property values of `object`."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "Note: This method is equivalent to `conforms` when source is partially applied."
+    },
+    {
+      "level": 3,
+      "source": "documentation",
+      "text": "Consider each parameter in turn (target, source), including missing, empty and boundary values."
+    }
+  ],
+  "id": "compat-predicate-conformsTo",
+  "integrity": {
+    "configHash": "964a02ac1df1acaa0d1d01687f5cf69419ea7e13d48504a5a134bc7723028033",
+    "manifestHash": "e2628a0acb3f044e1b7d8d96fea374259aa15891ddcc7debedb59ebcab0f9176",
+    "starterHash": "40239ad723192edc13e53651e686a88153c5c359a3a5eed7b6bb10d2d294ef94",
+    "testsHash": "a6665815d303e920ea2b54244560f62861c9bc30b2eec545194bded26f306af4"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/ConformsPredicateObject.ts",
+    "src/compat/predicate/conformsTo.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "conformsTo",
+  "targetExport": "conformsTo",
+  "title": "conformsTo",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/predicate/conformsTo.ts",
+    "testPaths": [
+      "src/compat/predicate/conformsTo.spec.ts"
+    ]
+  }
+}

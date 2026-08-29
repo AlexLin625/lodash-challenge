@@ -1,0 +1,47 @@
+{
+  "category": "string",
+  "challengeVersion": "91de18f4431c41a57b525f3368319099143bf948470b4178d79d57bb1d7602c6",
+  "description": "Checks if a string contains another string at the beginning of the string.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/string/startsWith.ts"
+  ],
+  "entryFile": "src/compat/string/startsWith.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Checks if a string contains another string at the beginning of the string."
+    }
+  ],
+  "id": "compat-string-startsWith",
+  "integrity": {
+    "configHash": "ec6a527ca6474a0862c82fcbb4c7b26e412c3420a1daa0fd6975eccb490c909f",
+    "manifestHash": "9665d44594bd0d51a402177c8ff6b6e5ba636d7d4dde948d8783112ced2b449d",
+    "starterHash": "931dc0993cfe47b9f46cb8f64fa44ad701d07240fcf5408e3498eb6e38c0efa7",
+    "testsHash": "aecee398f925a75c5e481ade85c7083964146775f9c2a9e7076f8353f69c1def"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/string/startsWith.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "startsWith",
+  "targetExport": "startsWith",
+  "title": "startsWith",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/string/startsWith.ts",
+    "testPaths": [
+      "src/compat/string/startsWith.spec.ts"
+    ]
+  }
+}

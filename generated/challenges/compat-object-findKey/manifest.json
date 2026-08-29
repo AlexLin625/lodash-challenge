@@ -1,0 +1,56 @@
+{
+  "category": "object",
+  "challengeVersion": "207f4907f2b321ca7fef4d76151f8683d56b0d57ede8ccf264614eed0db7f8e3",
+  "description": "Finds the key of the first element that matches the given predicate.",
+  "difficulty": "medium",
+  "editableFiles": [
+    "src/compat/object/findKey.ts"
+  ],
+  "entryFile": "src/compat/object/findKey.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Finds the key of the first element that matches the given predicate."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "This function determines the type of the predicate and delegates the search to the appropriate helper function. It supports predicates as functions, objects, arrays, or strings."
+    }
+  ],
+  "id": "compat-object-findKey",
+  "integrity": {
+    "configHash": "d05801d55ffd3ef0e3384e81a69a234085fcac003a1182446b889fdab9cddb62",
+    "manifestHash": "1e3ccb797c1d59ee2d616e9efe67d5dfd07d335ee64e2e33365233bbbd8fec13",
+    "starterHash": "1b22263da910076e13da06d4c595b416ea9c4a5003410766593f7497ae21f521",
+    "testsHash": "a765d86de07ca081cb8dbcb74488628ea8692a2fba7fe83f66cc6f6b9d82baf1"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/IterateeShorthand.ts",
+    "src/compat/_internal/ObjectIteratee.ts",
+    "src/compat/_internal/ObjectIterator.ts",
+    "src/compat/_internal/PartialShallow.ts",
+    "src/compat/object/findKey.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "findKey",
+  "targetExport": "findKey",
+  "title": "findKey",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/object/findKey.ts",
+    "testPaths": [
+      "src/compat/object/findKey.spec.ts"
+    ]
+  }
+}

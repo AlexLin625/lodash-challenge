@@ -4,7 +4,7 @@
     "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
     "root": "external/es-toolkit"
   },
-  "generatorVersion": "0.1.0",
+  "generatorVersion": "0.2.0",
   "challenges": [
     {
       "id": "compat-array-compact",
@@ -15,10 +15,12 @@
         "strategy": "single-function"
       },
       "tests": {
-        "sourcePaths": ["src/compat/array/compact.spec.ts"]
+        "sourcePaths": [
+          "src/compat/array/compact.spec.ts"
+        ]
       },
       "hints": {
-        "mode": "none",
+        "mode": "documentation",
         "maxLevel": 1
       }
     },
@@ -31,11 +33,571 @@
         "strategy": "remove-helpers"
       },
       "tests": {
-        "sourcePaths": ["src/compat/array/dropWhile.spec.ts"]
+        "sourcePaths": [
+          "src/compat/array/dropWhile.spec.ts"
+        ]
       },
       "hints": {
-        "mode": "none",
+        "mode": "documentation",
         "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-array-chunk",
+      "sourcePath": "src/compat/array/chunk.ts",
+      "targetExport": "chunk",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/array/chunk.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-array-difference",
+      "sourcePath": "src/compat/array/difference.ts",
+      "targetExport": "difference",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/array/difference.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-array-flattenDepth",
+      "sourcePath": "src/compat/array/flattenDepth.ts",
+      "targetExport": "flattenDepth",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "remove-helpers"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/array/flattenDepth.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-array-initial",
+      "sourcePath": "src/compat/array/initial.ts",
+      "targetExport": "initial",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/array/initial.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-array-nth",
+      "sourcePath": "src/compat/array/nth.ts",
+      "targetExport": "nth",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/array/nth.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-array-slice",
+      "sourcePath": "src/compat/array/slice.ts",
+      "targetExport": "slice",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/array/slice.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-array-xor",
+      "sourcePath": "src/compat/array/xor.ts",
+      "targetExport": "xor",
+      "difficulty": "hard",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/array/xor.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 3
+      }
+    },
+    {
+      "id": "compat-array-take",
+      "sourcePath": "src/compat/array/take.ts",
+      "targetExport": "take",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/array/take.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-string-capitalize",
+      "sourcePath": "src/compat/string/capitalize.ts",
+      "targetExport": "capitalize",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/string/capitalize.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-string-endsWith",
+      "sourcePath": "src/compat/string/endsWith.ts",
+      "targetExport": "endsWith",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/string/endsWith.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-string-startsWith",
+      "sourcePath": "src/compat/string/startsWith.ts",
+      "targetExport": "startsWith",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/string/startsWith.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-string-padStart",
+      "sourcePath": "src/compat/string/padStart.ts",
+      "targetExport": "padStart",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/string/padStart.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-string-escapeRegExp",
+      "sourcePath": "src/compat/string/escapeRegExp.ts",
+      "targetExport": "escapeRegExp",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/string/escapeRegExp.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-string-camelCase",
+      "sourcePath": "src/compat/string/camelCase.ts",
+      "targetExport": "camelCase",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/string/camelCase.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-string-truncate",
+      "sourcePath": "src/compat/string/truncate.ts",
+      "targetExport": "truncate",
+      "difficulty": "hard",
+      "transform": {
+        "strategy": "remove-helpers"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/string/truncate.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 3
+      }
+    },
+    {
+      "id": "compat-string-words",
+      "sourcePath": "src/compat/string/words.ts",
+      "targetExport": "words",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/string/words.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-math-inRange",
+      "sourcePath": "src/compat/math/inRange.ts",
+      "targetExport": "inRange",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/math/inRange.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-math-max",
+      "sourcePath": "src/compat/math/max.ts",
+      "targetExport": "max",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/math/max.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-math-maxBy",
+      "sourcePath": "src/compat/math/maxBy.ts",
+      "targetExport": "maxBy",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/math/maxBy.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-math-mean",
+      "sourcePath": "src/compat/math/mean.ts",
+      "targetExport": "mean",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/math/mean.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-math-sum",
+      "sourcePath": "src/compat/math/sum.ts",
+      "targetExport": "sum",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/math/sum.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-math-range",
+      "sourcePath": "src/compat/math/range.ts",
+      "targetExport": "range",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/math/range.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-object-findKey",
+      "sourcePath": "src/compat/object/findKey.ts",
+      "targetExport": "findKey",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/object/findKey.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-object-hasIn",
+      "sourcePath": "src/compat/object/hasIn.ts",
+      "targetExport": "hasIn",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/object/hasIn.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-object-unset",
+      "sourcePath": "src/compat/object/unset.ts",
+      "targetExport": "unset",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "remove-helpers"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/object/unset.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-predicate-isObjectLike",
+      "sourcePath": "src/compat/predicate/isObjectLike.ts",
+      "targetExport": "isObjectLike",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/predicate/isObjectLike.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-predicate-isInteger",
+      "sourcePath": "src/compat/predicate/isInteger.ts",
+      "targetExport": "isInteger",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/predicate/isInteger.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-predicate-isNaN",
+      "sourcePath": "src/compat/predicate/isNaN.ts",
+      "targetExport": "isNaN",
+      "difficulty": "easy",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/predicate/isNaN.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 1
+      }
+    },
+    {
+      "id": "compat-predicate-isPlainObject",
+      "sourcePath": "src/compat/predicate/isPlainObject.ts",
+      "targetExport": "isPlainObject",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/predicate/isPlainObject.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
+      }
+    },
+    {
+      "id": "compat-predicate-conformsTo",
+      "sourcePath": "src/compat/predicate/conformsTo.ts",
+      "targetExport": "conformsTo",
+      "difficulty": "hard",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/predicate/conformsTo.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 3
+      }
+    },
+    {
+      "id": "compat-predicate-matches",
+      "sourcePath": "src/compat/predicate/matches.ts",
+      "targetExport": "matches",
+      "difficulty": "medium",
+      "transform": {
+        "strategy": "single-function"
+      },
+      "tests": {
+        "sourcePaths": [
+          "src/compat/predicate/matches.spec.ts"
+        ]
+      },
+      "hints": {
+        "mode": "documentation",
+        "maxLevel": 2
       }
     }
   ]

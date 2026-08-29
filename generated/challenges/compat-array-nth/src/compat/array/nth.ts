@@ -1,0 +1,16 @@
+/**
+ * Gets the element at index `n` of `array`. If `n` is negative, the nth element from the end is returned.
+ *
+ * @param array - The array to query.
+ * @param [n=0] - The index of the element to return.
+ * @return {T | undefined} Returns the nth element of `array`.
+ *
+ * @example
+ * nth([1, 2, 3], 1); // => 2
+ * nth([1, 2, 3], -1); // => 3
+ */
+export function nth<T>(array: ArrayLike<T> | null | undefined, n = 0): T | undefined {
+  void array;
+  void n;
+  return undefined as unknown as T | undefined;
+}

@@ -1,0 +1,47 @@
+{
+  "category": "string",
+  "challengeVersion": "d536882215e1cbc11000b039cd5e49e9477816dab606842875284626b054c448",
+  "description": "Checks if a string contains another string at the end of the string.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/string/endsWith.ts"
+  ],
+  "entryFile": "src/compat/string/endsWith.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Checks if a string contains another string at the end of the string."
+    }
+  ],
+  "id": "compat-string-endsWith",
+  "integrity": {
+    "configHash": "a926214029e03036a591f5a44fc0ad0bd1a01d4138bc6c9ca4adce25ecdce900",
+    "manifestHash": "829ce06b7e62c1ca9a456d28d57b3bec38c3e0585fe44aae50d78d829197a0c5",
+    "starterHash": "92898a951fb536aa78a0978f99658e11a080b4efecdf44857ebfc32626cacd40",
+    "testsHash": "8ade864dd66aa0807544fc39472ec4dfbf9172422dbd851a9fc194eb347d0619"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/string/endsWith.spec.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "endsWith",
+  "targetExport": "endsWith",
+  "title": "endsWith",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/string/endsWith.ts",
+    "testPaths": [
+      "src/compat/string/endsWith.spec.ts"
+    ]
+  }
+}

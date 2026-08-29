@@ -1,18 +1,24 @@
 {
   "category": "array",
-  "challengeVersion": "77c692f4af0a8ae529f7c68c63c8020a75a2f396f92a42bfd23207807ae6cbcc",
+  "challengeVersion": "75c7782a7ae497a9d78a1b1ece2d38e91eba9f0dd7dad6cbf81e897b08cfac41",
   "description": "Removes falsey values (false, null, 0, 0n, '', undefined, NaN) from an array.",
   "difficulty": "easy",
   "editableFiles": [
     "src/compat/array/compact.ts"
   ],
   "entryFile": "src/compat/array/compact.ts",
-  "generatorVersion": "0.1.0",
-  "hints": [],
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Removes falsey values (false, null, 0, 0n, '', undefined, NaN) from an array."
+    }
+  ],
   "id": "compat-array-compact",
   "integrity": {
-    "configHash": "e7dea86b901209650c9ad0bc0f425fe7c4bd1423ebb3aeec2d0b207ebf4d2770",
-    "manifestHash": "e7551b24b822666519f4b57b7482bb75c170b78685362b4412b319b58fd37b62",
+    "configHash": "b18e6ed4807c931e77fab05f261c46beaa4f9c0f667fa8c8abfe168e9d226535",
+    "manifestHash": "9ea3cd6fafbb3f74bb26168ee9c54b9873a0edc438844daf999f5eb736cabd33",
     "starterHash": "3af31bebbe832b64912ba74d6268ec9b77168f760dbc6092bcf1ace6a48ecc5e",
     "testsHash": "2b6046922edff9aaf12546c44adfaace946f3b74b668f5f74fe28d11f030a8cc"
   },

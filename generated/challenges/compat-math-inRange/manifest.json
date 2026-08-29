@@ -1,0 +1,49 @@
+{
+  "category": "math",
+  "challengeVersion": "17a89352dcf14cb6dcafe4e0c13fdb4f8e4ff1a60719d4feece61e22f3be3f4e",
+  "description": "Checks if the value is within a specified range.",
+  "difficulty": "easy",
+  "editableFiles": [
+    "src/compat/math/inRange.ts"
+  ],
+  "entryFile": "src/compat/math/inRange.ts",
+  "generatorVersion": "0.2.0",
+  "hints": [
+    {
+      "level": 1,
+      "source": "documentation",
+      "text": "Checks if the value is within a specified range."
+    }
+  ],
+  "id": "compat-math-inRange",
+  "integrity": {
+    "configHash": "0cef61abf1d6f631b08fb39acfe435bb8e9b3abd4981746d1c7d83272e012da1",
+    "manifestHash": "54233f0fd3bda50307a9dd492961f9493f62713a6ba38021918a29056afaf0db",
+    "starterHash": "043664854f6637a825c3ef8fe4db862a45c11ea09d341339c3fd84c4901d5181",
+    "testsHash": "f0fe8879e37c8db04cc3c750fb96e3968e03bfa9cbc5a3d49b1c75c5325f4efd"
+  },
+  "readonlyFiles": [
+    "runtime/test-runtime.ts",
+    "src/compat/_internal/falsey.ts",
+    "src/compat/math/inRange.spec.ts",
+    "src/compat/util/stubTrue.ts"
+  ],
+  "runtime": {
+    "capabilities": [
+      "jest-subset-v1"
+    ],
+    "testAdapter": "jest-subset-v1",
+    "timeoutMs": 5000
+  },
+  "slug": "inRange",
+  "targetExport": "inRange",
+  "title": "inRange",
+  "upstream": {
+    "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+    "repository": "toss/es-toolkit",
+    "sourcePath": "src/compat/math/inRange.ts",
+    "testPaths": [
+      "src/compat/math/inRange.spec.ts"
+    ]
+  }
+}

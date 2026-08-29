@@ -2,19 +2,79 @@
   "challenges": [
     {
       "category": "array",
-      "challengeVersion": "77c692f4af0a8ae529f7c68c63c8020a75a2f396f92a42bfd23207807ae6cbcc",
+      "challengeVersion": "77a6b0c219a0c3dadae9f6b8b86e972c56c6010c902993c40ee640690862109b",
+      "description": "Splits an array into smaller arrays of a specified length.",
+      "difficulty": "medium",
+      "editableFiles": [
+        "src/compat/array/chunk.ts"
+      ],
+      "entryFile": "src/compat/array/chunk.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Splits an array into smaller arrays of a specified length."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "This function takes an input array and divides it into multiple smaller arrays, each of a specified length. If the input array cannot be evenly divided, the final sub-array will contain the remaining elements."
+        }
+      ],
+      "id": "compat-array-chunk",
+      "integrity": {
+        "configHash": "a90cccbcce8564d35e0dee7e6128509296eacec7e80451fa99caf9693b7b0f2e",
+        "manifestHash": "7383b16b899c7aae86cf52aa5a9a0a709b5f8b0ed715405bffb1563efe87af53",
+        "starterHash": "7d56713d4a2a7cfa4c00926e8cf899b202603b00eff6f40b5b957b06a53e16fd",
+        "testsHash": "b92e18fe5b0880996c04d8e21dc55d67e21684d96c464d119002680a95b402b1"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/args.ts",
+        "src/compat/_internal/toArgs.ts",
+        "src/compat/array/chunk.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "chunk",
+      "targetExport": "chunk",
+      "title": "chunk",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/array/chunk.ts",
+        "testPaths": [
+          "src/compat/array/chunk.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "array",
+      "challengeVersion": "75c7782a7ae497a9d78a1b1ece2d38e91eba9f0dd7dad6cbf81e897b08cfac41",
       "description": "Removes falsey values (false, null, 0, 0n, '', undefined, NaN) from an array.",
       "difficulty": "easy",
       "editableFiles": [
         "src/compat/array/compact.ts"
       ],
       "entryFile": "src/compat/array/compact.ts",
-      "generatorVersion": "0.1.0",
-      "hints": [],
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Removes falsey values (false, null, 0, 0n, '', undefined, NaN) from an array."
+        }
+      ],
       "id": "compat-array-compact",
       "integrity": {
-        "configHash": "e7dea86b901209650c9ad0bc0f425fe7c4bd1423ebb3aeec2d0b207ebf4d2770",
-        "manifestHash": "e7551b24b822666519f4b57b7482bb75c170b78685362b4412b319b58fd37b62",
+        "configHash": "b18e6ed4807c931e77fab05f261c46beaa4f9c0f667fa8c8abfe168e9d226535",
+        "manifestHash": "9ea3cd6fafbb3f74bb26168ee9c54b9873a0edc438844daf999f5eb736cabd33",
         "starterHash": "3af31bebbe832b64912ba74d6268ec9b77168f760dbc6092bcf1ace6a48ecc5e",
         "testsHash": "2b6046922edff9aaf12546c44adfaace946f3b74b668f5f74fe28d11f030a8cc"
       },
@@ -46,19 +106,81 @@
     },
     {
       "category": "array",
-      "challengeVersion": "64c90ac922217ccfa395e8f8f5c4b25bbc6d458ce112997d7017bf799d333a29",
+      "challengeVersion": "b632d1858f1ba3fa12375336b702dbdbe55feb3252cd79e9364501a8c837a99e",
+      "description": "Computes the difference between an array and multiple arrays.",
+      "difficulty": "medium",
+      "editableFiles": [
+        "src/compat/array/difference.ts"
+      ],
+      "entryFile": "src/compat/array/difference.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Computes the difference between an array and multiple arrays."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (arr, values), including missing, empty and boundary values."
+        }
+      ],
+      "id": "compat-array-difference",
+      "integrity": {
+        "configHash": "4ba5e16fd3f8abc5f2f63482da0890d39703c9a3669c898a0a57174f6d6ce6b7",
+        "manifestHash": "6fd796db929e27d9b776a214c5b703abf1167a8e209df4067a7620181500ee9e",
+        "starterHash": "11dba614ad26a5389d7bd74fe40382445a5237dbfffb40afb07f60882689569f",
+        "testsHash": "ad58457fc0e92817cc037713e35ad219c36465a2eb9d0109f4c7353dd8f3902c"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/LARGE_ARRAY_SIZE.ts",
+        "src/compat/_internal/args.ts",
+        "src/compat/_internal/toArgs.ts",
+        "src/compat/array/difference.spec.ts",
+        "src/math/range.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "difference",
+      "targetExport": "difference",
+      "title": "difference",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/array/difference.ts",
+        "testPaths": [
+          "src/compat/array/difference.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "array",
+      "challengeVersion": "f5573aa17db4f93842a47403ec94f3ba03ab49c06b929e23b491ad6d4a964eb8",
       "description": "Creates a slice of array excluding elements dropped from the beginning.\nElements are dropped until predicate returns falsey.\nThe predicate is invoked with three arguments: (value, index, array).",
       "difficulty": "easy",
       "editableFiles": [
         "src/compat/array/dropWhile.ts"
       ],
       "entryFile": "src/compat/array/dropWhile.ts",
-      "generatorVersion": "0.1.0",
-      "hints": [],
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Creates a slice of array excluding elements dropped from the beginning."
+        }
+      ],
       "id": "compat-array-dropWhile",
       "integrity": {
-        "configHash": "7b3f22fa2b8692e168d7d87cde6856a88b05b040aa021bed18c2808eb5c53847",
-        "manifestHash": "45a0158d607f22d452fc3b13b05cf3163adc64341503958e425d555803784575",
+        "configHash": "b60560c44e18d3242ffef5b637642d95ed06d3fb201a5a2aac4db365872428aa",
+        "manifestHash": "2ab419e852c34fbd9c3661e505bc7d1b2c3159edb9ca4e171367d18339180767",
         "starterHash": "31e7069b76e306963242f7faf4e5fea070d2624571422c7db201d61a1975ea6c",
         "testsHash": "cfdbed63ef146dab3be9a8491fa4876d0a25b538cbfe7bdece2fda8bcb988ef4"
       },
@@ -90,9 +212,1490 @@
           "src/compat/array/dropWhile.spec.ts"
         ]
       }
+    },
+    {
+      "category": "array",
+      "challengeVersion": "81516eef60b9aaa651c5bd62d58bd9b8e08c33a9112d9b779e1c7859dc17cc55",
+      "description": "Recursively flattens array up to depth times.",
+      "difficulty": "medium",
+      "editableFiles": [
+        "src/compat/array/flattenDepth.ts"
+      ],
+      "entryFile": "src/compat/array/flattenDepth.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Recursively flattens array up to depth times."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (array, depth), including missing, empty and boundary values."
+        }
+      ],
+      "id": "compat-array-flattenDepth",
+      "integrity": {
+        "configHash": "74ee3e0f74c9873774fed956727cb88d2c94897b9980437b41fe79189a43d1c4",
+        "manifestHash": "cd4ae9852fd6e37f42295b5df661b1a4ca829ad96bf1130d3b86e8d19fd161d9",
+        "starterHash": "a5da279256e3dfd778b98f8f4a21e200ac65f0fc7ee56034d6ad03bbf73e12b2",
+        "testsHash": "d6013715b13920622eee5b42d02e1a982f2a4f627c1af1d98bc5990d321387fc"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/ListOfRecursiveArraysOrValues.ts",
+        "src/compat/_internal/RecursiveArray.ts",
+        "src/compat/_internal/args.ts",
+        "src/compat/_internal/toArgs.ts",
+        "src/compat/array/flattenDepth.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "flattenDepth",
+      "targetExport": "flattenDepth",
+      "title": "flattenDepth",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/array/flattenDepth.ts",
+        "testPaths": [
+          "src/compat/array/flattenDepth.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "array",
+      "challengeVersion": "a7edc2e410f94b62d3d4f38fdfc0fd2947926b22c6772442e4980e948ee6c049",
+      "description": "Returns a new array containing all elements except the last one from the input array.\nIf the input array is empty or has only one element, the function returns an empty array.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/array/initial.ts"
+      ],
+      "entryFile": "src/compat/array/initial.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Returns a new array containing all elements except the last one from the input array."
+        }
+      ],
+      "id": "compat-array-initial",
+      "integrity": {
+        "configHash": "9990ba82fcf1dbd633cb7e127aaf06297dd077679d68585da02a202ef2c24334",
+        "manifestHash": "5d93d280e0870fb24dcc90cc71345eeb3c24ca1d031bc70f904b308e7d168c20",
+        "starterHash": "1c7e1ac232a78b312798dc316b39cc683071819cb3fc82317e760cde90f77f8e",
+        "testsHash": "e539c4bd47ec370d39a01d9e3ac0cd65aa63cf223cf4010947ba9fa0077d7690"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/args.ts",
+        "src/compat/_internal/toArgs.ts",
+        "src/compat/array/initial.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "initial",
+      "targetExport": "initial",
+      "title": "initial",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/array/initial.ts",
+        "testPaths": [
+          "src/compat/array/initial.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "array",
+      "challengeVersion": "79d9d8e7582e1ef9c6b3b8513c4f62d8fa647a6fab4319a9f3d0d8112668244e",
+      "description": "Gets the element at index `n` of `array`. If `n` is negative, the nth element from the end is returned.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/array/nth.ts"
+      ],
+      "entryFile": "src/compat/array/nth.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Gets the element at index `n` of `array`."
+        }
+      ],
+      "id": "compat-array-nth",
+      "integrity": {
+        "configHash": "70d583acd8b6f94f003390d5b4c549a74e528fcb93c69dff99913137c10eecd1",
+        "manifestHash": "20827aeb037686cfb19e2d439be99c7f5d68b463dc741b942edd18124b624862",
+        "starterHash": "ad3ffdc14ab131a5cc41ad445a032e8cd08c4efb60819052a2be294b6e52409d",
+        "testsHash": "6bcc195181b728e3e9cc9b810f9080a1014f8241ccbfa8a615279570bcaf4c65"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/_internal/DOMException.ts",
+        "src/_internal/globalThis.ts",
+        "src/compat/_internal/falsey.ts",
+        "src/compat/_internal/stubA.ts",
+        "src/compat/_internal/stubB.ts",
+        "src/compat/array/nth.spec.ts",
+        "src/error/AbortError.ts",
+        "src/function/after.ts",
+        "src/function/ary.ts",
+        "src/function/asyncNoop.ts",
+        "src/function/before.ts",
+        "src/function/curry.ts",
+        "src/function/curryRight.ts",
+        "src/function/debounce.ts",
+        "src/function/flow.ts",
+        "src/function/flowRight.ts",
+        "src/function/identity.ts",
+        "src/function/index.ts",
+        "src/function/memoize.ts",
+        "src/function/negate.ts",
+        "src/function/noop.ts",
+        "src/function/once.ts",
+        "src/function/partial.ts",
+        "src/function/partialRight.ts",
+        "src/function/rest.ts",
+        "src/function/retry.ts",
+        "src/function/spread.ts",
+        "src/function/throttle.ts",
+        "src/function/unary.ts",
+        "src/math/clamp.ts",
+        "src/math/inRange.ts",
+        "src/math/index.ts",
+        "src/math/mean.ts",
+        "src/math/meanBy.ts",
+        "src/math/median.ts",
+        "src/math/medianBy.ts",
+        "src/math/percentile.ts",
+        "src/math/random.ts",
+        "src/math/randomInt.ts",
+        "src/math/range.ts",
+        "src/math/rangeRight.ts",
+        "src/math/round.ts",
+        "src/math/sum.ts",
+        "src/math/sumBy.ts",
+        "src/promise/delay.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "nth",
+      "targetExport": "nth",
+      "title": "nth",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/array/nth.ts",
+        "testPaths": [
+          "src/compat/array/nth.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "array",
+      "challengeVersion": "884fab14d3a03f179efa8bb329876c8f228a169e5cd1569ae7d94c29726ed97c",
+      "description": "Create a slice of `array` from `start` up to, but not including, `end`.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/array/slice.ts"
+      ],
+      "entryFile": "src/compat/array/slice.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Create a slice of `array` from `start` up to, but not including, `end`."
+        }
+      ],
+      "id": "compat-array-slice",
+      "integrity": {
+        "configHash": "538a023f1c850656df85afaef231446b7b264c895611e8578db3819b3b8eb667",
+        "manifestHash": "e290b6dcbea65ab0790b97ac771214d8e45d06471eeed6d36cee48bfbaa7bc87",
+        "starterHash": "908d986f0bc305daeca541b243d41228ebf900698da404e7889b0368f61d552c",
+        "testsHash": "5ce01094ef2a182a4e0d1c3201134e811a128323783dc34a4528e62248572b56"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/args.ts",
+        "src/compat/_internal/falsey.ts",
+        "src/compat/_internal/toArgs.ts",
+        "src/compat/array/slice.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "slice",
+      "targetExport": "slice",
+      "title": "slice",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/array/slice.ts",
+        "testPaths": [
+          "src/compat/array/slice.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "array",
+      "challengeVersion": "a7b69e38fb888904d44a0f4239b108f8cf19d12bde3126b675efffe4a04e9b50",
+      "description": "Computes the symmetric difference of the provided arrays, returning an array of elements\nthat exist in only one of the arrays.",
+      "difficulty": "hard",
+      "editableFiles": [
+        "src/compat/array/xor.ts"
+      ],
+      "entryFile": "src/compat/array/xor.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Computes the symmetric difference of the provided arrays, returning an array of elements that exist in only one of the arrays."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (arrays), including missing, empty and boundary values."
+        }
+      ],
+      "id": "compat-array-xor",
+      "integrity": {
+        "configHash": "38ee9e12db4f0f7113db3919c2e237f24bb5bbae4b99166e9f56c4f86e74df50",
+        "manifestHash": "8e7266550494e28a265863adb363603f6e778ead0bc3196f90cd0af09c8f35a7",
+        "starterHash": "5292cac8b4685a2dcab4d2ae247ebcc07803c56f4f970674444fd246b3e94807",
+        "testsHash": "e629372fdf84dd74cd4af2e3eadc1300fd880d79f0dd29e2f0ed44dabe5d6641"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/args.ts",
+        "src/compat/_internal/toArgs.ts",
+        "src/compat/array/xor.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "xor",
+      "targetExport": "xor",
+      "title": "xor",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/array/xor.ts",
+        "testPaths": [
+          "src/compat/array/xor.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "math",
+      "challengeVersion": "17a89352dcf14cb6dcafe4e0c13fdb4f8e4ff1a60719d4feece61e22f3be3f4e",
+      "description": "Checks if the value is within a specified range.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/math/inRange.ts"
+      ],
+      "entryFile": "src/compat/math/inRange.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Checks if the value is within a specified range."
+        }
+      ],
+      "id": "compat-math-inRange",
+      "integrity": {
+        "configHash": "0cef61abf1d6f631b08fb39acfe435bb8e9b3abd4981746d1c7d83272e012da1",
+        "manifestHash": "54233f0fd3bda50307a9dd492961f9493f62713a6ba38021918a29056afaf0db",
+        "starterHash": "043664854f6637a825c3ef8fe4db862a45c11ea09d341339c3fd84c4901d5181",
+        "testsHash": "f0fe8879e37c8db04cc3c750fb96e3968e03bfa9cbc5a3d49b1c75c5325f4efd"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/falsey.ts",
+        "src/compat/math/inRange.spec.ts",
+        "src/compat/util/stubTrue.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "inRange",
+      "targetExport": "inRange",
+      "title": "inRange",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/math/inRange.ts",
+        "testPaths": [
+          "src/compat/math/inRange.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "math",
+      "challengeVersion": "4b286bd353ca60ea62d28f50f2aa29f9e19669369dce39b03c948faa60c8f2d7",
+      "description": "Finds the element in an array that has the maximum value.",
+      "difficulty": "medium",
+      "editableFiles": [
+        "src/compat/math/max.ts"
+      ],
+      "entryFile": "src/compat/math/max.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Finds the element in an array that has the maximum value."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (items), including missing, empty and boundary values."
+        }
+      ],
+      "id": "compat-math-max",
+      "integrity": {
+        "configHash": "570cf745f6a81865dbaff2224757fbe6e9e3d71bfb48ab969938641551f4b6c0",
+        "manifestHash": "b2fdc7d47475928c6ac4d9d81247a6182be2f1d413e9809ee449475891f09ee2",
+        "starterHash": "0e2405b33cae5409a831383beed32371b6ecda03c7268d5258e58be2a7d8038f",
+        "testsHash": "fe283a92cd02349d5a769997a6148f35e13164eed22d569fba587c6a734eba24"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/math/max.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "max",
+      "targetExport": "max",
+      "title": "max",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/math/max.ts",
+        "testPaths": [
+          "src/compat/math/max.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "math",
+      "challengeVersion": "24db978a9ee08252d8c091f06b03b5a872bd44b0f4ecfaedced5e2c024162519",
+      "description": "Finds the element in an array that has the maximum value when applying\nthe `iteratee` to each element.",
+      "difficulty": "medium",
+      "editableFiles": [
+        "src/compat/math/maxBy.ts"
+      ],
+      "entryFile": "src/compat/math/maxBy.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Finds the element in an array that has the maximum value when applying the `iteratee` to each element."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (items, iteratee), including missing, empty and boundary values."
+        }
+      ],
+      "id": "compat-math-maxBy",
+      "integrity": {
+        "configHash": "fedd1bed7cfdd0dd7ea16795d9c6b4eff1124ff2da95cde746ef61462599f952",
+        "manifestHash": "fbb64d0c303d086651958a7e1317b7123b4bc9816555f6252c97c116cd1fa422",
+        "starterHash": "58276b68b82b343f86a4134f0b8f97114810ac70d26d42f18ba7528bd8f51675",
+        "testsHash": "d1c7c33d7e73ae43be67507560aafd3a08f45dbad0455ee10c6e2f6bdb5674ca"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/PartialShallow.ts",
+        "src/compat/_internal/ValueIteratee.ts",
+        "src/compat/math/maxBy.spec.ts",
+        "src/function/identity.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "maxBy",
+      "targetExport": "maxBy",
+      "title": "maxBy",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/math/maxBy.ts",
+        "testPaths": [
+          "src/compat/math/maxBy.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "math",
+      "challengeVersion": "3ba0912227e230ca2bd4abd2e938918a9026761c911a2fdfd7706474a7966afa",
+      "description": "Calculates the average of an array of numbers.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/math/mean.ts"
+      ],
+      "entryFile": "src/compat/math/mean.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Calculates the average of an array of numbers."
+        }
+      ],
+      "id": "compat-math-mean",
+      "integrity": {
+        "configHash": "e9ef6b0735d20f8816d88903a0b4e3ffe5808d794454508c22ef9b3378a56ff6",
+        "manifestHash": "63130540a940cf710db53532b881664510999190b4930ce2c9f35185964083ae",
+        "starterHash": "157364e3ccf941cdc0b7849f388cfdb2ed8c856bbf2df497b5ae99a671a2e8cc",
+        "testsHash": "e827e86ef0f69bc9988030cf1a6fe42faa28c8b13899d877c33cebf60a3073cc"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/_internal/globalThis.ts",
+        "src/_internal/isUnsafeProperty.ts",
+        "src/compat/_internal/ArrayIterator.ts",
+        "src/compat/_internal/GetFieldType.ts",
+        "src/compat/_internal/IsMatchWithCustomizer.ts",
+        "src/compat/_internal/ListIterator.ts",
+        "src/compat/_internal/Many.ts",
+        "src/compat/_internal/ObjectIterator.ts",
+        "src/compat/_internal/PropertyPath.ts",
+        "src/compat/_internal/TupleIterator.ts",
+        "src/compat/_internal/empties.ts",
+        "src/compat/_internal/falsey.ts",
+        "src/compat/_internal/getSymbols.ts",
+        "src/compat/_internal/getTag.ts",
+        "src/compat/_internal/isDeepKey.ts",
+        "src/compat/_internal/isIndex.ts",
+        "src/compat/_internal/stubNaN.ts",
+        "src/compat/_internal/tags.ts",
+        "src/compat/_internal/toKey.ts",
+        "src/compat/array/map.ts",
+        "src/compat/math/mean.spec.ts",
+        "src/compat/object/cloneDeep.ts",
+        "src/compat/object/cloneDeepWith.ts",
+        "src/compat/object/get.ts",
+        "src/compat/object/has.ts",
+        "src/compat/object/property.ts",
+        "src/compat/predicate/isArguments.ts",
+        "src/compat/predicate/isArrayLike.ts",
+        "src/compat/predicate/isMatch.ts",
+        "src/compat/predicate/isMatchWith.ts",
+        "src/compat/predicate/isObject.ts",
+        "src/compat/predicate/isSymbol.ts",
+        "src/compat/predicate/matches.ts",
+        "src/compat/predicate/matchesProperty.ts",
+        "src/compat/util/eq.ts",
+        "src/compat/util/iteratee.ts",
+        "src/compat/util/toPath.ts",
+        "src/compat/util/toString.ts",
+        "src/function/identity.ts",
+        "src/math/range.ts",
+        "src/object/cloneDeep.ts",
+        "src/object/cloneDeepWith.ts",
+        "src/predicate/isBuffer.ts",
+        "src/predicate/isLength.ts",
+        "src/predicate/isPrimitive.ts",
+        "src/predicate/isTypedArray.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "mean",
+      "targetExport": "mean",
+      "title": "mean",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/math/mean.ts",
+        "testPaths": [
+          "src/compat/math/mean.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "math",
+      "challengeVersion": "fb1f12177771bf93d9c897e00b5aeafafeb096988208d11080812425153e38ac",
+      "description": "Computes the sum of the values that are returned by the `iteratee` function.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/math/sum.ts"
+      ],
+      "entryFile": "src/compat/math/sum.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Computes the sum of the values that are returned by the `iteratee` function."
+        }
+      ],
+      "id": "compat-math-sum",
+      "integrity": {
+        "configHash": "df697fa797349285e4689352c8827de5ca91b56624e257106159f752d185cbd5",
+        "manifestHash": "c57a45e533737a2d335eaed749787f2cc1082503faad10084edfb98357a06412",
+        "starterHash": "07e0b98c0c0cef9d9d0f532980ef0053fb1493cdb943318e8307c617d0d45fa6",
+        "testsHash": "e104c8bfa160bb3796d2326aa2c69f797d26cdeaab71b49dc1c824a753a90a9c"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/empties.ts",
+        "src/compat/_internal/falsey.ts",
+        "src/compat/_internal/stubZero.ts",
+        "src/compat/math/sum.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "sum",
+      "targetExport": "sum",
+      "title": "sum",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/math/sum.ts",
+        "testPaths": [
+          "src/compat/math/sum.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "object",
+      "challengeVersion": "207f4907f2b321ca7fef4d76151f8683d56b0d57ede8ccf264614eed0db7f8e3",
+      "description": "Finds the key of the first element that matches the given predicate.",
+      "difficulty": "medium",
+      "editableFiles": [
+        "src/compat/object/findKey.ts"
+      ],
+      "entryFile": "src/compat/object/findKey.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Finds the key of the first element that matches the given predicate."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "This function determines the type of the predicate and delegates the search to the appropriate helper function. It supports predicates as functions, objects, arrays, or strings."
+        }
+      ],
+      "id": "compat-object-findKey",
+      "integrity": {
+        "configHash": "d05801d55ffd3ef0e3384e81a69a234085fcac003a1182446b889fdab9cddb62",
+        "manifestHash": "1e3ccb797c1d59ee2d616e9efe67d5dfd07d335ee64e2e33365233bbbd8fec13",
+        "starterHash": "1b22263da910076e13da06d4c595b416ea9c4a5003410766593f7497ae21f521",
+        "testsHash": "a765d86de07ca081cb8dbcb74488628ea8692a2fba7fe83f66cc6f6b9d82baf1"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/IterateeShorthand.ts",
+        "src/compat/_internal/ObjectIteratee.ts",
+        "src/compat/_internal/ObjectIterator.ts",
+        "src/compat/_internal/PartialShallow.ts",
+        "src/compat/object/findKey.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "findKey",
+      "targetExport": "findKey",
+      "title": "findKey",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/object/findKey.ts",
+        "testPaths": [
+          "src/compat/object/findKey.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "object",
+      "challengeVersion": "67e5d69256b455b15e37c1ee17be1b2c502efbe5cca73b0dcf1cca9981b5ba5d",
+      "description": "Checks if a given path exists in an object, **including inherited properties**.",
+      "difficulty": "medium",
+      "editableFiles": [
+        "src/compat/object/hasIn.ts"
+      ],
+      "entryFile": "src/compat/object/hasIn.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Checks if a given path exists in an object, **including inherited properties**."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "You can provide the path as a single property key, an array of property keys, or a string representing a deep path. Unlike `has`, which only checks for own properties, `hasIn` also checks for properties in the prototype chain. If the path is an index and the object is an array or an arguments object, the function will verify if the index is valid and within the bounds of the array or arguments object, even if the array or arguments object is sparse (i.e., not all indexes are defined)."
+        }
+      ],
+      "id": "compat-object-hasIn",
+      "integrity": {
+        "configHash": "3411cc0429acca4815fc9e3111a4b05d11d45a34ca75d5feb0ed733e45a068c6",
+        "manifestHash": "9b7e957bc5c69e721325052506b89e96fe7d70daa906b5a5d05488eb13f3b419",
+        "starterHash": "edb9844db56ed64d94d868c0b3a5178151d3a4e0329ac557855d4cc179ac2230",
+        "testsHash": "6ee4457130aca71a12a9b8208766969a1145b66205ef5baf86c1c92457c25ceb"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/Many.ts",
+        "src/compat/_internal/PropertyPath.ts",
+        "src/compat/_internal/args.ts",
+        "src/compat/_internal/getTag.ts",
+        "src/compat/_internal/isDeepKey.ts",
+        "src/compat/_internal/isIndex.ts",
+        "src/compat/_internal/symbol.ts",
+        "src/compat/_internal/toArgs.ts",
+        "src/compat/_internal/toKey.ts",
+        "src/compat/object/has.ts",
+        "src/compat/object/hasIn.spec.ts",
+        "src/compat/predicate/isArguments.ts",
+        "src/compat/predicate/isSymbol.ts",
+        "src/compat/util/stubFalse.ts",
+        "src/compat/util/stubTrue.ts",
+        "src/compat/util/toPath.ts",
+        "src/compat/util/toString.ts",
+        "src/math/range.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "hasIn",
+      "targetExport": "hasIn",
+      "title": "hasIn",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/object/hasIn.ts",
+        "testPaths": [
+          "src/compat/object/hasIn.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "object",
+      "challengeVersion": "eb3fa48bf835fa74f5da529978e3947182ad385ee164dc46bc161932c1934040",
+      "description": "Removes the property at the given path of the object.",
+      "difficulty": "medium",
+      "editableFiles": [
+        "src/compat/object/unset.ts"
+      ],
+      "entryFile": "src/compat/object/unset.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Removes the property at the given path of the object."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (obj, path), including missing, empty and boundary values."
+        }
+      ],
+      "id": "compat-object-unset",
+      "integrity": {
+        "configHash": "619728fc9bff0bc0a96fbca21e3884cda79f14170711ffcdd0a0dc795413c169",
+        "manifestHash": "23103e38fb75b18a9b7f347380ee08f3404f896c7fde6ee214f76af8c530d463",
+        "starterHash": "c1a6769862995391792819e546e7a084de1c22b5c8f35fce505be1f69294b7a2",
+        "testsHash": "44a518827b09dd71726d76ef65a18130d3fab21136173fd080b64ac8fa469a3a"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/numberProto.ts",
+        "src/compat/_internal/stringProto.ts",
+        "src/compat/_internal/symbol.ts",
+        "src/compat/object/unset.spec.ts",
+        "src/compat/predicate/isSymbol.ts",
+        "src/compat/util/toString.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "unset",
+      "targetExport": "unset",
+      "title": "unset",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/object/unset.ts",
+        "testPaths": [
+          "src/compat/object/unset.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "predicate",
+      "challengeVersion": "fc482f9dc6feb667e980e742113d384e6ce4917d67abbd60132ae51a714c02c2",
+      "description": "Checks if `object` conforms to `source` by invoking the predicate properties of `source` with the corresponding property values of `object`.",
+      "difficulty": "hard",
+      "editableFiles": [
+        "src/compat/predicate/conformsTo.ts"
+      ],
+      "entryFile": "src/compat/predicate/conformsTo.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Checks if `object` conforms to `source` by invoking the predicate properties of `source` with the corresponding property values of `object`."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "Note: This method is equivalent to `conforms` when source is partially applied."
+        },
+        {
+          "level": 3,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (target, source), including missing, empty and boundary values."
+        }
+      ],
+      "id": "compat-predicate-conformsTo",
+      "integrity": {
+        "configHash": "964a02ac1df1acaa0d1d01687f5cf69419ea7e13d48504a5a134bc7723028033",
+        "manifestHash": "e2628a0acb3f044e1b7d8d96fea374259aa15891ddcc7debedb59ebcab0f9176",
+        "starterHash": "40239ad723192edc13e53651e686a88153c5c359a3a5eed7b6bb10d2d294ef94",
+        "testsHash": "a6665815d303e920ea2b54244560f62861c9bc30b2eec545194bded26f306af4"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/ConformsPredicateObject.ts",
+        "src/compat/predicate/conformsTo.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "conformsTo",
+      "targetExport": "conformsTo",
+      "title": "conformsTo",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/predicate/conformsTo.ts",
+        "testPaths": [
+          "src/compat/predicate/conformsTo.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "predicate",
+      "challengeVersion": "47e0f81c70738f6035c02fa18e30eedbd72bef84ad0f1059b30e9ca1654fd1ae",
+      "description": "Checks if `value` is an integer.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/predicate/isInteger.ts"
+      ],
+      "entryFile": "src/compat/predicate/isInteger.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Checks if `value` is an integer."
+        }
+      ],
+      "id": "compat-predicate-isInteger",
+      "integrity": {
+        "configHash": "3b64e49a1a33570581f731ca744f766313d29618c39dcdb298401515ea0fddfb",
+        "manifestHash": "d1edde2a70dff44312f3b1be07a88cf187e220889cc56225ffe762b25af296ce",
+        "starterHash": "27c2721822fc4037609e346a7c174221b83265e0326229ae8bbce62cb4f0372f",
+        "testsHash": "7d0e24fec4872dd8542e4dfcf11d0b9d6075b525143747940f1f0f3043f699a0"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/args.ts",
+        "src/compat/_internal/falsey.ts",
+        "src/compat/_internal/symbol.ts",
+        "src/compat/_internal/toArgs.ts",
+        "src/compat/predicate/isInteger.spec.ts",
+        "src/compat/util/stubFalse.ts",
+        "src/compat/util/stubTrue.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "isInteger",
+      "targetExport": "isInteger",
+      "title": "isInteger",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/predicate/isInteger.ts",
+        "testPaths": [
+          "src/compat/predicate/isInteger.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "predicate",
+      "challengeVersion": "d1a50fa5d9b868dc4dcd8951a84bedadf7363afa026cdc4e376186b2ccfff692",
+      "description": "Checks if the value is NaN.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/predicate/isNaN.ts"
+      ],
+      "entryFile": "src/compat/predicate/isNaN.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Checks if the value is NaN."
+        }
+      ],
+      "id": "compat-predicate-isNaN",
+      "integrity": {
+        "configHash": "388c78ed786330755f9fbeaabf74a9360d3182197755e5eb42112a3cb7212a4c",
+        "manifestHash": "1f6ddca9de3489434ee909e4468f6b69128e58bffa9e4db41c8ec59674e44190",
+        "starterHash": "8b62087620cc38f501e464e6044cc0a2d2a4662f82416e5fe27558fc9b311f60",
+        "testsHash": "89487b57be3dc8b46a131a3fe298709e8df3420eb04be35375c39790ed4cf682"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/predicate/isNaN.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "isNaN",
+      "targetExport": "isNaN",
+      "title": "isNaN",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/predicate/isNaN.ts",
+        "testPaths": [
+          "src/compat/predicate/isNaN.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "predicate",
+      "challengeVersion": "7594b70410f54f8937c9082f3427f7b031db3211941b64465400f70b430a0f3c",
+      "description": "Checks if the given value is object-like.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/predicate/isObjectLike.ts"
+      ],
+      "entryFile": "src/compat/predicate/isObjectLike.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Checks if the given value is object-like."
+        }
+      ],
+      "id": "compat-predicate-isObjectLike",
+      "integrity": {
+        "configHash": "19949f5cf18100c04aa212f250e5e0252c93e8682c049b497654b35f0440e52f",
+        "manifestHash": "944f3f79f6d0d8d3157722abbdc1aa569861156d9f5c5c4fe52de0b779fb8344",
+        "starterHash": "23d4b895bdbcf50890220c1d28cb689b6625ff4175bb74246393c4edbbffb56c",
+        "testsHash": "813ce5ba725a06b349e1e6e58f6391a8da1fae8a9e8892e24fa559734334eba2"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/args.ts",
+        "src/compat/_internal/falsey.ts",
+        "src/compat/_internal/slice.ts",
+        "src/compat/_internal/symbol.ts",
+        "src/compat/_internal/toArgs.ts",
+        "src/compat/predicate/isObjectLike.spec.ts",
+        "src/compat/util/stubFalse.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "isObjectLike",
+      "targetExport": "isObjectLike",
+      "title": "isObjectLike",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/predicate/isObjectLike.ts",
+        "testPaths": [
+          "src/compat/predicate/isObjectLike.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "predicate",
+      "challengeVersion": "3304ae349aeb78a64bd5ff60dbb2d70052e78a45d4cb9184107453de106d0c8d",
+      "description": "Checks if a given value is a plain object.",
+      "difficulty": "medium",
+      "editableFiles": [
+        "src/compat/predicate/isPlainObject.ts"
+      ],
+      "entryFile": "src/compat/predicate/isPlainObject.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Checks if a given value is a plain object."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "A plain object is an object created by the `{}` literal, `new Object()`, or `Object.create(null)`. This function also handles objects with custom `Symbol.toStringTag` properties. `Symbol.toStringTag` is a built-in symbol that a constructor can use to customize the default string description of objects."
+        }
+      ],
+      "id": "compat-predicate-isPlainObject",
+      "integrity": {
+        "configHash": "e184ac6d3b56afaae5f253ec00efc16586e251403c9b6d0016203f7468eeb167",
+        "manifestHash": "ee4502b0e00bc2cb9eeda02df96ced0d066a89c824576f3ca51fff8bda34d23d",
+        "starterHash": "4096677f6faf8acb5e76f3809167b8f400fb845f53aad438d922c56a256a8c5c",
+        "testsHash": "2c338e40651dc57b0a7d0a60ec7800b4ea5864f0d511c691beae6f05878193ce"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/_internal/falsey.ts",
+        "src/compat/predicate/isPlainObject.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "isPlainObject",
+      "targetExport": "isPlainObject",
+      "title": "isPlainObject",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/predicate/isPlainObject.ts",
+        "testPaths": [
+          "src/compat/predicate/isPlainObject.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "string",
+      "challengeVersion": "46490918461931808a2a0f24c3b5d36ea1948a3c37c3f688ff7c79fc7fb37107",
+      "description": "Converts a string to camel case.",
+      "difficulty": "medium",
+      "editableFiles": [
+        "src/compat/string/camelCase.ts"
+      ],
+      "entryFile": "src/compat/string/camelCase.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Converts a string to camel case."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "Camel case is the naming convention in which the first word is written in lowercase and each subsequent word begins with a capital letter, concatenated without any separator characters."
+        }
+      ],
+      "id": "compat-string-camelCase",
+      "integrity": {
+        "configHash": "c4611e99ea5435c23d50808100d404b7134aee6aeef0a6a0c93760aaed3584cc",
+        "manifestHash": "6c8002434870877c1a759af955fe8f6c31f538caef7d9e9aed2e3d83d92e43d6",
+        "starterHash": "56cc2b6ea7b2ab0d34e0b30261a48cefc6447014ba759fac9e173f9663a05937",
+        "testsHash": "61eaa8da3c47d08c13837af1b02f1cee5e85c6e3ef7dc2062be2d66629d01d42"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/string/camelCase.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "camelCase",
+      "targetExport": "camelCase",
+      "title": "camelCase",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/string/camelCase.ts",
+        "testPaths": [
+          "src/compat/string/camelCase.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "string",
+      "challengeVersion": "d2072d35cd6f3f522a4b4c7be08d1d6b227edbfbc9285f12f12ccdbf9a480f25",
+      "description": "Converts the first character of string to upper case and the remaining to lower case.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/string/capitalize.ts"
+      ],
+      "entryFile": "src/compat/string/capitalize.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Converts the first character of string to upper case and the remaining to lower case."
+        }
+      ],
+      "id": "compat-string-capitalize",
+      "integrity": {
+        "configHash": "66a55b09fac7805ca534e9f1fd93ebc791683a42b623da6b837dabfa60395a16",
+        "manifestHash": "1afff6622592528ffc9a8f54674f914a6419443a1bd3e8f19538689883fb420a",
+        "starterHash": "44cf526fddd593dc851af1db5ade92505fd6eb4a9d81b9d6de4c3b4213e32e49",
+        "testsHash": "05ca9bab6dba14356dfcf3b980be41bb82d688ad30827c1e64054e61d5da1a46"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/string/capitalize.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "capitalize",
+      "targetExport": "capitalize",
+      "title": "capitalize",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/string/capitalize.ts",
+        "testPaths": [
+          "src/compat/string/capitalize.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "string",
+      "challengeVersion": "d536882215e1cbc11000b039cd5e49e9477816dab606842875284626b054c448",
+      "description": "Checks if a string contains another string at the end of the string.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/string/endsWith.ts"
+      ],
+      "entryFile": "src/compat/string/endsWith.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Checks if a string contains another string at the end of the string."
+        }
+      ],
+      "id": "compat-string-endsWith",
+      "integrity": {
+        "configHash": "a926214029e03036a591f5a44fc0ad0bd1a01d4138bc6c9ca4adce25ecdce900",
+        "manifestHash": "829ce06b7e62c1ca9a456d28d57b3bec38c3e0585fe44aae50d78d829197a0c5",
+        "starterHash": "92898a951fb536aa78a0978f99658e11a080b4efecdf44857ebfc32626cacd40",
+        "testsHash": "8ade864dd66aa0807544fc39472ec4dfbf9172422dbd851a9fc194eb347d0619"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/string/endsWith.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "endsWith",
+      "targetExport": "endsWith",
+      "title": "endsWith",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/string/endsWith.ts",
+        "testPaths": [
+          "src/compat/string/endsWith.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "string",
+      "challengeVersion": "20c7e73d263d8c56e7657f85f82184d04b195ca7dea148b659453eb5a3b51f6a",
+      "description": "Escapes the RegExp special characters \"^\", \"$\", \"\\\\\", \".\", \"*\", \"+\", \"?\", \"(\", \")\", \"[\", \"]\", \"{\", \"}\", and \"|\" in `str`.",
+      "difficulty": "medium",
+      "editableFiles": [
+        "src/compat/string/escapeRegExp.ts"
+      ],
+      "entryFile": "src/compat/string/escapeRegExp.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Escapes the RegExp special characters \"^\", \"$\", \"\\\\\", \".\", \"*\", \"+\", \"?\", \"(\", \")\", \"[\", \"]\", \"{\", \"}\", and \"|\" in `str`."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (str), including missing, empty and boundary values."
+        }
+      ],
+      "id": "compat-string-escapeRegExp",
+      "integrity": {
+        "configHash": "0d647cbb19f1d13d82036d2a1aff9a9c0db824b08b25f8b4e78900f4c27c8c26",
+        "manifestHash": "8c78f62f4923940cbc956e8384e27fd2dc15e888491e0ee2ea43b69233f0fd88",
+        "starterHash": "c11d411e28f5ec3ea7c00cb285f5dc928615cd8392a82a229fe0eee2fcea23bd",
+        "testsHash": "e08bb659144adc547882b3c4955cd8e5f3db19c7e5f583d9cb29abb44b921b25"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/_internal/globalThis.ts",
+        "src/_internal/isUnsafeProperty.ts",
+        "src/compat/_internal/ArrayIterator.ts",
+        "src/compat/_internal/GetFieldType.ts",
+        "src/compat/_internal/IsMatchWithCustomizer.ts",
+        "src/compat/_internal/ListIterator.ts",
+        "src/compat/_internal/Many.ts",
+        "src/compat/_internal/ObjectIterator.ts",
+        "src/compat/_internal/PropertyPath.ts",
+        "src/compat/_internal/TupleIterator.ts",
+        "src/compat/_internal/getSymbols.ts",
+        "src/compat/_internal/getTag.ts",
+        "src/compat/_internal/isDeepKey.ts",
+        "src/compat/_internal/isIndex.ts",
+        "src/compat/_internal/tags.ts",
+        "src/compat/_internal/toKey.ts",
+        "src/compat/array/map.ts",
+        "src/compat/object/cloneDeep.ts",
+        "src/compat/object/cloneDeepWith.ts",
+        "src/compat/object/get.ts",
+        "src/compat/object/has.ts",
+        "src/compat/object/property.ts",
+        "src/compat/predicate/isArguments.ts",
+        "src/compat/predicate/isArrayLike.ts",
+        "src/compat/predicate/isMatch.ts",
+        "src/compat/predicate/isMatchWith.ts",
+        "src/compat/predicate/isObject.ts",
+        "src/compat/predicate/isSymbol.ts",
+        "src/compat/predicate/matches.ts",
+        "src/compat/predicate/matchesProperty.ts",
+        "src/compat/string/escapeRegExp.spec.ts",
+        "src/compat/util/eq.ts",
+        "src/compat/util/iteratee.ts",
+        "src/compat/util/stubString.ts",
+        "src/compat/util/toPath.ts",
+        "src/compat/util/toString.ts",
+        "src/function/identity.ts",
+        "src/math/range.ts",
+        "src/object/cloneDeep.ts",
+        "src/object/cloneDeepWith.ts",
+        "src/predicate/isBuffer.ts",
+        "src/predicate/isLength.ts",
+        "src/predicate/isPrimitive.ts",
+        "src/predicate/isTypedArray.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "escapeRegExp",
+      "targetExport": "escapeRegExp",
+      "title": "escapeRegExp",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/string/escapeRegExp.ts",
+        "testPaths": [
+          "src/compat/string/escapeRegExp.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "string",
+      "challengeVersion": "4152c029228031e70df359fe12343f9fe0605774d3a4aba4c7e6dc2fd2c7dfcd",
+      "description": "Pads the start of a string with a given character until it reaches the specified length.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/string/padStart.ts"
+      ],
+      "entryFile": "src/compat/string/padStart.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Pads the start of a string with a given character until it reaches the specified length."
+        }
+      ],
+      "id": "compat-string-padStart",
+      "integrity": {
+        "configHash": "dfa093389ae70cb8464dab5913c599ef9d274d55bd97f07b4edeb63a07592b0c",
+        "manifestHash": "26141cd0f911c658c81f2840461a8f33b6283e771154da7e682924f2ba3f9d99",
+        "starterHash": "cca8eb9e5618e8b98099eae30169def81908462254c4580bf3e701c2268926f2",
+        "testsHash": "d218ab83c00781ca212a5b4d9cb9fde6348a5a6a8af945b00cb960de7a18569c"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/string/padStart.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "padStart",
+      "targetExport": "padStart",
+      "title": "padStart",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/string/padStart.ts",
+        "testPaths": [
+          "src/compat/string/padStart.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "string",
+      "challengeVersion": "91de18f4431c41a57b525f3368319099143bf948470b4178d79d57bb1d7602c6",
+      "description": "Checks if a string contains another string at the beginning of the string.",
+      "difficulty": "easy",
+      "editableFiles": [
+        "src/compat/string/startsWith.ts"
+      ],
+      "entryFile": "src/compat/string/startsWith.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Checks if a string contains another string at the beginning of the string."
+        }
+      ],
+      "id": "compat-string-startsWith",
+      "integrity": {
+        "configHash": "ec6a527ca6474a0862c82fcbb4c7b26e412c3420a1daa0fd6975eccb490c909f",
+        "manifestHash": "9665d44594bd0d51a402177c8ff6b6e5ba636d7d4dde948d8783112ced2b449d",
+        "starterHash": "931dc0993cfe47b9f46cb8f64fa44ad701d07240fcf5408e3498eb6e38c0efa7",
+        "testsHash": "aecee398f925a75c5e481ade85c7083964146775f9c2a9e7076f8353f69c1def"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/compat/string/startsWith.spec.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "startsWith",
+      "targetExport": "startsWith",
+      "title": "startsWith",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/string/startsWith.ts",
+        "testPaths": [
+          "src/compat/string/startsWith.spec.ts"
+        ]
+      }
+    },
+    {
+      "category": "string",
+      "challengeVersion": "5f5ebcb92091bf0857b3f10e68bf0c2f2bef2702c1ff16b4ca7f7d4ed2546d9d",
+      "description": "Truncates `string` if it's longer than the given maximum string length.\nThe last characters of the truncated string are replaced with the omission\nstring which defaults to \"...\".",
+      "difficulty": "hard",
+      "editableFiles": [
+        "src/compat/string/truncate.ts"
+      ],
+      "entryFile": "src/compat/string/truncate.ts",
+      "generatorVersion": "0.2.0",
+      "hints": [
+        {
+          "level": 1,
+          "source": "documentation",
+          "text": "Truncates `string` if it's longer than the given maximum string length."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "The last characters of the truncated string are replaced with the omission string which defaults to \"...\"."
+        },
+        {
+          "level": 3,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (string, options), including missing, empty and boundary values."
+        }
+      ],
+      "id": "compat-string-truncate",
+      "integrity": {
+        "configHash": "01aee6d9568caf38629f3baa9b3846117faf6341cc5627088312ea1861a2572f",
+        "manifestHash": "2925c637bd6c606e247492c5a13f715bf004f526cf0506a5cd7a397e6d63f065",
+        "starterHash": "799656602cf72e8cd8c1c062fce1ed91d6b716c6fa34a2f28d6e41c353a29275",
+        "testsHash": "a1bfde312c1caa34f0a169823d07698843b578a296746cb8850c12e9c958f163"
+      },
+      "readonlyFiles": [
+        "runtime/test-runtime.ts",
+        "src/_internal/globalThis.ts",
+        "src/_internal/isUnsafeProperty.ts",
+        "src/compat/_internal/ArrayIterator.ts",
+        "src/compat/_internal/GetFieldType.ts",
+        "src/compat/_internal/IsMatchWithCustomizer.ts",
+        "src/compat/_internal/ListIterator.ts",
+        "src/compat/_internal/Many.ts",
+        "src/compat/_internal/ObjectIterator.ts",
+        "src/compat/_internal/PropertyPath.ts",
+        "src/compat/_internal/StringIterator.ts",
+        "src/compat/_internal/TupleIterator.ts",
+        "src/compat/_internal/getSymbols.ts",
+        "src/compat/_internal/getTag.ts",
+        "src/compat/_internal/isDeepKey.ts",
+        "src/compat/_internal/isIndex.ts",
+        "src/compat/_internal/tags.ts",
+        "src/compat/_internal/toKey.ts",
+        "src/compat/array/forEach.ts",
+        "src/compat/array/map.ts",
+        "src/compat/object/cloneDeep.ts",
+        "src/compat/object/cloneDeepWith.ts",
+        "src/compat/object/get.ts",
+        "src/compat/object/has.ts",
+        "src/compat/object/property.ts",
+        "src/compat/predicate/isArguments.ts",
+        "src/compat/predicate/isArrayLike.ts",
+        "src/compat/predicate/isMatch.ts",
+        "src/compat/predicate/isMatchWith.ts",
+        "src/compat/predicate/isObject.ts",
+        "src/compat/predicate/isSymbol.ts",
+        "src/compat/predicate/matches.ts",
+        "src/compat/predicate/matchesProperty.ts",
+        "src/compat/string/truncate.spec.ts",
+        "src/compat/util/constant.ts",
+        "src/compat/util/eq.ts",
+        "src/compat/util/iteratee.ts",
+        "src/compat/util/toPath.ts",
+        "src/compat/util/toString.ts",
+        "src/function/identity.ts",
+        "src/math/range.ts",
+        "src/object/cloneDeep.ts",
+        "src/object/cloneDeepWith.ts",
+        "src/predicate/isBuffer.ts",
+        "src/predicate/isLength.ts",
+        "src/predicate/isPrimitive.ts",
+        "src/predicate/isTypedArray.ts"
+      ],
+      "runtime": {
+        "capabilities": [
+          "jest-subset-v1"
+        ],
+        "testAdapter": "jest-subset-v1",
+        "timeoutMs": 5000
+      },
+      "slug": "truncate",
+      "targetExport": "truncate",
+      "title": "truncate",
+      "upstream": {
+        "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",
+        "repository": "toss/es-toolkit",
+        "sourcePath": "src/compat/string/truncate.ts",
+        "testPaths": [
+          "src/compat/string/truncate.spec.ts"
+        ]
+      }
     }
   ],
-  "generatorVersion": "0.1.0",
+  "generatorVersion": "0.2.0",
   "schemaVersion": 1,
   "upstream": {
     "commit": "32f4c8fb33828ad6512064ba84b0fdd8fda966a3",

@@ -6,6 +6,11 @@ import { canonicalJson, hashOfParts, sha256Hex } from './hash.ts';
 import { documentationHints } from './docHints.ts';
 import { CATALOG_SCHEMA_VERSION, DEFAULT_TIMEOUT_MS } from './paths.ts';
 
+/** Deduplicates and sorts a list of file paths / strings (deterministic code-unit order). */
+export function dedupeSorted(values: readonly string[]): string[] {
+  return [...new Set(values)].sort();
+}
+
 export interface ManifestInput {
   config: ChallengeGenerationConfig;
   upstream: GeneratorConfigFile['upstream'];
@@ -53,14 +58,14 @@ export function buildManifest(input: ManifestInput): ChallengeManifest {
       repository: input.upstream.repository,
       commit: input.upstream.commit,
       sourcePath: input.entryPath,
-      testPaths: [...input.testPaths].sort(),
+      testPaths: dedupeSorted(input.testPaths),
     },
     generatorVersion: input.generatorVersion,
     challengeVersion,
     targetExport: input.config.targetExport,
     entryFile: input.entryPath,
     editableFiles: [input.entryPath],
-    readonlyFiles: [...input.readonlyFiles].sort(),
+    readonlyFiles: dedupeSorted(input.readonlyFiles),
     description: descriptionFromSource(input.originalSourceText, input.config.targetExport),
     hints: hintsForConfig(input.config, input.originalSourceText),
     runtime: {

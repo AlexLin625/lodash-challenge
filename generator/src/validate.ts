@@ -3,6 +3,7 @@ import path from 'node:path';
 import ts from 'typescript';
 import { Project, SyntaxKind } from 'ts-morph';
 import { GENERATOR_DIR } from './paths.ts';
+import { findUnusedImportBindings } from './unusedImports.ts';
 import type { ChallengeGenerationConfig, ValidationResult } from './types.ts';
 import { runTests } from './testRunner.ts';
 
@@ -63,6 +64,13 @@ export async function validateChallenge(input: ValidateInput): Promise<Validatio
 
   const helperRefs = unresolvedHelperRefs(input.starterText, input.removedHelpers);
   checks.push({ name: 'no references to removed helpers', passed: helperRefs.length === 0, detail: helperRefs.length ? `found: ${helperRefs.join(', ')}` : undefined });
+
+  const unusedImports = findUnusedImportBindings(input.starterText);
+  checks.push({
+    name: 'starter has no unused imports',
+    passed: unusedImports.length === 0,
+    detail: unusedImports.length ? `unused: ${unusedImports.map((u) => `${u.binding} (${u.moduleSpecifier})`).join(', ')}` : undefined,
+  });
 
   const nodeApis = nodeApiUsage(input.testPaths.map((p) => input.bundleFiles.get(p) ?? ''));
   checks.push({ name: 'selected tests avoid Node-only APIs', passed: nodeApis.length === 0, detail: nodeApis.length ? `found: ${nodeApis.join(', ')}` : undefined });

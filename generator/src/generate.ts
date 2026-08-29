@@ -4,7 +4,7 @@ import { analyzeSource } from './analyzer.ts';
 import { transformSource } from './transform.ts';
 import { collectClosure } from './closure.ts';
 import { adaptTestFile } from './testAdapter.ts';
-import { buildManifest } from './bundle.ts';
+import { buildManifest, dedupeSorted } from './bundle.ts';
 import { validateChallenge } from './validate.ts';
 import { buildCatalog, buildUnsupportedReport, writeFile, writeJson } from './catalog.ts';
 import { hashOfParts } from './hash.ts';
@@ -110,7 +110,7 @@ export async function buildChallenge(
     });
   }
 
-  const readonlyFiles = [...bundleFiles.keys()].filter((p) => p !== sourcePath);
+  const readonlyFiles = dedupeSorted([...bundleFiles.keys()].filter((p) => p !== sourcePath));
 
   const manifest = buildManifest({
     config,
@@ -154,6 +154,7 @@ export async function generateAll(
   const outputDir = path.resolve(ROOT, options.outputDir ?? DEFAULT_OUTPUT_DIR);
   const challengesDir = path.join(outputDir, 'challenges');
   const built: BuiltChallenge[] = [];
+  const supported: BuiltChallenge[] = [];
   const unsupported: UnsupportedEntry[] = [];
 
   for (const config of configFile.challenges) {
@@ -168,6 +169,19 @@ export async function generateAll(
       });
       continue;
     }
+    // A validation error fails generation: the challenge is reported as
+    // unsupported instead of being published to the catalog.
+    if (challenge.validation !== null && !challenge.validation.ok) {
+      const failedChecks = challenge.validation.checks.filter((c) => !c.passed).map((c) => c.name);
+      unsupported.push({
+        id: challenge.id,
+        sourcePath: config.sourcePath,
+        targetExport: config.targetExport,
+        reasons: [`validation failed: ${failedChecks.join('; ')}`],
+      });
+      continue;
+    }
+    supported.push(challenge);
     if (options.write !== false) {
       const challengeDir = path.join(challengesDir, config.id);
       fs.rmSync(challengeDir, { recursive: true, force: true });
@@ -178,7 +192,6 @@ export async function generateAll(
     }
   }
 
-  const supported = built.filter((b) => b.classification !== 'unsupported');
 
   if (options.write !== false && options.writeAggregates !== false) {
     writeJson(

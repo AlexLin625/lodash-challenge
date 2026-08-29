@@ -435,7 +435,7 @@ export function ChallengeWorkspace({
           )}
         </aside>
 
-        <main className="main">
+        <main className="workspace-main">
           {!selectedManifest ? (
             <div className="empty-state">
               {loadingChallenge && <p className="panel-hint">Loading challenge…</p>}
@@ -444,8 +444,37 @@ export function ChallengeWorkspace({
                   Failed to load challenge: {challengeError}
                 </p>
               )}
-              {!loadingChallenge && !challengeError && (
-                <p className="panel-hint">Select a challenge from the list to get started.</p>
+              {!loadingChallenge && !challengeError && catalog && (
+                <section className="welcome" aria-labelledby="welcome-title">
+                  <p className="welcome-kicker">Browser-based practice</p>
+                  <h2 className="welcome-title" id="welcome-title">
+                    Rebuild familiar utilities, one function at a time.
+                  </h2>
+                  <p className="welcome-copy">
+                    Choose a challenge from the catalog, implement it in TypeScript, and run the original behavior
+                    upstream behavior tests locally in your browser.
+                  </p>
+                  <p className="welcome-prompt">Select a challenge from the left to begin.</p>
+                  <footer className="welcome-credits">
+                    <span>
+                      Developed by{' '}
+                      <a href="mailto:me@a1exlin.cn">me@a1exlin.cn</a>
+                    </span>
+                    <span className="welcome-credit-separator" aria-hidden="true">
+                      ·
+                    </span>
+                    <span>
+                      Puzzle sources adapted from{' '}
+                      <a
+                        href={`https://github.com/${catalog.upstream.repository}/commit/${catalog.upstream.commit}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        es-toolkit@{catalog.upstream.commit.slice(0, 8)}
+                      </a>
+                    </span>
+                  </footer>
+                </section>
               )}
             </div>
           ) : (

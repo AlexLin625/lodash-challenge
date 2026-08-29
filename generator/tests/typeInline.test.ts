@@ -68,6 +68,74 @@ export function use(a: Alpha): string {
   });
 });
 
+test('inlines and symbol-renames aliased type imports, including self references', async () => {
+  const files = {
+    'lib/box.ts': `export interface Box<T> {
+  value: T;
+  next?: Box<T>;
+}
+`,
+  };
+  const starter = `import { Box as LocalBox } from './box.ts';
+export function unwrap<T>(box: LocalBox<T>): T {
+  void box;
+  return undefined as unknown as T;
+}
+`;
+  await withFixture(files, (root) => {
+    const { content, report } = run(starter, root);
+    assert.ok(!content.includes('import {'), 'aliased import removed');
+    assert.ok(content.includes('export interface LocalBox<T> {'), 'declaration adopts the local binding');
+    assert.ok(content.includes('next?: LocalBox<T>;'), 'self references are renamed with the declaration');
+    assert.deepEqual(report.inlinedTypes, ['LocalBox']);
+    assert.deepEqual(report.warnings, []);
+  });
+});
+
+test('follows renamed imports and renamed re-exports in a transitive closure', async () => {
+  const files = {
+    'lib/public.ts': `export { Source as Public } from './source.ts';\n`,
+    'lib/source.ts': `import { Dependency as LocalDependency } from './dependency.ts';
+export type Source = { dependency: LocalDependency };
+`,
+    'lib/dependency.ts': `export type Dependency = string;\n`,
+  };
+  const starter = `import { Public as Visible } from './public.ts';
+export function use(value: Visible): string {
+  void value;
+  return '';
+}
+`;
+  await withFixture(files, (root) => {
+    const { content, report } = run(starter, root);
+    assert.ok(content.includes('export type LocalDependency = string;'));
+    assert.ok(content.includes('export type Visible = { dependency: LocalDependency };'));
+    assert.deepEqual(report.inlinedTypes, ['LocalDependency', 'Visible']);
+    assert.deepEqual(report.warnings, []);
+  });
+});
+
+test('reports unsupported default and namespace type imports', async () => {
+  const starter = `import DefaultType from './default.ts';
+import * as Types from './types.ts';
+export function use(a: DefaultType, b: Types.Value): void {
+  void a;
+  void b;
+}
+`;
+  await withFixture({}, (root) => {
+    const { content, report } = run(starter, root);
+    assert.equal(content, starter);
+    assert.deepEqual(
+      report.warnings.map(({ binding, reason }) => ({ binding, reason })),
+      [
+        { binding: 'DefaultType', reason: 'default type imports are not inlined' },
+        { binding: 'Types', reason: 'namespace type imports are not inlined' },
+      ]
+    );
+  });
+});
+
 test('injects a type shared by two imports exactly once', async () => {
   const files = {
     'lib/s1.ts': `import { Shared } from './shared.ts';

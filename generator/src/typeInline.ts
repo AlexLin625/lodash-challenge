@@ -96,8 +96,8 @@ export function createUpstreamResolver(upstreamRoot: string): ImportResolver {
  * generic constraints and leading comments preserved verbatim) is injected
  * into the starter together with its transitive type closure. Values
  * (parameter defaults like `= identity`) are never inlined and keep their
- * imports. Anything that cannot be resolved or renamed through the chain is
- * preserved as an import and reported as a warning.
+ * imports. Named aliases are followed and symbol-renamed deterministically;
+ * anything else that cannot be resolved is preserved and reported as a warning.
  */
 export function inlineTypeImports(starterText: string, starterPath: string, resolveImport: ImportResolver): TypeInlineResult {
   const project = new Project({ useInMemoryFileSystem: true });
@@ -214,11 +214,21 @@ export function inlineTypeImports(starterText: string, starterPath: string, reso
     const moduleSpecifier = decl.getModuleSpecifierValue();
     const defaultImport = decl.getDefaultImport();
     if (defaultImport) {
-      allBindingNames.push(defaultImport.getText());
+      const binding = defaultImport.getText();
+      allBindingNames.push(binding);
+      const references = refsByName.get(binding) ?? [];
+      if (references.length > 0 && references.every(isTypeOnlyReference)) {
+        warnings.push({ binding, moduleSpecifier, reason: 'default type imports are not inlined' });
+      }
     }
     const namespaceImport = decl.getNamespaceImport();
     if (namespaceImport) {
-      allBindingNames.push(namespaceImport.getText());
+      const binding = namespaceImport.getText();
+      allBindingNames.push(binding);
+      const references = refsByName.get(binding) ?? [];
+      if (references.length > 0 && references.every(isTypeOnlyReference)) {
+        warnings.push({ binding, moduleSpecifier, reason: 'namespace type imports are not inlined' });
+      }
     }
     for (const spec of decl.getNamedImports()) {
       const alias = spec.getAliasNode();
@@ -226,10 +236,6 @@ export function inlineTypeImports(starterText: string, starterPath: string, reso
       allBindingNames.push(binding);
       const references = refsByName.get(binding) ?? [];
       if (references.length === 0 || !references.every(isTypeOnlyReference)) {
-        continue;
-      }
-      if (alias) {
-        warnings.push({ binding, moduleSpecifier, reason: 'aliased type imports are not inlined' });
         continue;
       }
       candidates.push({ spec, exportedName: spec.getName(), binding, moduleSpecifier, addedNodeNames: [], error: null });
@@ -262,35 +268,47 @@ export function inlineTypeImports(starterText: string, starterPath: string, reso
     return undefined;
   }
 
-  function addLocalNode(candidate: Candidate, sourceFile: SourceFile, sourcePath: string, decl: TypeDecl, name: string): void {
+  function addLocalNode(
+    candidate: Candidate,
+    sourceFile: SourceFile,
+    sourcePath: string,
+    decl: TypeDecl,
+    sourceName: string,
+    visibleName: string
+  ): void {
     if (candidate.error) {
       return;
     }
-    const existing = nodes.get(name);
+    const existing = nodes.get(visibleName);
     if (existing) {
       if (existing.file !== sourcePath) {
-        fail(candidate, `duplicate type name "${name}" exported from ${existing.file} and ${sourcePath}`);
+        fail(candidate, `duplicate type name "${visibleName}" exported from ${existing.file} and ${sourcePath}`);
       }
       return;
     }
-    if (starterTypeDecls.has(name) || inProgress.has(name)) {
+    if (starterTypeDecls.has(visibleName) || inProgress.has(visibleName)) {
       return;
     }
-    const collision = bindingCollision(name, candidate);
+    const collision = bindingCollision(visibleName, candidate);
     if (collision) {
       fail(candidate, collision);
       return;
     }
-    inProgress.add(name);
-    const node: ClosureNode = { name, file: sourcePath, text: decl.getFullText().trim(), deps: [] };
+    inProgress.add(visibleName);
+    const node: ClosureNode = {
+      name: visibleName,
+      file: sourcePath,
+      text: renamedDeclarationText(decl, sourceName, visibleName),
+      deps: [],
+    };
     for (const ref of referenceNamesIn(decl)) {
-      if (candidate.error || ref === name || starterTypeDecls.has(ref)) {
+      if (candidate.error || ref === sourceName || starterTypeDecls.has(ref)) {
         continue;
       }
       const local = localTypeDecl(sourceFile, ref);
       if (local) {
         node.deps.push(ref);
-        addLocalNode(candidate, sourceFile, sourcePath, local, ref);
+        addLocalNode(candidate, sourceFile, sourcePath, local, ref, ref);
         continue;
       }
       const binding = importBindingOf(sourceFile, ref);
@@ -299,68 +317,60 @@ export function inlineTypeImports(starterText: string, starterPath: string, reso
         break;
       }
       if (binding) {
-        if (binding.exportedName !== ref) {
-          fail(candidate, `import rename "${binding.exportedName} as ${ref}" in ${sourcePath} is not supported for inlining`);
-          break;
-        }
         const target = resolveImport(sourcePath, binding.specifier);
         if (!target) {
           fail(candidate, `module "${binding.specifier}" (imported by ${sourcePath} for "${ref}") could not be resolved`);
           break;
         }
         node.deps.push(ref);
-        addVisibleName(candidate, target, ref);
+        addVisibleName(candidate, target, binding.exportedName, ref);
         continue;
       }
       if (starterValueDeclNames.has(ref)) {
-        fail(candidate, `"${ref}" referenced by ${sourcePath}:${name} collides with a value declaration in the starter`);
+        fail(candidate, `"${ref}" referenced by ${sourcePath}:${visibleName} collides with a value declaration in the starter`);
         break;
       }
       // Anything else is a global (PropertyKey, ArrayLike, ...) bound in the
       // ambient/lib context of the starter as well: no injection needed.
     }
-    inProgress.delete(name);
+    inProgress.delete(visibleName);
     if (!candidate.error) {
-      nodes.set(name, node);
-      candidate.addedNodeNames.push(name);
+      nodes.set(visibleName, node);
+      candidate.addedNodeNames.push(visibleName);
     }
   }
 
-  /** Ensures the type under `name` (as seen by an importer of `file`) is inlined. */
-  function addVisibleName(candidate: Candidate, file: ResolvedUpstreamFile, name: string): void {
+  /** Ensures an exported type is inlined under the name visible to its importer. */
+  function addVisibleName(candidate: Candidate, file: ResolvedUpstreamFile, exportedName: string, visibleName: string): void {
     if (candidate.error) {
       return;
     }
-    if (starterTypeDecls.has(name)) {
+    if (starterTypeDecls.has(visibleName)) {
       return;
     }
-    const existing = nodes.get(name);
+    const existing = nodes.get(visibleName);
     if (existing) {
       if (existing.file !== file.path) {
-        fail(candidate, `duplicate type name "${name}" exported from ${existing.file} and ${file.path}`);
+        fail(candidate, `duplicate type name "${visibleName}" exported from ${existing.file} and ${file.path}`);
       }
       return;
     }
     const sourceFile = parseUpstream(file);
-    const lookup = lookupExport(sourceFile, name);
+    const lookup = lookupExport(sourceFile, exportedName);
     if (lookup.kind === 'local') {
-      addLocalNode(candidate, sourceFile, file.path, lookup.decl, name);
+      addLocalNode(candidate, sourceFile, file.path, lookup.decl, lookup.decl.getName(), visibleName);
       return;
     }
     if (lookup.kind === 'reexport') {
-      if (lookup.originalName !== name) {
-        fail(candidate, `export rename "${lookup.originalName} as ${name}" in ${file.path} is not supported for inlining`);
-        return;
-      }
       const target = resolveImport(file.path, lookup.specifier);
       if (!target) {
         fail(candidate, `module "${lookup.specifier}" (re-exported by ${file.path}) could not be resolved`);
         return;
       }
-      addVisibleName(candidate, target, name);
+      addVisibleName(candidate, target, lookup.originalName, visibleName);
       return;
     }
-    addError(candidate, name, file.path, lookup);
+    addError(candidate, exportedName, file.path, lookup);
   }
 
   function addError(candidate: Candidate, name: string, exporterPath: string, lookup: ExportLookup): void {
@@ -377,11 +387,7 @@ export function inlineTypeImports(starterText: string, starterPath: string, reso
     if (!target) {
       fail(candidate, `module "${candidate.moduleSpecifier}" could not be resolved`);
     } else {
-      if (candidate.exportedName !== candidate.binding) {
-        fail(candidate, `export rename "${candidate.exportedName} as ${candidate.binding}" is not supported for inlining`);
-      } else {
-        addVisibleName(candidate, target, candidate.binding);
-      }
+      addVisibleName(candidate, target, candidate.exportedName, candidate.binding);
     }
     inProgress.clear();
     if (candidate.error) {
@@ -462,6 +468,22 @@ function collectValueDeclarationNames(sourceFile: SourceFile): Set<string> {
     }
   }
   return names;
+}
+
+/** Clones and symbol-renames a declaration without mutating the cached upstream AST. */
+function renamedDeclarationText(decl: TypeDecl, sourceName: string, visibleName: string): string {
+  const text = decl.getFullText().trim();
+  if (sourceName === visibleName) {
+    return text;
+  }
+  const project = new Project({ useInMemoryFileSystem: true });
+  const sourceFile = project.createSourceFile('/renamed-type.ts', text, { overwrite: true });
+  const clone = sourceFile.getTypeAlias(sourceName) ?? sourceFile.getInterface(sourceName) ?? sourceFile.getEnum(sourceName);
+  if (!clone) {
+    return text;
+  }
+  clone.rename(visibleName);
+  return sourceFile.getFullText().trim();
 }
 
 /** Dependency topological order; declarations at the same level sort by name. */

@@ -11,11 +11,18 @@
 //
 // This module is browser-only and must not be imported from Node tests.
 
-import * as monaco from '../../node_modules/monaco-editor/esm/vs/editor/editor.api.js';
-import '../../node_modules/monaco-editor/esm/vs/languages/definitions/typescript/register.js';
-import '../../node_modules/monaco-editor/esm/vs/languages/features/typescript/register.js';
+import * as monaco from 'monaco-editor';
+import { typescriptDefaults } from '../../node_modules/monaco-editor/esm/vs/languages/features/typescript/register.js';
 import editorWorker from '../../node_modules/monaco-editor/esm/vs/editor/editor.worker?worker';
 import tsWorker from '../../node_modules/monaco-editor/esm/vs/language/typescript/ts.worker?worker';
+
+// A challenge is a small multi-file TypeScript workspace. Monaco otherwise
+// syncs only models that have been opened in the editor, so an editable file
+// can report a false "Cannot find module" diagnostic for a readonly dependency
+// (for example maxBy.ts -> identity.ts) until that dependency's tab is opened.
+// Hidden test/runtime files are not models, so eager sync remains scoped to the
+// starter's compilable dependency closure.
+typescriptDefaults.setEagerModelSync(true);
 
 if (!self.MonacoEnvironment) {
   self.MonacoEnvironment = {

@@ -14,17 +14,22 @@
  *              16px -> --sp-4 | 18px -> --sp-5 | 20px -> --sp-5
  */
 
+/* Full-viewport shell: the app owns the scroll surface, so the page never
+   scrolls; sidebar/main scroll internally. position:relative anchors the
+   header menu popover and the off-screen runner host. */
 .app {
   display: flex;
   flex-direction: column;
+  position: relative;
   height: 100svh;
+  overflow: hidden;
 }
 
 /* ------------------------------------------------------------------ Header */
 
 .app-header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--sp-3);
   padding: var(--sp-3) var(--sp-5);
   border-bottom: 1px solid var(--border);
@@ -43,17 +48,101 @@
   color: var(--text-dim);
 }
 
-/* -------------------------------------------------------------- Storage banner */
-
-.storage-banner {
-  padding: var(--sp-2) var(--sp-5);
-  font-size: var(--fs-sm);
-  border-bottom: 1px solid var(--border);
+.app-header-slot {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 
-.banner--muted {
+/* -------------------------------------------------------------- Header menu */
+
+/* The menu is the only chrome beside title + count. The popover anchors to
+   the trigger (which sits at the header's 20px right padding), so it lands
+   right:20px below the header; .app clips nothing above the fold and the
+   z-index keeps it over the workspace. */
+.header-menu {
+  position: relative;
+  display: flex;
+}
+
+.header-menu-trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
   color: var(--text-dim);
+  cursor: pointer;
+}
+
+.header-menu-trigger:hover {
+  color: var(--text-h);
+  border-color: var(--border);
   background: var(--bg-alt);
+}
+
+.header-menu-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.header-menu-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--warn);
+}
+
+.header-menu-popover {
+  position: absolute;
+  top: calc(100% + var(--sp-4));
+  right: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  width: 280px;
+  max-width: calc(100vw - 2 * var(--sp-5));
+  max-height: calc(100svh - 2 * var(--sp-5));
+  overflow-y: auto;
+  padding: var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.14);
+}
+
+.header-menu-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.header-menu-row-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-dim);
+}
+
+/* Storage warning: the old top banner's copy, now a red status line. */
+.header-menu-storage {
+  margin: 0;
+  padding: var(--sp-2);
+  border-radius: 8px;
+  background: var(--err-bg);
+  color: var(--err);
+  font-size: var(--fs-sm);
+  overflow-wrap: anywhere;
 }
 
 /* ------------------------------------------------------------ Settings bar */
@@ -61,11 +150,9 @@
 .settings-bar {
   display: flex;
   align-items: center;
-  gap: var(--sp-4);
-  padding: var(--sp-2) var(--sp-5);
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
   font-size: var(--fs-sm);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
 }
 
 .settings-group {
@@ -87,34 +174,26 @@
 
 /* ------------------------------------------------------------- Progress IO */
 
-.app-topbar {
-  display: flex;
-  align-items: stretch;
-}
-
 .progress-io {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--sp-2);
-  margin-left: auto;
-  padding: var(--sp-2) var(--sp-5);
   font-size: var(--fs-sm);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
 }
 
 .progress-io-file {
   display: none;
 }
 
-/* Self-contained chip: previously leaned on .banner--muted for its colors. */
 .progress-io-message {
-  margin-left: var(--sp-2);
-  padding: 1px 8px;
+  max-width: 100%;
+  padding: 1px var(--sp-2);
   border-radius: 999px;
   font-size: var(--fs-xs);
   color: var(--text-dim);
   background: var(--bg-alt);
+  overflow-wrap: anywhere;
 }
 
 /* ------------------------------------------------------------- Workspace */
@@ -648,23 +727,6 @@
 /* ----------------------------------------------------------- Responsive */
 
 @media (max-width: 900px) {
-  .app {
-    height: auto;
-    min-height: 100svh;
-  }
-
-  .app-topbar {
-    flex-wrap: wrap;
-  }
-
-  .settings-bar {
-    flex-wrap: wrap;
-  }
-
-  .progress-io {
-    margin-left: 0;
-  }
-
   .workspace {
     flex-direction: column;
   }
@@ -678,7 +740,8 @@
   }
 
   .main {
-    overflow-y: visible;
+    min-height: 0;
+    overflow-y: auto;
   }
 
   .editor-results {

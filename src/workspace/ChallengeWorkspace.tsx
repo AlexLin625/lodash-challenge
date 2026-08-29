@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { ChallengeLoader } from '../challenges/loader.ts';
 import type { ChallengeCatalog, LoadedChallenge } from '../challenges/types.ts';
 import { sourceHash } from '../persistence/hash.ts';
@@ -34,6 +34,8 @@ export interface ChallengeWorkspaceProps {
   editorFontSize?: number;
   /** Bump to re-read the progress summary (e.g. after an import replaced it). */
   refreshSignal?: number;
+  /** Rendered at the right end of the single-line app header (e.g. the menu). */
+  headerSlot?: ReactNode;
 }
 
 const DRAFT_SAVE_DEBOUNCE_MS = 600;
@@ -83,6 +85,7 @@ export function ChallengeWorkspace({
   editorTheme,
   editorFontSize,
   refreshSignal,
+  headerSlot,
 }: ChallengeWorkspaceProps) {
   const [catalog, setCatalog] = useState<ChallengeCatalog | null>(null);
   const [catalogError, setCatalogError] = useState<string | null>(null);
@@ -410,6 +413,7 @@ export function ChallengeWorkspace({
       <header className="app-header">
         <h1 className="app-title">Lodash Challenge</h1>
         {catalog && <span className="app-subtitle">{catalog.challenges.length} challenges</span>}
+        <div className="app-header-slot">{headerSlot}</div>
       </header>
 
       <div className="workspace">

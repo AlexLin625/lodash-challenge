@@ -2,9 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPersistence } from './persistence/bootstrap.ts';
 import type { PreferencesState } from './persistence/preferences.ts';
 import { ChallengeWorkspace } from './workspace/ChallengeWorkspace.tsx';
-import { ProgressIO } from './workspace/progress-io.tsx';
+import { HeaderMenu } from './workspace/header-menu.tsx';
 import type { ProgressIOApi } from './workspace/progress-io.tsx';
-import { SettingsBar } from './workspace/settings-bar.tsx';
 import { nextTheme, resolveEditorTheme, stepFontSize } from './workspace/settings-logic.ts';
 import { useChallengeProgressSummary } from './workspace/use-progress.ts';
 import { useSystemTheme } from './workspace/use-system-theme.ts';
@@ -88,28 +87,28 @@ function App() {
 
   return (
     <div className="app">
-      {!storageAvailable && (
-        <div className="storage-banner banner--muted" role="status">
-          Local storage unavailable — progress won&apos;t be saved
-        </div>
-      )}
-      <div className="app-topbar">
-        {prefs !== null && (
-          <SettingsBar
-            prefs={prefs}
-            prefersDark={prefersDark}
-            onFontSize={handleFontSize}
-            onToggleTheme={handleToggleTheme}
-          />
-        )}
-        <ProgressIO disabled={!storageAvailable} api={progressIoApi} />
-      </div>
       <ChallengeWorkspace
         progressService={persistence.progress}
         reader={persistence.dao}
         editorTheme={resolvedEditorTheme}
         editorFontSize={prefs?.fontSize}
         refreshSignal={importCount}
+        headerSlot={
+          <HeaderMenu
+            storageAvailable={storageAvailable}
+            settings={
+              prefs !== null
+                ? {
+                    prefs,
+                    prefersDark,
+                    onFontSize: handleFontSize,
+                    onToggleTheme: handleToggleTheme,
+                  }
+                : null
+            }
+            progress={{ disabled: !storageAvailable, api: progressIoApi }}
+          />
+        }
       />
     </div>
   );

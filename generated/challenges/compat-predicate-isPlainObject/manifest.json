@@ -1,8 +1,8 @@
 {
   "category": "predicate",
-  "challengeVersion": "3304ae349aeb78a64bd5ff60dbb2d70052e78a45d4cb9184107453de106d0c8d",
+  "challengeVersion": "e63fb296815a7cc7df33b1c0ed934c5c3d3784f7d2f9f00cb8297dcf35900ba8",
   "description": "Checks if a given value is a plain object.",
-  "difficulty": "medium",
+  "difficulty": "hard",
   "editableFiles": [
     "src/compat/predicate/isPlainObject.ts"
   ],
@@ -18,12 +18,17 @@
       "level": 2,
       "source": "documentation",
       "text": "A plain object is an object created by the `{}` literal, `new Object()`, or `Object.create(null)`. This function also handles objects with custom `Symbol.toStringTag` properties. `Symbol.toStringTag` is a built-in symbol that a constructor can use to customize the default string description of objects."
+    },
+    {
+      "level": 3,
+      "source": "documentation",
+      "text": "Consider each parameter in turn (object), including missing, empty and boundary values."
     }
   ],
   "id": "compat-predicate-isPlainObject",
   "integrity": {
-    "configHash": "e184ac6d3b56afaae5f253ec00efc16586e251403c9b6d0016203f7468eeb167",
-    "manifestHash": "ee4502b0e00bc2cb9eeda02df96ced0d066a89c824576f3ca51fff8bda34d23d",
+    "configHash": "4c13d9ff5b48bdba9c7d8f256e67393acec9b6a30bf0aa7ba5b3ea0a88fa8e99",
+    "manifestHash": "33eb3aa6acbc69f89cc5890178947c0f211415f91a581f5833843f763eed027e",
     "starterHash": "4096677f6faf8acb5e76f3809167b8f400fb845f53aad438d922c56a256a8c5c",
     "testsHash": "2c338e40651dc57b0a7d0a60ec7800b4ea5864f0d511c691beae6f05878193ce"
   },

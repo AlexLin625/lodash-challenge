@@ -1,8 +1,8 @@
 {
   "category": "math",
-  "challengeVersion": "17a89352dcf14cb6dcafe4e0c13fdb4f8e4ff1a60719d4feece61e22f3be3f4e",
+  "challengeVersion": "759f13956dc27f3950eb5312494e7878d805ba8c364bb4e055b0d3effb93c3ce",
   "description": "Checks if the value is within a specified range.",
-  "difficulty": "easy",
+  "difficulty": "medium",
   "editableFiles": [
     "src/compat/math/inRange.ts"
   ],
@@ -13,12 +13,17 @@
       "level": 1,
       "source": "documentation",
       "text": "Checks if the value is within a specified range."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "If only `minimum` is provided, it is treated as the exclusive upper bound and the range starts at `0`. When the resolved bounds are out of order they are swapped, so the lower one is always inclusive and the higher one exclusive."
     }
   ],
   "id": "compat-math-inRange",
   "integrity": {
-    "configHash": "0cef61abf1d6f631b08fb39acfe435bb8e9b3abd4981746d1c7d83272e012da1",
-    "manifestHash": "54233f0fd3bda50307a9dd492961f9493f62713a6ba38021918a29056afaf0db",
+    "configHash": "7671bfd62ded5e31db98994f8c40ecf56577ecb8e7c7dde253d92ff7d9f46426",
+    "manifestHash": "febc5df3e19a3247c2d425fced2db1ea153d8b656f5619013a567bf5fc347178",
     "starterHash": "043664854f6637a825c3ef8fe4db862a45c11ea09d341339c3fd84c4901d5181",
     "testsHash": "f0fe8879e37c8db04cc3c750fb96e3968e03bfa9cbc5a3d49b1c75c5325f4efd"
   },

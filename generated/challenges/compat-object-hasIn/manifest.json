@@ -1,8 +1,8 @@
 {
   "category": "object",
-  "challengeVersion": "5fed49c5e9be60fffbe18daa8e8f3318e08d3ba25dcb63b3c552f2c47880a6dc",
+  "challengeVersion": "55596ce01472040830ab29ceea30e6824b6851df63264f19acd0e16a8ab48cbd",
   "description": "Checks if a given path exists in an object, **including inherited properties**.",
-  "difficulty": "medium",
+  "difficulty": "hard",
   "editableFiles": [
     "src/compat/object/hasIn.ts"
   ],
@@ -18,12 +18,17 @@
       "level": 2,
       "source": "documentation",
       "text": "You can provide the path as a single property key, an array of property keys, or a string representing a deep path. Unlike `has`, which only checks for own properties, `hasIn` also checks for properties in the prototype chain. If the path is an index and the object is an array or an arguments object, the function will verify if the index is valid and within the bounds of the array or arguments object, even if the array or arguments object is sparse (i.e., not all indexes are defined)."
+    },
+    {
+      "level": 3,
+      "source": "documentation",
+      "text": "Consider each parameter in turn (object, path), including missing, empty and boundary values."
     }
   ],
   "id": "compat-object-hasIn",
   "integrity": {
-    "configHash": "3411cc0429acca4815fc9e3111a4b05d11d45a34ca75d5feb0ed733e45a068c6",
-    "manifestHash": "4a90ce028c55f6929d3e1f93b7312973858916faf56172b8fa24d44a6d293653",
+    "configHash": "c6c9efbebd50c761036d981132541c400b477e4c8221efed9f0ca6fc98ae88c5",
+    "manifestHash": "dfa141f2576c0756866be6625dc519c7ccc51b13aed3fd1bbfb31816ca2bcc16",
     "starterHash": "2eae8124082107f74b41d7206d5b73e93450f110517624d7969526876d23da37",
     "testsHash": "6ee4457130aca71a12a9b8208766969a1145b66205ef5baf86c1c92457c25ceb"
   },

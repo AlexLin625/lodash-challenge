@@ -1,8 +1,8 @@
 {
   "category": "object",
-  "challengeVersion": "eb3fa48bf835fa74f5da529978e3947182ad385ee164dc46bc161932c1934040",
+  "challengeVersion": "afec8f64a2a85998cb0a6bfc667c75308210da1153583e58d06e7bed163ccf7e",
   "description": "Removes the property at the given path of the object.",
-  "difficulty": "medium",
+  "difficulty": "hard",
   "editableFiles": [
     "src/compat/object/unset.ts"
   ],
@@ -22,8 +22,8 @@
   ],
   "id": "compat-object-unset",
   "integrity": {
-    "configHash": "619728fc9bff0bc0a96fbca21e3884cda79f14170711ffcdd0a0dc795413c169",
-    "manifestHash": "23103e38fb75b18a9b7f347380ee08f3404f896c7fde6ee214f76af8c530d463",
+    "configHash": "adb8b2350044a08ea28eeb912d020f2ea650f9dcc03a3147d779d95876e2f6c8",
+    "manifestHash": "093b40a07b52ac5a5f01757707dc03acbc052160d9364ba84cbf1f47eb5250fe",
     "starterHash": "c1a6769862995391792819e546e7a084de1c22b5c8f35fce505be1f69294b7a2",
     "testsHash": "44a518827b09dd71726d76ef65a18130d3fab21136173fd080b64ac8fa469a3a"
   },

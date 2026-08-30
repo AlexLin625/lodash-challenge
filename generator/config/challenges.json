@@ -118,7 +118,7 @@
       "id": "compat-array-nth",
       "sourcePath": "src/compat/array/nth.ts",
       "targetExport": "nth",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "transform": {
         "strategy": "single-function"
       },
@@ -129,14 +129,14 @@
       },
       "hints": {
         "mode": "documentation",
-        "maxLevel": 1
+        "maxLevel": 2
       }
     },
     {
       "id": "compat-array-slice",
       "sourcePath": "src/compat/array/slice.ts",
       "targetExport": "slice",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "transform": {
         "strategy": "single-function"
       },
@@ -147,7 +147,7 @@
       },
       "hints": {
         "mode": "documentation",
-        "maxLevel": 1
+        "maxLevel": 2
       }
     },
     {
@@ -244,7 +244,7 @@
       "id": "compat-string-padStart",
       "sourcePath": "src/compat/string/padStart.ts",
       "targetExport": "padStart",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "transform": {
         "strategy": "single-function"
       },
@@ -255,7 +255,7 @@
       },
       "hints": {
         "mode": "documentation",
-        "maxLevel": 1
+        "maxLevel": 2
       }
     },
     {
@@ -280,7 +280,7 @@
       "id": "compat-string-camelCase",
       "sourcePath": "src/compat/string/camelCase.ts",
       "targetExport": "camelCase",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "transform": {
         "strategy": "single-function"
       },
@@ -291,7 +291,7 @@
       },
       "hints": {
         "mode": "documentation",
-        "maxLevel": 2
+        "maxLevel": 3
       }
     },
     {
@@ -316,7 +316,7 @@
       "id": "compat-string-words",
       "sourcePath": "src/compat/string/words.ts",
       "targetExport": "words",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "transform": {
         "strategy": "single-function"
       },
@@ -327,14 +327,14 @@
       },
       "hints": {
         "mode": "documentation",
-        "maxLevel": 2
+        "maxLevel": 3
       }
     },
     {
       "id": "compat-math-inRange",
       "sourcePath": "src/compat/math/inRange.ts",
       "targetExport": "inRange",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "transform": {
         "strategy": "single-function"
       },
@@ -345,7 +345,7 @@
       },
       "hints": {
         "mode": "documentation",
-        "maxLevel": 1
+        "maxLevel": 2
       }
     },
     {
@@ -460,7 +460,7 @@
       "id": "compat-object-hasIn",
       "sourcePath": "src/compat/object/hasIn.ts",
       "targetExport": "hasIn",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "transform": {
         "strategy": "single-function"
       },
@@ -471,14 +471,14 @@
       },
       "hints": {
         "mode": "documentation",
-        "maxLevel": 2
+        "maxLevel": 3
       }
     },
     {
       "id": "compat-object-unset",
       "sourcePath": "src/compat/object/unset.ts",
       "targetExport": "unset",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "transform": {
         "strategy": "remove-helpers"
       },
@@ -489,7 +489,7 @@
       },
       "hints": {
         "mode": "documentation",
-        "maxLevel": 2
+        "maxLevel": 3
       }
     },
     {
@@ -550,7 +550,7 @@
       "id": "compat-predicate-isPlainObject",
       "sourcePath": "src/compat/predicate/isPlainObject.ts",
       "targetExport": "isPlainObject",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "transform": {
         "strategy": "single-function"
       },
@@ -561,7 +561,7 @@
       },
       "hints": {
         "mode": "documentation",
-        "maxLevel": 2
+        "maxLevel": 3
       }
     },
     {
@@ -586,7 +586,7 @@
       "id": "compat-predicate-matches",
       "sourcePath": "src/compat/predicate/matches.ts",
       "targetExport": "matches",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "transform": {
         "strategy": "single-function"
       },
@@ -597,7 +597,7 @@
       },
       "hints": {
         "mode": "documentation",
-        "maxLevel": 2
+        "maxLevel": 3
       }
     }
   ]

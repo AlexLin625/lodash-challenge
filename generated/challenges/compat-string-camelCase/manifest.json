@@ -1,8 +1,8 @@
 {
   "category": "string",
-  "challengeVersion": "46490918461931808a2a0f24c3b5d36ea1948a3c37c3f688ff7c79fc7fb37107",
+  "challengeVersion": "238466f700356f7822a47fc4c999f573e120ed2b66c1b1a42cc2e95c8e7775e9",
   "description": "Converts a string to camel case.",
-  "difficulty": "medium",
+  "difficulty": "hard",
   "editableFiles": [
     "src/compat/string/camelCase.ts"
   ],
@@ -18,12 +18,17 @@
       "level": 2,
       "source": "documentation",
       "text": "Camel case is the naming convention in which the first word is written in lowercase and each subsequent word begins with a capital letter, concatenated without any separator characters."
+    },
+    {
+      "level": 3,
+      "source": "documentation",
+      "text": "Consider each parameter in turn (str), including missing, empty and boundary values."
     }
   ],
   "id": "compat-string-camelCase",
   "integrity": {
-    "configHash": "c4611e99ea5435c23d50808100d404b7134aee6aeef0a6a0c93760aaed3584cc",
-    "manifestHash": "6c8002434870877c1a759af955fe8f6c31f538caef7d9e9aed2e3d83d92e43d6",
+    "configHash": "b57a9cf58e6fb8005143474f395b41dad17195b918752a2734c9de23bceb36e9",
+    "manifestHash": "86731dfa3a6d6f69976ec17d17c6a88f657560e7ca3dbd5e901125997ac7b74f",
     "starterHash": "56cc2b6ea7b2ab0d34e0b30261a48cefc6447014ba759fac9e173f9663a05937",
     "testsHash": "61eaa8da3c47d08c13837af1b02f1cee5e85c6e3ef7dc2062be2d66629d01d42"
   },

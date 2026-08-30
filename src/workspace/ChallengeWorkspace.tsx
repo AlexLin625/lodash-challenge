@@ -10,6 +10,12 @@ import { computeVisibleFiles } from './editor-files.ts';
 import { ChallengeList } from './ChallengeList.tsx';
 import { HintPanel } from './HintPanel.tsx';
 import { nextRevealedLevel, type RevealedLevel } from './hint-logic.ts';
+import {
+  estimateDeclaredTestCaseCount,
+  isFailedPartialRun,
+  relaxedInitialTimeoutMs,
+  shouldRetryAfterPartialFailure,
+} from './run-policy.ts';
 import { TestPanel, type RunPhase } from './TestPanel.tsx';
 import { completedChallengeIds, progressTotalsLabel } from './completion.ts';
 import { useChallengeProgressSummary, type ProgressReader as ProgressSummaryReader } from './use-progress.ts';
@@ -112,6 +118,8 @@ export function ChallengeWorkspace({
   const challengeRef = useRef<LoadedChallenge | null>(null);
   const phaseRef = useRef<RunPhase>('idle');
   const draftTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hasCompletedFirstRunRef = useRef(false);
+  const previousRunFailedPartiallyRef = useRef(false);
   // Bundle files outside the starter's compilable dependency closure (specs,
   // runtime shims, unreferenced _internal files); the runner receives them
   // merged back with the live model contents, and the editor never sees them.
@@ -201,6 +209,8 @@ export function ChallengeWorkspace({
     hiddenFilesRef.current = {};
     runnerRef.current?.destroy();
     runnerRef.current = null;
+    hasCompletedFirstRunRef.current = false;
+    previousRunFailedPartiallyRef.current = false;
     setModels(null);
     setFiles([]);
     setActivePath('');
@@ -349,11 +359,44 @@ export function ChallengeWorkspace({
     // The editor only carries the starter closure; hand the runner the
     // pristine hidden files plus the live (editable + visible readonly) models.
     const files = { ...hiddenFilesRef.current, ...currentModels.getAllContents() };
+    const declaredCaseCount = estimateDeclaredTestCaseCount(files, current.manifest.upstream.testPaths);
     setPhase('running');
     setResult(null);
     const startedAt = Date.now();
     try {
-      const runResult = await runner.run({ manifest: current.manifest, files });
+      const firstRunTimeout = hasCompletedFirstRunRef.current
+        ? undefined
+        : relaxedInitialTimeoutMs(current.manifest.runtime.timeoutMs);
+      let runResult = await runner.run({ manifest: current.manifest, files, timeoutMs: firstRunTimeout });
+      hasCompletedFirstRunRef.current = true;
+      if (challengeRef.current?.manifest.id !== runChallengeId) {
+        // The user switched challenges mid-run; drop the stale result.
+        return;
+      }
+      if (runResult.status === 'timeout' && firstRunTimeout !== undefined) {
+        runResult = await runner.run({ manifest: current.manifest, files });
+        if (challengeRef.current?.manifest.id !== runChallengeId) {
+          return;
+        }
+      }
+      if (
+        shouldRetryAfterPartialFailure({
+          previousRunFailedPartially: previousRunFailedPartiallyRef.current,
+          status: runResult.status,
+          executedCount: runResult.tests.length,
+          declaredCount: declaredCaseCount,
+        })
+      ) {
+        runResult = await runner.run({ manifest: current.manifest, files });
+        if (challengeRef.current?.manifest.id !== runChallengeId) {
+          return;
+        }
+      }
+      previousRunFailedPartiallyRef.current = isFailedPartialRun(
+        runResult.status,
+        runResult.tests.length,
+        declaredCaseCount
+      );
       if (challengeRef.current?.manifest.id !== runChallengeId) {
         // The user switched challenges mid-run; drop the stale result.
         return;

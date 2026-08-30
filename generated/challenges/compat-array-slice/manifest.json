@@ -1,8 +1,8 @@
 {
   "category": "array",
-  "challengeVersion": "884fab14d3a03f179efa8bb329876c8f228a169e5cd1569ae7d94c29726ed97c",
+  "challengeVersion": "beb54004d58be04a2679c06f98216712a358e29910177f847a21afa55c2f54e4",
   "description": "Create a slice of `array` from `start` up to, but not including, `end`.",
-  "difficulty": "easy",
+  "difficulty": "medium",
   "editableFiles": [
     "src/compat/array/slice.ts"
   ],
@@ -13,12 +13,17 @@
       "level": 1,
       "source": "documentation",
       "text": "Create a slice of `array` from `start` up to, but not including, `end`."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "It does not return a dense array for sparse arrays unlike the native `Array.prototype.slice`."
     }
   ],
   "id": "compat-array-slice",
   "integrity": {
-    "configHash": "538a023f1c850656df85afaef231446b7b264c895611e8578db3819b3b8eb667",
-    "manifestHash": "e290b6dcbea65ab0790b97ac771214d8e45d06471eeed6d36cee48bfbaa7bc87",
+    "configHash": "0c17f44fd1d79786246a8be3564409acbf761914448245e97da4a954c69f514c",
+    "manifestHash": "e9abe3bfd534828487b6e8bce3931f0507111946531380e4cb633fc5e141909e",
     "starterHash": "908d986f0bc305daeca541b243d41228ebf900698da404e7889b0368f61d552c",
     "testsHash": "5ce01094ef2a182a4e0d1c3201134e811a128323783dc34a4528e62248572b56"
   },

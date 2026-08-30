@@ -1,8 +1,8 @@
 {
   "category": "array",
-  "challengeVersion": "79d9d8e7582e1ef9c6b3b8513c4f62d8fa647a6fab4319a9f3d0d8112668244e",
+  "challengeVersion": "4a02805026759a291156070dc58e16d4fc46f56b262ceec3c02e2f4986a188ce",
   "description": "Gets the element at index `n` of `array`. If `n` is negative, the nth element from the end is returned.",
-  "difficulty": "easy",
+  "difficulty": "medium",
   "editableFiles": [
     "src/compat/array/nth.ts"
   ],
@@ -13,12 +13,17 @@
       "level": 1,
       "source": "documentation",
       "text": "Gets the element at index `n` of `array`."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "If `n` is negative, the nth element from the end is returned."
     }
   ],
   "id": "compat-array-nth",
   "integrity": {
-    "configHash": "70d583acd8b6f94f003390d5b4c549a74e528fcb93c69dff99913137c10eecd1",
-    "manifestHash": "20827aeb037686cfb19e2d439be99c7f5d68b463dc741b942edd18124b624862",
+    "configHash": "f137b4d41ab6f8a67c1f70eb0f2869542c453f6f6442eda0e7be1c2867443e22",
+    "manifestHash": "b8999662ffd2820f4ff3893600b09373c15fdda7bcce8f041052d90cfba12556",
     "starterHash": "ad3ffdc14ab131a5cc41ad445a032e8cd08c4efb60819052a2be294b6e52409d",
     "testsHash": "6bcc195181b728e3e9cc9b810f9080a1014f8241ccbfa8a615279570bcaf4c65"
   },

@@ -316,9 +316,9 @@
     },
     {
       "category": "array",
-      "challengeVersion": "79d9d8e7582e1ef9c6b3b8513c4f62d8fa647a6fab4319a9f3d0d8112668244e",
+      "challengeVersion": "4a02805026759a291156070dc58e16d4fc46f56b262ceec3c02e2f4986a188ce",
       "description": "Gets the element at index `n` of `array`. If `n` is negative, the nth element from the end is returned.",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "editableFiles": [
         "src/compat/array/nth.ts"
       ],
@@ -329,12 +329,17 @@
           "level": 1,
           "source": "documentation",
           "text": "Gets the element at index `n` of `array`."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "If `n` is negative, the nth element from the end is returned."
         }
       ],
       "id": "compat-array-nth",
       "integrity": {
-        "configHash": "70d583acd8b6f94f003390d5b4c549a74e528fcb93c69dff99913137c10eecd1",
-        "manifestHash": "20827aeb037686cfb19e2d439be99c7f5d68b463dc741b942edd18124b624862",
+        "configHash": "f137b4d41ab6f8a67c1f70eb0f2869542c453f6f6442eda0e7be1c2867443e22",
+        "manifestHash": "b8999662ffd2820f4ff3893600b09373c15fdda7bcce8f041052d90cfba12556",
         "starterHash": "ad3ffdc14ab131a5cc41ad445a032e8cd08c4efb60819052a2be294b6e52409d",
         "testsHash": "6bcc195181b728e3e9cc9b810f9080a1014f8241ccbfa8a615279570bcaf4c65"
       },
@@ -407,9 +412,9 @@
     },
     {
       "category": "array",
-      "challengeVersion": "884fab14d3a03f179efa8bb329876c8f228a169e5cd1569ae7d94c29726ed97c",
+      "challengeVersion": "beb54004d58be04a2679c06f98216712a358e29910177f847a21afa55c2f54e4",
       "description": "Create a slice of `array` from `start` up to, but not including, `end`.",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "editableFiles": [
         "src/compat/array/slice.ts"
       ],
@@ -420,12 +425,17 @@
           "level": 1,
           "source": "documentation",
           "text": "Create a slice of `array` from `start` up to, but not including, `end`."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "It does not return a dense array for sparse arrays unlike the native `Array.prototype.slice`."
         }
       ],
       "id": "compat-array-slice",
       "integrity": {
-        "configHash": "538a023f1c850656df85afaef231446b7b264c895611e8578db3819b3b8eb667",
-        "manifestHash": "e290b6dcbea65ab0790b97ac771214d8e45d06471eeed6d36cee48bfbaa7bc87",
+        "configHash": "0c17f44fd1d79786246a8be3564409acbf761914448245e97da4a954c69f514c",
+        "manifestHash": "e9abe3bfd534828487b6e8bce3931f0507111946531380e4cb633fc5e141909e",
         "starterHash": "908d986f0bc305daeca541b243d41228ebf900698da404e7889b0368f61d552c",
         "testsHash": "5ce01094ef2a182a4e0d1c3201134e811a128323783dc34a4528e62248572b56"
       },
@@ -511,9 +521,9 @@
     },
     {
       "category": "math",
-      "challengeVersion": "17a89352dcf14cb6dcafe4e0c13fdb4f8e4ff1a60719d4feece61e22f3be3f4e",
+      "challengeVersion": "759f13956dc27f3950eb5312494e7878d805ba8c364bb4e055b0d3effb93c3ce",
       "description": "Checks if the value is within a specified range.",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "editableFiles": [
         "src/compat/math/inRange.ts"
       ],
@@ -524,12 +534,17 @@
           "level": 1,
           "source": "documentation",
           "text": "Checks if the value is within a specified range."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "If only `minimum` is provided, it is treated as the exclusive upper bound and the range starts at `0`. When the resolved bounds are out of order they are swapped, so the lower one is always inclusive and the higher one exclusive."
         }
       ],
       "id": "compat-math-inRange",
       "integrity": {
-        "configHash": "0cef61abf1d6f631b08fb39acfe435bb8e9b3abd4981746d1c7d83272e012da1",
-        "manifestHash": "54233f0fd3bda50307a9dd492961f9493f62713a6ba38021918a29056afaf0db",
+        "configHash": "7671bfd62ded5e31db98994f8c40ecf56577ecb8e7c7dde253d92ff7d9f46426",
+        "manifestHash": "febc5df3e19a3247c2d425fced2db1ea153d8b656f5619013a567bf5fc347178",
         "starterHash": "043664854f6637a825c3ef8fe4db862a45c11ea09d341339c3fd84c4901d5181",
         "testsHash": "f0fe8879e37c8db04cc3c750fb96e3968e03bfa9cbc5a3d49b1c75c5325f4efd"
       },
@@ -859,9 +874,9 @@
     },
     {
       "category": "object",
-      "challengeVersion": "5fed49c5e9be60fffbe18daa8e8f3318e08d3ba25dcb63b3c552f2c47880a6dc",
+      "challengeVersion": "55596ce01472040830ab29ceea30e6824b6851df63264f19acd0e16a8ab48cbd",
       "description": "Checks if a given path exists in an object, **including inherited properties**.",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "editableFiles": [
         "src/compat/object/hasIn.ts"
       ],
@@ -877,12 +892,17 @@
           "level": 2,
           "source": "documentation",
           "text": "You can provide the path as a single property key, an array of property keys, or a string representing a deep path. Unlike `has`, which only checks for own properties, `hasIn` also checks for properties in the prototype chain. If the path is an index and the object is an array or an arguments object, the function will verify if the index is valid and within the bounds of the array or arguments object, even if the array or arguments object is sparse (i.e., not all indexes are defined)."
+        },
+        {
+          "level": 3,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (object, path), including missing, empty and boundary values."
         }
       ],
       "id": "compat-object-hasIn",
       "integrity": {
-        "configHash": "3411cc0429acca4815fc9e3111a4b05d11d45a34ca75d5feb0ed733e45a068c6",
-        "manifestHash": "4a90ce028c55f6929d3e1f93b7312973858916faf56172b8fa24d44a6d293653",
+        "configHash": "c6c9efbebd50c761036d981132541c400b477e4c8221efed9f0ca6fc98ae88c5",
+        "manifestHash": "dfa141f2576c0756866be6625dc519c7ccc51b13aed3fd1bbfb31816ca2bcc16",
         "starterHash": "2eae8124082107f74b41d7206d5b73e93450f110517624d7969526876d23da37",
         "testsHash": "6ee4457130aca71a12a9b8208766969a1145b66205ef5baf86c1c92457c25ceb"
       },
@@ -928,9 +948,9 @@
     },
     {
       "category": "object",
-      "challengeVersion": "eb3fa48bf835fa74f5da529978e3947182ad385ee164dc46bc161932c1934040",
+      "challengeVersion": "afec8f64a2a85998cb0a6bfc667c75308210da1153583e58d06e7bed163ccf7e",
       "description": "Removes the property at the given path of the object.",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "editableFiles": [
         "src/compat/object/unset.ts"
       ],
@@ -950,8 +970,8 @@
       ],
       "id": "compat-object-unset",
       "integrity": {
-        "configHash": "619728fc9bff0bc0a96fbca21e3884cda79f14170711ffcdd0a0dc795413c169",
-        "manifestHash": "23103e38fb75b18a9b7f347380ee08f3404f896c7fde6ee214f76af8c530d463",
+        "configHash": "adb8b2350044a08ea28eeb912d020f2ea650f9dcc03a3147d779d95876e2f6c8",
+        "manifestHash": "093b40a07b52ac5a5f01757707dc03acbc052160d9364ba84cbf1f47eb5250fe",
         "starterHash": "c1a6769862995391792819e546e7a084de1c22b5c8f35fce505be1f69294b7a2",
         "testsHash": "44a518827b09dd71726d76ef65a18130d3fab21136173fd080b64ac8fa469a3a"
       },
@@ -1195,9 +1215,9 @@
     },
     {
       "category": "predicate",
-      "challengeVersion": "3304ae349aeb78a64bd5ff60dbb2d70052e78a45d4cb9184107453de106d0c8d",
+      "challengeVersion": "e63fb296815a7cc7df33b1c0ed934c5c3d3784f7d2f9f00cb8297dcf35900ba8",
       "description": "Checks if a given value is a plain object.",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "editableFiles": [
         "src/compat/predicate/isPlainObject.ts"
       ],
@@ -1213,12 +1233,17 @@
           "level": 2,
           "source": "documentation",
           "text": "A plain object is an object created by the `{}` literal, `new Object()`, or `Object.create(null)`. This function also handles objects with custom `Symbol.toStringTag` properties. `Symbol.toStringTag` is a built-in symbol that a constructor can use to customize the default string description of objects."
+        },
+        {
+          "level": 3,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (object), including missing, empty and boundary values."
         }
       ],
       "id": "compat-predicate-isPlainObject",
       "integrity": {
-        "configHash": "e184ac6d3b56afaae5f253ec00efc16586e251403c9b6d0016203f7468eeb167",
-        "manifestHash": "ee4502b0e00bc2cb9eeda02df96ced0d066a89c824576f3ca51fff8bda34d23d",
+        "configHash": "4c13d9ff5b48bdba9c7d8f256e67393acec9b6a30bf0aa7ba5b3ea0a88fa8e99",
+        "manifestHash": "33eb3aa6acbc69f89cc5890178947c0f211415f91a581f5833843f763eed027e",
         "starterHash": "4096677f6faf8acb5e76f3809167b8f400fb845f53aad438d922c56a256a8c5c",
         "testsHash": "2c338e40651dc57b0a7d0a60ec7800b4ea5864f0d511c691beae6f05878193ce"
       },
@@ -1248,9 +1273,9 @@
     },
     {
       "category": "string",
-      "challengeVersion": "46490918461931808a2a0f24c3b5d36ea1948a3c37c3f688ff7c79fc7fb37107",
+      "challengeVersion": "238466f700356f7822a47fc4c999f573e120ed2b66c1b1a42cc2e95c8e7775e9",
       "description": "Converts a string to camel case.",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "editableFiles": [
         "src/compat/string/camelCase.ts"
       ],
@@ -1266,12 +1291,17 @@
           "level": 2,
           "source": "documentation",
           "text": "Camel case is the naming convention in which the first word is written in lowercase and each subsequent word begins with a capital letter, concatenated without any separator characters."
+        },
+        {
+          "level": 3,
+          "source": "documentation",
+          "text": "Consider each parameter in turn (str), including missing, empty and boundary values."
         }
       ],
       "id": "compat-string-camelCase",
       "integrity": {
-        "configHash": "c4611e99ea5435c23d50808100d404b7134aee6aeef0a6a0c93760aaed3584cc",
-        "manifestHash": "6c8002434870877c1a759af955fe8f6c31f538caef7d9e9aed2e3d83d92e43d6",
+        "configHash": "b57a9cf58e6fb8005143474f395b41dad17195b918752a2734c9de23bceb36e9",
+        "manifestHash": "86731dfa3a6d6f69976ec17d17c6a88f657560e7ca3dbd5e901125997ac7b74f",
         "starterHash": "56cc2b6ea7b2ab0d34e0b30261a48cefc6447014ba759fac9e173f9663a05937",
         "testsHash": "61eaa8da3c47d08c13837af1b02f1cee5e85c6e3ef7dc2062be2d66629d01d42"
       },
@@ -1489,9 +1519,9 @@
     },
     {
       "category": "string",
-      "challengeVersion": "4152c029228031e70df359fe12343f9fe0605774d3a4aba4c7e6dc2fd2c7dfcd",
+      "challengeVersion": "31f12d6162ad29fc66412f47f399ec8b13aa80c43fa2b69bbc1ea44fd578ec08",
       "description": "Pads the start of a string with a given character until it reaches the specified length.",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "editableFiles": [
         "src/compat/string/padStart.ts"
       ],
@@ -1502,12 +1532,17 @@
           "level": 1,
           "source": "documentation",
           "text": "Pads the start of a string with a given character until it reaches the specified length."
+        },
+        {
+          "level": 2,
+          "source": "documentation",
+          "text": "If the length is less than or equal to the original string's length, or if the padding character is an empty string, the original string is returned unchanged."
         }
       ],
       "id": "compat-string-padStart",
       "integrity": {
-        "configHash": "dfa093389ae70cb8464dab5913c599ef9d274d55bd97f07b4edeb63a07592b0c",
-        "manifestHash": "26141cd0f911c658c81f2840461a8f33b6283e771154da7e682924f2ba3f9d99",
+        "configHash": "c266e0737448c5aa9f3e109efba7dbdd3ac285dc40d51e0abe1ee13ce5520599",
+        "manifestHash": "c242a26c132f16d18d33369bc2c80378d6ee5dddad486d5b459f66cb21730905",
         "starterHash": "cca8eb9e5618e8b98099eae30169def81908462254c4580bf3e701c2268926f2",
         "testsHash": "d218ab83c00781ca212a5b4d9cb9fde6348a5a6a8af945b00cb960de7a18569c"
       },

@@ -1,8 +1,8 @@
 {
   "category": "string",
-  "challengeVersion": "4152c029228031e70df359fe12343f9fe0605774d3a4aba4c7e6dc2fd2c7dfcd",
+  "challengeVersion": "31f12d6162ad29fc66412f47f399ec8b13aa80c43fa2b69bbc1ea44fd578ec08",
   "description": "Pads the start of a string with a given character until it reaches the specified length.",
-  "difficulty": "easy",
+  "difficulty": "medium",
   "editableFiles": [
     "src/compat/string/padStart.ts"
   ],
@@ -13,12 +13,17 @@
       "level": 1,
       "source": "documentation",
       "text": "Pads the start of a string with a given character until it reaches the specified length."
+    },
+    {
+      "level": 2,
+      "source": "documentation",
+      "text": "If the length is less than or equal to the original string's length, or if the padding character is an empty string, the original string is returned unchanged."
     }
   ],
   "id": "compat-string-padStart",
   "integrity": {
-    "configHash": "dfa093389ae70cb8464dab5913c599ef9d274d55bd97f07b4edeb63a07592b0c",
-    "manifestHash": "26141cd0f911c658c81f2840461a8f33b6283e771154da7e682924f2ba3f9d99",
+    "configHash": "c266e0737448c5aa9f3e109efba7dbdd3ac285dc40d51e0abe1ee13ce5520599",
+    "manifestHash": "c242a26c132f16d18d33369bc2c80378d6ee5dddad486d5b459f66cb21730905",
     "starterHash": "cca8eb9e5618e8b98099eae30169def81908462254c4580bf3e701c2268926f2",
     "testsHash": "d218ab83c00781ca212a5b4d9cb9fde6348a5a6a8af945b00cb960de7a18569c"
   },
